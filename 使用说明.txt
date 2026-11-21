@@ -1,0 +1,6 @@
+公开网站部署包
+1. 将本文件夹里的 index.html、robots.txt、favicon.svg 一起上传至 Netlify（上传整个文件夹）。
+2. 发布后用 netlify.app 公共地址访问；请检查站点访问权限为公开。
+3. 每位访客的数据只存在各自浏览器，互不共享。
+4. 搜索引擎收录不保证。上线后可将实际网站地址提交到 Google Search Console、Bing Webmaster Tools 等。
+5. Excel 导入依赖外部 CDN，使用时需要网络连接。

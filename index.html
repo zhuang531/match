@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国</title><meta name="description" content="免费的逆水寒手游帮会插旗赛管理工具。支持玩家名单、随机1v1小组赛、BO3比分录入、BO1加赛、八强淘汰赛树状图、冠军季军赛和奖励管理。每位访客独立使用。"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#fff8f2"><meta property="og:type" content="website"><meta property="og:title" content="逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国"><meta property="og:description" content="免费在线创建帮会插旗赛：随机抽签、比分录入、八强树状对阵、奖励管理。"><link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国</title><meta name="description" content="免费的逆水寒手游帮会插旗赛管理工具。支持玩家名单、随机1v1小组赛、BO3点击计分、BO1加赛、自适应八强或十六强淘汰赛树状图、冠军季军赛和奖励管理。每位访客独立使用。"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#fff8f2"><meta property="og:type" content="website"><meta property="og:title" content="逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国"><meta property="og:description" content="免费在线创建帮会插旗赛：随机抽签、比分录入、八强或十六强树状对阵、奖励管理。"><link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0d1628;color:#e8effb;font:16px system-ui,-apple-system,sans-serif}main{max-width:1450px;margin:auto;padding:22px}h1{color:#f4c778}h2{font-size:20px}p{color:#acbdd2}.panel,.match{background:#1b2b40;border:1px solid #354e69;border-radius:14px;padding:17px;margin:14px 0}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,input,textarea{font:inherit;border-radius:8px}button{border:0;background:#eac27a;color:#1d2430;padding:12px 16px;cursor:pointer;font-weight:700}button.secondary{background:#344d69;color:white}button.danger{background:#7b3648;color:white}button:disabled{opacity:.45}textarea{width:100%;min-height:130px;padding:12px;background:#101d30;color:white;border:1px solid #4d627a}input[type=number]{width:60px;padding:9px;background:#101d30;color:white;border:1px solid #516b83;text-align:center}.hint{font-size:13px}.status{color:#9fe2b9}.rounds{display:flex;gap:16px;overflow-x:auto;padding-bottom:20px}.round{flex:0 0 260px}.round h3{text-align:center;color:#f0c67e}.match{padding:13px}.match .names{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:38px}.names span{overflow-wrap:anywhere;flex:1;min-width:0}.names b{white-space:nowrap;color:#f1c97d}.score{display:flex;gap:8px;align-items:center;margin:10px 0}.score button{padding:9px}.win{color:#83e2b4}.note{background:#263b52;padding:10px;border-radius:8px}.final{border-color:#e6b85f;box-shadow:0 0 0 1px #e6b85f}.tabs{display:flex;flex-wrap:wrap;gap:8px}.tabs button{background:#334c68;color:white}.tabs button.active{background:#eac27a;color:#172333}.hidden{display:none}.center{max-width:600px;margin:auto}#msg{min-height:24px;color:#a7e9bc}.bracket{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,1fr) minmax(240px,1fr);gap:14px;align-items:start}.wing{display:flex;gap:10px;overflow-x:auto}.wing .round{flex-basis:235px}.wing.right{flex-direction:row-reverse}.wing.right .round{direction:ltr}.bracket .center{width:100%}@media(max-width:850px){.bracket{display:block}.wing{margin:12px 0}.bracket .center{margin:20px auto}}@media print{button,.tabs,.no-print{display:none!important}body{background:white;color:black}.panel,.match{color:black;background:white;border-color:#888}}
 .stage{margin:20px 0}.stage h3{color:#f0c67e}.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:14px}.stage-grid .match{margin:0}.final-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:20px}.champion{text-align:center;color:#f0c67e;font-weight:700}.tabs{position:sticky;top:0;z-index:3;background:#0d1628;padding:10px 0}.tabs button{padding:10px 12px}@media(max-width:650px){main{padding:12px}.tabs{position:static}} </style><style id="v15-tree-style">
 .tree-scroll{overflow-x:auto;padding:16px 10px 30px;overscroll-behavior-x:contain}
@@ -87,6 +87,11 @@ main{max-width:1900px;width:100%;padding:18px clamp(10px,2vw,30px)}
 @media(min-width:1250px){.ko-bracket{min-width:0}.ko-col h3,.ko-center>h3{font-size:16px}}
 @media(max-width:850px){.ko-bracket{min-width:1000px}.ko-scroll{overflow-x:auto}}
 @media print{.score-direct{display:none}}
+.ko-bracket.ko16{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(245px,1.35fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);min-width:1350px;min-height:720px;gap:12px}
+.ko16 .ko-col h3{font-size:clamp(12px,1vw,16px)}
+.ko16 .ko-col .names span{font-size:clamp(12px,.85vw,15px)}
+.ko16 .ko-center{min-height:690px}
+@media(min-width:1850px){.ko-bracket.ko16{min-width:0}}
 </style><style id="v25-kawaii">
 :root{color-scheme:light}
 body{background:#fffaf0;color:#644b55;background-image:radial-gradient(circle at 8% 12%,#ffe8ed 0,transparent 28%),radial-gradient(circle at 92% 30%,#e0f8ff 0,transparent 30%);}
@@ -146,6 +151,10 @@ button.danger{background:#e9a3b4!important;color:#fff!important;border-color:#e9
 .ko-node .names,.ko-center .names{background:#fff6f8!important;border-color:#f0d5dc!important}
 .group-grid .match{border:2px solid #efd3d4!important;border-radius:18px!important}
 .score-direct input{background:#fff!important;color:#a75e7d!important;border-color:#ebcbd6!important}
+.score-direct input[readonly]{cursor:pointer!important;user-select:none;touch-action:manipulation;caret-color:transparent}
+.score-direct input[readonly]:hover:not(:disabled){background:#fff0f5!important;border-color:#ce91ad!important}
+.score-direct input[readonly]:focus-visible{outline:3px solid #d88eac!important;outline-offset:2px}
+
 input:focus,textarea:focus{outline:3px solid #f3c2d4;outline-offset:1px}
 .ko-col h3,.ko-center h3,.round h3{color:#ad7283!important}
 .champion{color:#bd8a53!important}
@@ -164,21 +173,286 @@ input:focus,textarea:focus{outline:3px solid #f3c2d4;outline-offset:1px}
 #pageGroup .stage-heading,#pageEight .stage-heading{margin-bottom:0}
 #pageGroup #groupStatus:empty{display:none}
 @media(max-width:600px){.empty-stage{min-height:160px;padding:22px 12px}.empty-stage p{font-size:18px}.empty-stage small{font-size:13px}}
-</style></head><body><main><h1>牛牛利亚共和国 <small class="guild-subtitle">⚔️ 逆水寒 · 帮会插旗赛</small></h1>
+</style>
+<style id="v37-pdf-export-style">
+/* Report is separate from the interactive UI, so print output never depends on the current tab. */
+#printReport{display:none}
+@media print{
+  @page{size:A4 portrait;margin:10mm 11mm 10mm}
+  html,body{background:#fff!important;background-image:none!important;color:#263248!important;margin:0!important;padding:0!important;width:auto!important;overflow:visible!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body>main{display:none!important}
+  #printReport{display:block!important;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif!important;font-size:10pt!important;line-height:1.55!important;color:#283347!important;overflow:visible!important}
+  #printReport *{box-sizing:border-box!important}
+  #printReport .pr-head{display:flex!important;align-items:center!important;gap:13px!important;border-bottom:2px solid #b47b8a!important;padding-bottom:12px!important;margin-bottom:14px!important;break-inside:avoid!important}
+  #printReport .pr-logo{width:64px!important;height:64px!important;object-fit:cover!important;border-radius:50%!important;border:2px solid #ead2d8!important;flex:none!important}
+  #printReport .pr-title{font-size:19pt!important;color:#985b71!important;font-weight:800!important;line-height:1.25!important;margin:0!important}
+  #printReport .pr-subtitle{font-size:10pt!important;color:#7d7381!important;margin-top:4px!important}
+  #printReport .pr-meta{display:flex!important;flex-wrap:wrap!important;gap:8px 18px!important;margin:0 0 14px!important;color:#5c6575!important;font-size:9pt!important}
+  #printReport .pr-section{margin:11px 0 13px!important;break-inside:auto!important}
+  #printReport h2{font-size:13pt!important;color:#955e72!important;border-left:4px solid #dfb4c0!important;padding:3px 0 3px 9px!important;margin:0 0 7px!important;break-after:avoid!important;page-break-after:avoid!important}
+  #printReport h3{font-size:10pt!important;color:#79546a!important;margin:12px 0 6px!important;break-after:avoid!important}
+  #printReport p{color:#526073!important;margin:6px 0 10px!important}
+  #printReport .pr-summary{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin:9px 0!important;break-inside:avoid!important}
+  #printReport .pr-medal{border:1px solid #e6cbd3!important;border-radius:9px!important;padding:10px 8px!important;text-align:center!important;background:#fff9f7!important;min-width:0!important}
+  #printReport .pr-medal strong{display:block!important;font-size:9pt!important;color:#8d6175!important}
+  #printReport .pr-medal b{display:block!important;font-size:12pt!important;overflow-wrap:anywhere!important;color:#313b4d!important;margin:3px 0!important}
+  #printReport .pr-medal small{display:block!important;color:#786c74!important;font-size:8pt!important;overflow-wrap:anywhere!important}
+  #printReport table{width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;margin:5px 0 8px!important;font-size:9pt!important;background:#fff!important}
+  #printReport th,#printReport td{padding:5px 7px!important;border:1px solid #d9dce3!important;text-align:left!important;vertical-align:top!important;color:#303c4d!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  #printReport th{background:#f6e8ec!important;color:#795468!important;font-weight:700!important}
+  #printReport tr{break-inside:avoid!important;page-break-inside:avoid!important}
+  #printReport thead{display:table-header-group!important}
+  #printReport .pr-winner{font-weight:750!important;color:#8a4d68!important}
+  #printReport .pr-muted{color:#7b8390!important}
+  #printReport .pr-note{font-size:8.5pt!important;color:#697387!important}
+  #printReport .pr-footer{border-top:1px solid #e4d9de!important;margin-top:12px!important;padding-top:8px!important;color:#7a7c87!important;font-size:8pt!important}
+}
+</style>
+<style id="v39-visible-report-style">
+/* V39: show report in-page before printing, independent of popup permission. */
+body.report-preview-active>main{display:none!important}
+#reportControls{display:none}
+body.report-preview-active #reportControls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;position:sticky;top:0;z-index:50;padding:13px;background:#fff5f7;border-bottom:1px solid #ead3db;box-shadow:0 3px 14px #78536318}
+body.report-preview-active #printReport{display:block!important;max-width:850px;margin:20px auto 45px;padding:30px;background:white;border:1px solid #ead6dc;border-radius:13px;box-shadow:0 12px 36px #7b576322}
+#printReport *{box-sizing:border-box!important}
+#printReport .pr-head{display:flex!important;align-items:center!important;gap:13px!important;border-bottom:2px solid #b47b8a!important;padding-bottom:12px!important;margin-bottom:14px!important;break-inside:avoid!important}
+#printReport .pr-logo{width:64px!important;height:64px!important;object-fit:cover!important;border-radius:50%!important;border:2px solid #ead2d8!important;flex:none!important}
+#printReport .pr-title{font-size:19pt!important;color:#985b71!important;font-weight:800!important;line-height:1.25!important;margin:0!important}
+#printReport .pr-subtitle{font-size:10pt!important;color:#7d7381!important;margin-top:4px!important}
+#printReport .pr-meta{display:flex!important;flex-wrap:wrap!important;gap:8px 18px!important;margin:0 0 14px!important;color:#5c6575!important;font-size:9pt!important}
+#printReport .pr-section{margin:11px 0 13px!important;break-inside:auto!important}
+#printReport h2{font-size:13pt!important;color:#955e72!important;border-left:4px solid #dfb4c0!important;padding:3px 0 3px 9px!important;margin:0 0 7px!important;break-after:avoid!important;page-break-after:avoid!important}
+#printReport h3{font-size:10pt!important;color:#79546a!important;margin:12px 0 6px!important;break-after:avoid!important}
+#printReport p{color:#526073!important;margin:6px 0 10px!important}
+#printReport .pr-summary{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin:9px 0!important;break-inside:avoid!important}
+#printReport .pr-medal{border:1px solid #e6cbd3!important;border-radius:9px!important;padding:10px 8px!important;text-align:center!important;background:#fff9f7!important;min-width:0!important}
+#printReport .pr-medal strong{display:block!important;font-size:9pt!important;color:#8d6175!important}
+#printReport .pr-medal b{display:block!important;font-size:12pt!important;overflow-wrap:anywhere!important;color:#313b4d!important;margin:3px 0!important}
+#printReport .pr-medal small{display:block!important;color:#786c74!important;font-size:8pt!important;overflow-wrap:anywhere!important}
+#printReport table{width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;margin:5px 0 8px!important;font-size:9pt!important;background:#fff!important}
+#printReport th,#printReport td{padding:5px 7px!important;border:1px solid #d9dce3!important;text-align:left!important;vertical-align:top!important;color:#303c4d!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+#printReport th{background:#f6e8ec!important;color:#795468!important;font-weight:700!important}
+#printReport tr{break-inside:avoid!important;page-break-inside:avoid!important}
+#printReport thead{display:table-header-group!important}
+#printReport .pr-winner{font-weight:750!important;color:#8a4d68!important}
+#printReport .pr-muted{color:#7b8390!important}
+#printReport .pr-note{font-size:8.5pt!important;color:#697387!important}
+#printReport .pr-footer{border-top:1px solid #e4d9de!important;margin-top:12px!important;padding-top:8px!important;color:#7a7c87!important;font-size:8pt!important}
+@media(max-width:700px){body.report-preview-active #printReport{margin:0;padding:14px;border:0;border-radius:0;box-shadow:none}body.report-preview-active #reportControls{position:static}}
+@media print{
+  #reportControls{display:none!important}
+  #printReport{margin:0!important;padding:0!important;max-width:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+}
+</style>
+
+<style id="v40-poster-style">
+/* V40 — one-page promotional poster; does not change the tournament UI. */
+body.report-preview-active{background:linear-gradient(125deg,#fff2f3,#f7f5ff 55%,#effcff)!important}
+body.report-preview-active #printReport{max-width:720px!important;padding:0!important;margin:20px auto 42px!important;background:transparent!important;border:0!important;box-shadow:0 14px 55px #945d7025!important}
+#printReport .poster-frame{position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:3/4;background:linear-gradient(155deg,#fff5ed 0%,#fff0f4 40%,#f0f9ff 100%);border:9px solid #fff;border-radius:16px;box-shadow:inset 0 0 0 2px #eac5d1;color:#714f65;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+#printReport .poster-frame:before{content:"";position:absolute;inset:16px;border:1.5px solid #d7a8b8;border-radius:9px;pointer-events:none}
+#printReport .poster-decor{position:absolute;z-index:-1;border-radius:50%;filter:blur(1px);opacity:.7}
+#printReport .poster-decor-a{width:270px;height:270px;left:-95px;top:-75px;background:#ffdfdf}
+#printReport .poster-decor-b{width:280px;height:280px;right:-120px;bottom:-110px;background:#d8f3ff}
+#printReport .poster-inner{position:relative;z-index:1;padding:26px 42px 20px;text-align:center;height:100%;display:flex;flex-direction:column}
+#printReport .poster-topline{font-size:10px;font-weight:800;letter-spacing:4px;color:#b88b9e}
+#printReport .poster-head{display:flex!important;align-items:center!important;flex-direction:column!important;gap:4px!important;margin:9px 0 3px!important;border:0!important;padding:0!important}
+#printReport .pr-logo{width:91px!important;height:91px!important;border-radius:50%!important;object-fit:cover!important;border:4px solid white!important;box-shadow:0 3px 13px #9c66783d!important}
+#printReport .pr-logo-fallback{font-size:50px}
+#printReport .poster-guild{font-size:27px;font-weight:900;letter-spacing:2px;color:#955a70;line-height:1.3}
+#printReport .poster-sub{font-size:12px;letter-spacing:4px;color:#9a7c88}
+#printReport .poster-hero{margin:15px 0 11px}
+#printReport .poster-kicker{display:inline-block;border:1px solid #d7a0b1;background:#fff8f9;border-radius:30px;padding:5px 17px;font-size:11px;letter-spacing:2px;color:#ae637e;font-weight:800}
+#printReport .poster-big{font-size:53px;font-weight:1000;line-height:1.28;letter-spacing:5px;color:#a35b76;text-shadow:2px 3px 0 #ffe1e9;margin:6px 0 0}
+#printReport .poster-en{font-size:11px;letter-spacing:4px;color:#bf8ea2;font-weight:700}
+#printReport .poster-hero-rule{font-size:13px;letter-spacing:3px;margin-top:8px;color:#8d7182}
+#printReport .poster-section-title{display:flex;align-items:center;justify-content:center;gap:22px;font-size:18px;font-weight:900;color:#a15b76;letter-spacing:4px;margin:10px 0 12px}
+#printReport .poster-section-title span{color:#cfa47d}
+#printReport .poster-prizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#printReport .poster-prize{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:150px;padding:14px 6px;border-radius:14px;border:1px solid #e4c6cf;background:#fffbf9;box-shadow:0 5px 14px #ad7c8a15}
+#printReport .poster-prize-gold{background:linear-gradient(160deg,#fff1c9,#fff9f1);border-color:#e8cb85}
+#printReport .poster-prize-silver{background:linear-gradient(160deg,#f3f5ff,#fffafb);border-color:#d5d9eb}
+#printReport .poster-prize-bronze{background:linear-gradient(160deg,#fff0e5,#fff9f6);border-color:#e9cbb7}
+#printReport .poster-medal{font-size:34px;line-height:1.2}
+#printReport .poster-prize-label{font-size:12px;letter-spacing:2px;color:#9a7381;font-weight:800;margin-top:4px}
+#printReport .poster-prize strong{font-size:20px;line-height:1.3;color:#7b4961;overflow-wrap:anywhere;margin-top:9px}
+#printReport .poster-prize-line{font-size:8px;letter-spacing:1.6px;color:#b49aa5;margin-top:6px}
+#printReport .poster-extra{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
+#printReport .poster-extra>div{background:#fffafc;border:1px solid #e8ccd5;border-radius:11px;padding:11px 8px;display:flex;flex-direction:column;gap:5px}
+#printReport .poster-extra span{font-size:12px;color:#9a6b7e;font-weight:800}
+#printReport .poster-extra strong{font-size:17px;color:#704f63;overflow-wrap:anywhere}
+#printReport .poster-rules{margin-top:18px;border:1px solid #e5c5d1;background:#ffffffad;border-radius:13px;padding:11px 12px}
+#printReport .poster-rules-title{font-size:16px;letter-spacing:4px;color:#a15d78;font-weight:900;margin-bottom:7px}
+#printReport .poster-rules-grid{display:grid;grid-template-columns:1fr;gap:4px;justify-items:center;text-align:center}
+#printReport .poster-rules-grid span{font-size:15px;color:#7d6676;line-height:1.5}
+#printReport .poster-rules-grid b{color:#a95c7b;font-size:20px;margin-left:5px}
+#printReport .poster-call{font-size:17px;font-weight:900;color:#a55d78;letter-spacing:2px;margin-top:auto;padding-top:14px}
+#printReport .poster-bottom{font-size:10px;letter-spacing:3px;color:#b38b9d;margin-top:9px}
+@media(max-width:650px){body.report-preview-active #printReport{margin:0 auto!important}#printReport .poster-inner{padding:3.5% 6% 3%}#printReport .pr-logo{width:11vw!important;height:11vw!important;min-width:58px!important;min-height:58px!important}#printReport .poster-guild{font-size:clamp(17px,4vw,27px)}#printReport .poster-big{font-size:clamp(27px,7vw,53px)}#printReport .poster-prize{min-height:unset;padding:8px 4px}#printReport .poster-medal{font-size:clamp(21px,5vw,34px)}#printReport .poster-prize strong{font-size:clamp(12px,3vw,20px)}#printReport .poster-hero{margin:8px 0}#printReport .poster-rules{margin-top:9px}#printReport .poster-section-title{margin:7px 0}}
+@media print{
+  @page{size:A4 portrait;margin:0}
+  html,body{margin:0!important;padding:0!important;width:210mm!important;height:297mm!important;background:#fff!important;overflow:hidden!important}
+  #reportControls{display:none!important}
+  body.report-preview-active #printReport,#printReport{display:block!important;width:200mm!important;height:266.667mm!important;max-width:none!important;margin:10mm auto 0!important;padding:0!important;border:0!important;box-shadow:none!important;overflow:hidden!important}
+  #printReport .poster-frame{width:100%!important;height:100%!important;aspect-ratio:auto!important;border-radius:0!important;border-width:0!important}
+  #printReport .poster-inner{padding:10mm 15mm 8mm!important}
+  #printReport .pr-logo{width:27mm!important;height:27mm!important}
+  #printReport .poster-prize{min-height:41mm!important}
+}
+</style>
+<style id="v46-centered-grand-final">
+/* V46: keep the final at the exact visual center of the bracket. */
+.ko-bracket .ko-center{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  justify-items:stretch;
+  align-self:stretch;
+  min-height:610px;
+  overflow:visible;
+}
+.ko-bracket.ko16 .ko-center{min-height:720px}
+.ko-final-spot{grid-column:1;grid-row:2;width:100%;position:relative;z-index:1;text-align:center}
+.ko-final-spot>h3{
+  display:inline-block;
+  min-height:0!important;
+  margin:0 auto 14px!important;
+  padding:10px 20px;
+  border-radius:999px;
+  background:linear-gradient(120deg,#fff0c9,#f6d998,#fff0c9);
+  color:#9d6935!important;
+  font-size:clamp(19px,1.65vw,26px)!important;
+  font-weight:900;
+  letter-spacing:.05em;
+  box-shadow:0 5px 15px #d8ad6740;
+}
+.ko-final-spot>.match.final{
+  border:3px solid #d9a44d!important;
+  border-radius:22px!important;
+  background:linear-gradient(145deg,#fffefb,#fff3e1)!important;
+  box-shadow:0 0 0 5px #f9e8c9,0 12px 28px #c28b4140!important;
+  padding:clamp(10px,1.2vw,20px)!important;
+}
+.ko-final-spot .names{background:#fffaf1!important;border-color:#e8c88e!important;min-height:88px!important}
+.ko-final-spot .names span{font-size:clamp(18px,1.25vw,23px)!important}
+.ko-final-spot .score-direct input{font-size:clamp(22px,1.65vw,29px)!important;font-weight:900!important}
+.ko-final-spot>.champion{
+  display:inline-block;
+  margin:15px auto 0;
+  padding:8px 20px!important;
+  background:#fff0d4;
+  border:1px solid #ebca8e;
+  border-radius:999px;
+  color:#a87837!important;
+  font-size:clamp(17px,1.2vw,21px)!important;
+  font-weight:900;
+}
+.ko-bracket .ko-center>.ko-third{
+  grid-column:1;
+  grid-row:3;
+  align-self:end;
+  width:100%;
+  margin:0 0 8px;
+}
+.ko-bracket .ko-third h2{margin:0 0 10px;font-size:clamp(15px,1.15vw,19px)!important}
+@media(max-width:850px){.ko-bracket .ko-center{min-height:610px}}
+</style><style id="v47-connected-uniform-bracket">
+/* V47: equal-size round cards and actual bracket connector paths. */
+.ko-bracket{position:relative;isolation:isolate;}
+.ko-lines{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible;}
+.ko-lines path{fill:none;stroke:#c6a069;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
+.ko-node,.ko-final-spot,.ko-third{position:relative;z-index:1;}
+/* Remove old decorative stubs; SVG connects every round, including the final. */
+.ko-wing.left .ko-node::after,.ko-wing.right .ko-node::before{display:none!important;}
+.ko-col h3{height:46px!important;min-height:46px!important;margin-bottom:12px!important;box-sizing:border-box;}
+.ko-col .ko-stack{min-height:0;}
+.ko-col .ko-node .match{height:168px!important;min-height:168px!important;max-height:168px!important;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;position:relative;padding:10px!important;}
+.ko-col .ko-node .names{flex:1;min-height:0!important;max-height:100%;padding:7px 5px!important;box-sizing:border-box;}
+.ko-col .ko-node .names span{font-size:clamp(12px,.84vw,15px)!important;line-height:1.3!important;overflow-wrap:anywhere;word-break:break-word;}
+.ko-col .ko-node .match-winner{position:absolute;bottom:2px;left:5px;right:5px;text-align:center;margin:0;font-size:11px;pointer-events:none;}
+.ko-bracket.ko16 .ko-col .ko-node .match{height:174px!important;min-height:174px!important;max-height:174px!important;}
+.ko-bracket.ko16 .ko-col .ko-node .names span{font-size:clamp(12px,.76vw,14px)!important;}
+/* Center round remains gold and visually emphasized. */
+.ko-final-spot>.match.final{min-height:168px;display:flex;flex-direction:column;justify-content:center;}
+.ko-third>.match{min-height:168px;display:flex;flex-direction:column;justify-content:center;}
+@media(max-width:850px){.ko-col .ko-node .names span{font-size:13px!important;}}
+</style>
+
+<style id="v48-compact-bracket-and-poster">
+/* Compact consistent cards; extra spacing between rounds gives longer connector lines. */
+.ko-bracket{column-gap:clamp(30px,3.1vw,56px)!important;min-width:1100px!important;}
+.ko-bracket.ko16{column-gap:clamp(24px,2.1vw,38px)!important;min-width:1390px!important;}
+.ko-col .ko-node .match{width:100%!important;max-width:214px!important;height:130px!important;min-height:130px!important;max-height:130px!important;margin:0 auto!important;padding:7px!important;}
+.ko-bracket.ko16 .ko-col .ko-node .match{max-width:178px!important;height:130px!important;min-height:130px!important;max-height:130px!important;}
+.ko-col .ko-node .names{padding:5px 4px!important;gap:3px!important;}
+.ko-col .ko-node .names span{font-size:clamp(12px,.85vw,15px)!important;line-height:1.24!important;}
+.ko-bracket.ko16 .ko-col .names span{font-size:clamp(11px,.75vw,13px)!important;}
+.ko-col .score-direct input{width:clamp(29px,2.35vw,42px)!important;min-height:38px!important;padding:3px 1px!important;font-size:clamp(17px,1.3vw,22px)!important;}
+.ko-col .score-direct{gap:2px!important;}
+.ko-col .score-direct b{font-size:17px!important;}
+.ko-col .ko-node .match-winner{font-size:10px!important;}
+.ko-final-spot>.match.final{width:100%!important;max-width:260px!important;min-height:145px!important;margin:0 auto!important;padding:10px!important;}
+.ko-third>.match{width:100%!important;max-width:260px!important;min-height:135px!important;margin:0 auto!important;padding:10px!important;}
+.ko-bracket .ko-center{min-height:650px!important;}
+.ko-bracket.ko16 .ko-center{min-height:840px!important;}
+.ko-col h3{font-size:clamp(12px,1.1vw,16px)!important;}
+/* Keep lines behind the cards but in front of the background. */
+.ko-lines path{stroke-width:2.5;stroke:#c6a069;}
+#printReport .poster-extra.poster-extra-three{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;}
+#printReport .poster-extra.poster-extra-three>div{padding:10px 4px;}
+#printReport .poster-extra.poster-extra-three span{font-size:11px;}
+#printReport .poster-extra.poster-extra-three strong{font-size:clamp(11px,1.5vw,16px);}
+.reset-modal[hidden]{display:none!important;}
+.reset-modal{position:fixed;inset:0;background:#2c253599;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
+.reset-modal-card{width:min(440px,100%);background:#fffaf8;color:#704e5d;border:1px solid #e8c7d1;border-radius:20px;padding:24px;box-shadow:0 20px 60px #322b3a44;}
+.reset-modal-card h2{margin:0 0 12px;color:#a65d77;}
+.reset-modal-card p{line-height:1.8;margin:0 0 20px;}
+.reset-modal-actions{display:flex;justify-content:flex-end;gap:12px;}
+.reset-modal-actions button{min-width:100px;}
+@media(max-width:650px){#printReport .poster-extra.poster-extra-three span{font-size:9px;}#printReport .poster-extra.poster-extra-three strong{font-size:11px;}}
+</style>
+
+<style id="v49-bo1-layout-awards">
+/* V49: Slightly reduce vertical whitespace in 8/16-team brackets. */
+.ko-bracket{min-height:585px!important;}
+.ko-bracket.ko16{min-height:765px!important;}
+.ko-bracket .ko-center{min-height:585px!important;}
+.ko-bracket.ko16 .ko-center{min-height:765px!important;}
+.ko-bracket .ko-stack{gap:20px!important;}
+/* BO1: same click-to-increment score cards as BO3/BO5. */
+.tie-match{max-width:540px;min-height:118px;display:flex;flex-direction:column;justify-content:center;padding:14px!important;}
+.tie-match .names{min-height:65px;gap:8px;}
+.tie-match .names span{font-size:clamp(16px,1.2vw,21px);font-weight:750;overflow-wrap:anywhere;line-height:1.35;}
+.tie-match .score-direct input{width:49px;min-height:45px;font-size:22px;font-weight:850;}
+.tie-match .match-winner{margin-top:5px;}
+/* Same aligned label and input width for every award, including the 16-team prize. */
+#awards label{display:grid!important;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:12px;max-width:720px;margin:12px 0!important;}
+#awards .awardInput{width:100%!important;min-width:0;box-sizing:border-box;display:block;}
+@media(max-width:540px){#awards label{grid-template-columns:80px minmax(0,1fr);gap:8px;}.tie-match .names span{font-size:15px;}.tie-match .score-direct input{width:40px;min-height:40px;}}
+</style>
+</head><body><main><h1>牛牛利亚共和国 <small class="guild-subtitle">⚔️ 逆水寒 · 帮会插旗赛</small></h1>
 <div class="tabs"><button data-tab="List" class="active">① 参赛名单</button><button data-tab="Group">② 小组赛</button><button data-tab="Eight">③ 淘汰赛</button><button data-tab="Award">④ 奖励</button><button id="reset" class="danger" type="button">↻ 重置比赛</button></div>
+<div id="resetDialog" class="reset-modal" role="dialog" aria-modal="true" aria-labelledby="resetDialogTitle" hidden>
+ <div class="reset-modal-card">
+  <h2 id="resetDialogTitle">确认重置比赛？</h2>
+  <p>将清空参赛名单、小组赛、BO1 加赛、淘汰赛和全部比分。<strong>奖励设置会保留。</strong></p>
+  <div class="reset-modal-actions"><button type="button" id="resetCancel" class="secondary">取消</button><button type="button" id="resetConfirm" class="danger">确认重置</button></div>
+ </div>
+</div>
 <p id="msg" role="status" aria-live="polite"></p>
 <section id="pageList"><div class="panel"><h2>参赛名单</h2><textarea id="names" placeholder="参赛人员"></textarea><div class="row roster-actions"><button id="saveNames">保存名单</button><button id="importBtn" class="secondary">📄 导入Excel</button><input id="file" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden><button id="draw">🎲 随机生成1v1对阵</button></div><p id="count"></p></div></section>
 <section id="pageGroup" class="hidden"><div class="panel"><div class="stage-heading"><h2>⚔️ 小组赛</h2><span class="stage-rules">BO3</span></div><p id="groupStatus" role="status" aria-live="polite" style="color:#9fe2b9;font-weight:600;min-height:1.5em"></p><div id="groupMatches"></div><div id="qualification"></div></div></section>
-<section id="pageEight" class="hidden"><div class="panel"><div class="stage-heading"><h2>🏆 淘汰赛</h2><span class="stage-rules">八强、半决赛：BO3　｜　决赛、季军赛：BO5</span></div><div id="eightMatches"></div></div></section>
-<section id="pageAward" class="hidden"><div class="panel"><h2>奖项设置</h2><div id="awards"></div><button id="print" class="secondary">打印 / 保存PDF</button></div></section></main>
+<section id="pageEight" class="hidden"><div class="panel"><div class="stage-heading"><h2>🏆 淘汰赛</h2><span class="stage-rules">十六强、八强、半决赛：BO3　｜　决赛、季军赛：BO5</span></div><div id="eightMatches"></div></div></section>
+<section id="pageAward" class="hidden"><div class="panel"><h2>奖项设置</h2><div id="awards"></div><button id="print" class="secondary">🎨 导出海报</button></div></section></main><div id="reportControls" role="toolbar" aria-label="比赛报告操作"><strong>🐮 宣传海报预览</strong><button type="button" id="reportPrint">🖨️ 打印 / 保存 PDF</button><button type="button" id="reportPNG" class="secondary">🖼️ 下载海报 PNG</button><button type="button" id="reportBack" class="secondary">↩ 返回比赛</button><span id="reportFeedback" role="status" style="font-size:13px;color:#8b6578"></span></div><article id="printReport" aria-label="比赛结果打印报告"></article>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>
 (()=>{'use strict';
 const KEY='nsh_duel_v20_qualifier';const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const initial=()=>({names:[],groups:[],groupScores:{},tieRounds:[],bracket:null,bracketScores:{},thirdScore:null,awards:{冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',参与奖:'柠檬茶'}});
+const initial=()=>({names:[],groups:[],groupScores:{},tieRounds:[],bracket:null,bracketScores:{},thirdScore:null,awards:{冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',十六强奖:'奶茶一杯',参与奖:'柠檬茶'}});
 let s=initial();try{const old=JSON.parse(localStorage.getItem(KEY));if(old&&Array.isArray(old.names))s={...s,...old}}catch(e){}
 // Upgrade untouched default awards while keeping user-customized prizes.
-const awardDefaults={冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',参与奖:'柠檬茶'};
+const awardDefaults={冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',十六强奖:'奶茶一杯',参与奖:'柠檬茶'};
 if(!s.awards||typeof s.awards!=='object')s.awards={};
 for(const [k,v] of Object.entries(awardDefaults)){if(s.awards[k]===undefined||s.awards[k]==='待定'||(k==='冠军'&&s.awards[k]==='288')||(k==='亚军'&&s.awards[k]==='128')||(k==='季军'&&s.awards[k]==='68'))s.awards[k]=v;}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(s));return true}catch(e){say('⚠ 比分已更新，但浏览器未允许永久保存：'+e.message);return false}}
@@ -188,14 +462,19 @@ function show(t){for(const x of ['List','Group','Eight','Award']){$('page'+x).cl
 function groupWin(i){const sc=s.groupScores[i];if(!sc||!valid(sc[0],sc[1],2))return null;return sc[0]>sc[1]?s.groups[i][0]:s.groups[i][1]}
 function groupResult(){const wins=[];if(!s.groups.length)return {ready:false,wins};for(let i=0;i<s.groups.length;i++){const w=groupWin(i);if(!w)return {ready:false,wins};wins.push({name:w,score:s.groupScores[i].includes(0)?'2:0':'2:1',tier:s.groupScores[i].includes(0)?2:1})}return {ready:true,wins}}
 function valid(a,b,n){return Number.isInteger(a)&&Number.isInteger(b)&&a>=0&&b>=0&&Math.max(a,b)===n&&Math.min(a,b)<n}
-function pairMatches(players){let matches=[];for(let i=0;i<players.length;i++)for(let j=i+1;j<players.length;j++)matches.push({a:players[i],b:players[j],score:null});return matches}
+function targetSize(){return s.names.length>=32?16:8}
+function hasSixteenRound(){return (s.bracket&&s.bracket.players?.length===16)||s.names.length>=32}
+function targetLabel(){return targetSize()===16?'十六强':'八强'}
+function finalStage(){return s.bracket&&s.bracket.players.length===16?3:2}
+function semiStage(){return finalStage()-1}
+function pairMatches(players){let matches=[];for(let i=0;i<players.length;i++)for(let j=i+1;j<players.length;j++)matches.push({a:players[i],b:players[j],score:null});return shuffle(matches)}
 function roundReady(round){return round.matches.every(m=>m.score===0||m.score===1)}
 function standings(round){const stats=new Map(round.players.map(n=>[n,{name:n,w:0,l:0}]));for(const m of round.matches){if(m.score===0){stats.get(m.a).w++;stats.get(m.b).l++}if(m.score===1){stats.get(m.b).w++;stats.get(m.a).l++}}return [...stats.values()].sort((a,b)=>b.w-a.w||a.name.localeCompare(b.name,'zh'))}
 // Returns a complete, reproducible qualification decision; only a tie spanning the cutoff causes a new BO1 round robin.
 function qualification(){const gr=groupResult();if(!gr.ready)return {ready:false,reason:'请先完成所有小组赛BO3比分。'};
 const tiers=[gr.wins.filter(x=>x.tier===2).map(x=>x.name),gr.wins.filter(x=>x.tier===1).map(x=>x.name)];let chosen=[],roundIndex=0,info=[];
 for(let ti=0;ti<2;ti++){
- const players=tiers[ti],seats=8-chosen.length;
+ const players=tiers[ti],seats=targetSize()-chosen.length;
  if(seats<=0){info.push({tier:ti,players,kind:'excluded'});continue}
  if(players.length<=seats){chosen.push(...players);info.push({tier:ti,players,kind:'direct'});continue}
  // Oversubscribed tier. A sequence of mini-leagues resolves the boundary; locked-in players remain locked in.
@@ -221,33 +500,370 @@ for(let ti=0;ti<2;ti++){
 }
 function syncTie(){let q=qualification();if(q.needRound){const r=q.needRound;s.tieRounds=s.tieRounds.slice(0,r.index);s.tieRounds.push({tier:r.tier,stage:r.stage,players:r.players,seats:r.seats,matches:pairMatches(r.players)});persist();q=qualification()}return q}
 function clearLater(){s.tieRounds=[];s.bracket=null;s.bracketScores={};s.thirdScore=null}
-function draw(){if(s.names.length<16||s.names.length%2){say('为了全员首轮1v1、无轮空并产生8强，请输入至少16名、且为偶数的参赛选手。');return}if(s.groups.length&&!confirm('重新抽签会清空当前所有比分，确定吗？'))return;const a=shuffle(s.names);s.groups=[];for(let i=0;i<a.length;i+=2)s.groups.push([a[i],a[i+1]]);s.groupScores={};clearLater();persist();show('Group');say('✓ 已随机生成'+s.groups.length+'场BO3小组赛')}
+function draw(){if(s.names.length<16||s.names.length%2){say('为了全员首轮1v1、无轮空，请输入至少16名、且为偶数的参赛选手。');return}if(s.groups.length&&!confirm('重新抽签会清空当前所有比分，确定吗？'))return;const a=shuffle(s.names);s.groups=[];for(let i=0;i<a.length;i+=2)s.groups.push([a[i],a[i+1]]);s.groupScores={};clearLater();persist();show('Group');say('✓ 已随机生成'+s.groups.length+'场BO3小组赛')}
 function saveGroup(i){const ia=$('g'+i+'A'),ib=$('g'+i+'B');if(!ia||!ib){say('比分输入框未就绪，请重新进入小组赛界面');return}const a=Number(ia.value),b=Number(ib.value);if(ia.value.trim()===''||ib.value.trim()===''||!valid(a,b,2)){say('第'+(i+1)+'组比分无效：只接受2:0、2:1、0:2或1:2');return}const drafts={};for(let j=0;j<s.groups.length;j++){if(j===i)continue;const x=$('g'+j+'A'),y=$('g'+j+'B');if(x&&y)drafts[j]=[x.value,y.value]}const old=s.groupScores[i];s.groupScores[i]=[a,b];if(!old||old[0]!==a||old[1]!==b)clearLater();const ok=persist();render();for(const [j,vals] of Object.entries(drafts)){const x=$('g'+j+'A'),y=$('g'+j+'B');if(x&&y){x.value=vals[0];y.value=vals[1]}}if(ok)say('✓ 第'+(i+1)+'组比分 '+a+':'+b+' 已保存，胜者：'+(a>b?s.groups[i][0]:s.groups[i][1]));else say('⚠ 第'+(i+1)+'组比分已更新，但浏览器禁止永久保存，请用 Safari 正式网址打开')}
-function saveTie(ri,mi){const round=s.tieRounds[ri],m=round?.matches[mi];if(!m)return;const val=document.querySelector('input[name="tie_'+ri+'_'+mi+'"]:checked')?.value;if(val===undefined){say('请先选择BO1获胜者');return}m.score=+val;s.tieRounds=s.tieRounds.slice(0,ri+1);s.bracket=null;s.bracketScores={};s.thirdScore=null;persist();syncTie();render();say('✓ BO1加赛结果已保存')}
-function seedBracket(){let q=syncTie();if(!q.ready){say('请先完成小组赛及全部BO1加赛');render();return}if(q.chosen.length!==8){say('晋级人数异常，请检查加赛结果');return}if(s.bracket&&!confirm('重新抽签八强会清空淘汰赛比分，确定吗？'))return;const a=shuffle(q.chosen);s.bracket={players:a};s.bracketScores={};s.thirdScore=null;persist();show('Eight');say('✓ 已生成八强树状图')}
-function pair(stage,i){if(!s.bracket)return [null,null];if(stage===0)return s.bracket.players.slice(i*2,i*2+2);if(stage===1)return [bracketWin(0,i*2),bracketWin(0,i*2+1)];return [bracketWin(1,0),bracketWin(1,1)]}
-function bracketWin(stage,i){const [a,b]=pair(stage,i),v=s.bracketScores[stage+'_'+i],n=stage===2?3:2;return a&&b&&v&&valid(v[0],v[1],n)?(v[0]>v[1]?a:b):null}
+function seedBracket(){
+ let q=syncTie(),target=targetSize();
+ if(!q.ready){say('请先完成小组赛及全部BO1加赛');render();return}
+ if(q.chosen.length!==target){say('晋级人数异常，请检查加赛结果');return}
+ if(s.bracket&&!confirm('重新抽签'+targetLabel()+'会清空淘汰赛比分，确定吗？'))return;
+ s.bracket={players:shuffle(q.chosen)};s.bracketScores={};s.thirdScore=null;persist();show('Eight');say('✓ 已生成'+targetLabel()+'树状图')
+}
+function pair(stage,i){
+ if(!s.bracket)return [null,null];
+ if(stage===0)return s.bracket.players.slice(i*2,i*2+2);
+ if(stage>0&&stage<=finalStage())return [bracketWin(stage-1,i*2),bracketWin(stage-1,i*2+1)];
+ return [null,null];
+}
+function bracketWin(stage,i){
+ const [a,b]=pair(stage,i),v=s.bracketScores[stage+'_'+i],n=stage===finalStage()?3:2;
+ return a&&b&&v&&valid(v[0],v[1],n)?(v[0]>v[1]?a:b):null
+}
 function bracketLoser(stage,i){const [a,b]=pair(stage,i),w=bracketWin(stage,i);return w?(w===a?b:a):null}
+function clearDescendants(stage,i){
+ const f=finalStage();
+ for(let st=stage+1;st<=f;st++){
+  const ancestor=Math.floor(i/Math.pow(2,st-stage));
+  delete s.bracketScores[st+'_'+ancestor];
+ }
+ if(stage<=f-1)s.thirdScore=null;
+}
 function matchCard(a,b,score,need,key,disabled=false){
  const w=score&&valid(score[0],score[1],need)?(score[0]>score[1]?a:b):null;
  const v=score||[0,0],off=!a||!b||disabled?'disabled':'';
- return `<div class="match ${need===3?'final':''}"><div class="names score-top"><span class="${w===a&&w?'win':''}">${esc(a||'待定')}</span><div class="score-direct no-print"><input aria-label="${esc(a||'选手A')}比分" inputmode="numeric" type="number" min="0" max="${need}" value="${v[0]}" id="${key}A" data-auto="${key}" ${off}><b>:</b><input aria-label="${esc(b||'选手B')}比分" inputmode="numeric" type="number" min="0" max="${need}" value="${v[1]}" id="${key}B" data-auto="${key}" ${off}></div><span class="${w===b&&w?'win':''}" style="text-align:right">${esc(b||'待定')}</span></div>${w?'<small class="match-winner">获胜：'+esc(w)+'</small>':''}</div>`
+ return `<div class="match ${need===3?'final':''}"><div class="names score-top"><span class="${w===a&&w?'win':''}">${esc(a||'待定')}</span><div class="score-direct no-print"><input aria-label="${esc(a||'选手A')}比分" type="number" min="0" max="${need}" value="${v[0]}" id="${key}A" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}><b>:</b><input aria-label="${esc(b||'选手B')}比分" type="number" min="0" max="${need}" value="${v[1]}" id="${key}B" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}></div><span class="${w===b&&w?'win':''}" style="text-align:right">${esc(b||'待定')}</span></div>${w?'<small class="match-winner">获胜：'+esc(w)+'</small>':''}</div>`
 }
 function groupHTML(){if(!s.groups.length)return '<div class="empty-stage"><span class="empty-stage-icon">🎲</span><p>暂无比赛对阵</p><small>请先在「参赛名单」中保存选手并随机抽签</small></div>';return `<div class="group-grid">${s.groups.map(([a,b],i)=>`<div>${'<h3 style="color:#edc47d;text-align:center">第'+(i+1)+'组</h3>'}${matchCard(a,b,s.groupScores[i],2,'g'+i)}</div>`).join('')}</div>`}
-function qualHTML(){if(!s.groups.length)return '';const gr=groupResult();if(!gr.ready)return '<div class="qual-section"><h3>八强资格</h3><p>完成全部小组赛后，自动统计2:0、2:1胜者，并安排需要的BO1加赛。</p></div>';
-let q=syncTie();let html='<div class="qual-section"><h3>八强资格 · BO1加赛</h3><p class="qual-notice">2:0胜者优先于2:1胜者。同档人数超过剩余名额时，所有相关选手进行BO1循环赛；若晋级线同分，则同分选手继续BO1循环赛，直到确定八强。无随机轮空。</p>';
-html+='<table class="qual-table"><thead><tr><th>优先级</th><th>小组赛胜者</th><th>人数</th></tr></thead><tbody><tr><td>第一档 · 2:0</td><td>'+esc(gr.wins.filter(x=>x.tier===2).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===2).length+'</td></tr><tr><td>第二档 · 2:1</td><td>'+esc(gr.wins.filter(x=>x.tier===1).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===1).length+'</td></tr></tbody></table>';
-for(let ri=0;ri<s.tieRounds.length;ri++){const r=s.tieRounds[ri];html+='<div class="qual-section"><h3>'+ (r.tier===0?'2:0':'2:1')+'档 · BO1循环赛'+(r.stage>1?'（第'+r.stage+'轮同分加赛）':'')+'</h3><p>'+r.players.length+'名选手争夺'+r.seats+'个名额，共'+r.matches.length+'场BO1。</p><div class="group-grid">';for(let mi=0;mi<r.matches.length;mi++){const m=r.matches[mi],key='tie_'+ri+'_'+mi;html+='<div class="match"><div class="names"><span>'+esc(m.a)+'</span><b>VS</b><span style="text-align:right">'+esc(m.b)+'</span></div><div class="score"><label><input type="radio" name="'+key+'" value="0" '+(m.score===0?'checked':'')+'> '+esc(m.a)+'胜</label><label><input type="radio" name="'+key+'" value="1" '+(m.score===1?'checked':'')+'> '+esc(m.b)+'胜</label><button data-tie="'+ri+'_'+mi+'">保存BO1</button></div></div>'}html+='</div>';const ranked=standings(r);html+='<table class="qual-table"><thead><tr><th>选手</th><th>胜场</th><th>负场</th></tr></thead><tbody>'+ranked.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+x.w+'</td><td>'+x.l+'</td></tr>').join('')+'</tbody></table></div>'}
-if(q.ready){html+='<h3>✓ 八强名单已确定</h3><p>'+q.chosen.map(esc).join('、')+'</p><button id="seedBracket">🎲 生成八强对阵树</button>'}else if(q.needRound){html+='<p>正在生成下一轮同分加赛，请稍候。</p>'}else if(q.pending!==undefined){html+='<p>请完成以上BO1加赛，系统将自动确定晋级名单。</p>'}html+='</div>';return html}
-function koCard(stage,i){const [a,b]=pair(stage,i);return matchCard(a,b,s.bracketScores[stage+'_'+i],stage===2?3:2,'k'+stage+'_'+i)}
-function koHTML(){if(!s.bracket)return '<div class="empty-stage"><span class="empty-stage-icon">🏆</span><p>暂无比赛对阵</p><small>完成小组赛及必要的BO1加赛后，生成八强对阵树</small></div>';const champ=bracketWin(2,0),thirdA=bracketLoser(1,0),thirdB=bracketLoser(1,1),v=s.thirdScore,third=v&&valid(v[0],v[1],3)?(v[0]>v[1]?thirdA:thirdB):null;
-const col=(stage,indices,title)=>'<div class="ko-col"><h3>'+title+'</h3><div class="ko-stack">'+indices.map(i=>'<div class="ko-node">'+koCard(stage,i)+'</div>').join('')+'</div></div>';
-return '<div class="ko-scroll"><div class="ko-bracket"><div class="ko-wing left">'+col(0,[0,1],'八强赛 · 左半区')+col(1,[0],'半决赛 · 左半区')+'</div><div class="ko-center"><h3>🏆 决赛 · BO5</h3>'+koCard(2,0)+'<p class="champion">'+(champ?'冠军：'+esc(champ):'冠军待定')+'</p><div class="ko-third"><h2 style="text-align:center">🥉 季军赛 · BO5</h2>'+matchCard(thirdA,thirdB,v,3,'third')+'<p class="champion">'+(third?'季军：'+esc(third):'季军待定')+'</p></div></div><div class="ko-wing right">'+col(1,[1],'半决赛 · 右半区')+col(0,[2,3],'八强赛 · 右半区')+'</div></div></div>'}
-function saveKO(stage,i){const [a,b]=pair(stage,i),need=stage===2?3:2;if(!a||!b){say('请先完成前一轮比赛');return}const x=+$('k'+stage+'_'+i+'A').value,y=+$('k'+stage+'_'+i+'B').value;if(!valid(x,y,need)){say('请输入有效的BO'+(need*2-1)+'终局比分');return}const old=bracketWin(stage,i);s.bracketScores[stage+'_'+i]=[x,y];if(old!==bracketWin(stage,i)){if(stage===0){delete s.bracketScores['1_'+Math.floor(i/2)];delete s.bracketScores['2_0'];s.thirdScore=null}else if(stage===1){delete s.bracketScores['2_0'];s.thirdScore=null}}persist();render();say('')}
-function saveThird(){const a=bracketLoser(1,0),b=bracketLoser(1,1);if(!a||!b){say('请先完成半决赛');return}const x=+$('thirdA').value,y=+$('thirdB').value;if(!valid(x,y,3)){say('季军赛请输入有效BO5比分');return}s.thirdScore=[x,y];persist();render();say('')}
-function awards(){const champ=s.bracket?bracketWin(2,0):null,runner=champ?(champ===pair(2,0)[0]?pair(2,0)[1]:pair(2,0)[0]):null;const [a,b]=s.bracket?[bracketLoser(1,0),bracketLoser(1,1)]:[null,null],v=s.thirdScore,third=a&&b&&v&&valid(v[0],v[1],3)?(v[0]>v[1]?a:b):null;
-$('awards').innerHTML='<p>🥇 冠军：'+esc(champ||'待定')+'　🥈 亚军：'+esc(runner||'待定')+'　🥉 季军：'+esc(third||'待定')+'</p>'+Object.entries(s.awards).map(([k,val])=>'<label style="display:block;margin:12px 0">'+esc(k)+' <input class="awardInput" data-award="'+esc(k)+'" style="width:min(340px,100%);padding:9px;background:#101d30;color:white;border:1px solid #516b83" value="'+esc(val)+'"></label>').join('')}
-function render(){if(document.activeElement!==$('names'))$('names').value=s.names.join('\n');$('count').textContent='当前 '+s.names.length+' 人';$('groupMatches').innerHTML=groupHTML();$('qualification').innerHTML=qualHTML();$('eightMatches').innerHTML=koHTML();awards();document.querySelectorAll('[data-auto]').forEach(el=>{el.addEventListener('focus',()=>{el.select()});el.addEventListener('click',()=>{el.select()})});document.querySelectorAll('[data-auto]').forEach(el=>el.addEventListener('change',()=>{const k=el.dataset.auto;const x=$(k+'A'),y=$(k+'B');if(!x||!y)return;const need=k==='third'||k==='k2_0'?3:2;const a=Number(x.value),b=Number(y.value);if(x.value.trim()===''||y.value.trim()===''||!valid(a,b,need)){if(a!==0||b!==0)say('比分未完成：BO'+(need*2-1)+'需先赢'+need+'局，填写有效终局比分后自动保存');return}if(k[0]==='g')saveGroup(+k.slice(1));else if(k==='third')saveThird();else if(k[0]==='k'){const [st,i]=k.slice(1).split('_').map(Number);saveKO(st,i)}}));document.querySelectorAll('[data-tie]').forEach(b=>b.onclick=()=>{const [r,i]=b.dataset.tie.split('_').map(Number);saveTie(r,i)});const seed=$('seedBracket');if(seed)seed.onclick=seedBracket;document.querySelectorAll('.awardInput').forEach(el=>el.onchange=()=>{s.awards[el.dataset.award]=el.value;persist();say('✓ 奖励已保存')})}
-function updateNames(arr){const names=[...new Set(arr.map(x=>String(x??'').trim()).filter(Boolean))];if(names.length<16||names.length%2){say('请提供至少16名且为偶数人数的选手，才能保证全员首轮1v1并产生无轮空八强。');return}if(s.groups.length&&!confirm('更改名单将清空当前所有比赛数据，继续吗？'))return;s.names=names;s.groups=[];s.groupScores={};clearLater();persist();render();say('✓ 已保存'+names.length+'名选手')}
-$('saveNames').onclick=()=>updateNames($('names').value.split(/\r?\n/));$('draw').onclick=draw;$('reset').onclick=()=>{if(!confirm('确定重置比赛？将清空参赛名单、所有对阵、比分、加赛及名次结果；奖励设置会保留。'))return;const keptAwards={...s.awards};try{localStorage.removeItem(KEY)}catch(e){}s=initial();s.awards=keptAwards;persist();$('names').value='';$('file').value='';show('List');say('')};$('importBtn').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{let arr;if(/\.(csv|tsv)$/i.test(f.name)){arr=(await f.text()).split(/\r?\n/).map(x=>x.split(/[\t,]/)[0])}else{if(!window.XLSX)throw Error('Excel组件加载失败，请检查网络或使用CSV');const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});arr=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1}).map(x=>x[0])}updateNames(arr.map(x=>String(x??'').trim()).filter(x=>x&&!/^(角色名|玩家id|昵称|姓名)$/i.test(x)))}catch(err){say('导入失败：'+err.message)}e.target.value=''};document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>show(b.dataset.tab));$('print').onclick=()=>window.print();render();
+function qualHTML(){
+ if(!s.groups.length)return '';
+ const label=targetLabel(),gr=groupResult();
+ if(!gr.ready)return '<div class="qual-section"><h3>'+label+'资格</h3><p>完成全部小组赛后，自动统计2:0、2:1胜者，并安排必要的BO1随机抽签加赛。</p></div>';
+ let q=syncTie();
+ let html='<div class="qual-section"><h3>'+label+'资格 · BO1加赛</h3><p class="qual-notice">本次 '+s.names.length+' 人参赛，晋级 '+targetSize()+' 人。2:0胜者优先直接晋级；不足的名额由2:1胜者争夺。若同档人数超过剩余名额，将随机安排BO1循环赛（每人均有比赛，不轮空）；晋级线同分则继续加赛。若2:0胜者本身超额，也须加赛决定名额。</p>';
+ html+='<table class="qual-table"><thead><tr><th>优先级</th><th>小组赛胜者</th><th>人数</th></tr></thead><tbody><tr><td>第一档 · 2:0</td><td>'+esc(gr.wins.filter(x=>x.tier===2).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===2).length+'</td></tr><tr><td>第二档 · 2:1</td><td>'+esc(gr.wins.filter(x=>x.tier===1).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===1).length+'</td></tr></tbody></table>';
+ for(let ri=0;ri<s.tieRounds.length;ri++){
+  const r=s.tieRounds[ri];
+  html+='<div class="qual-section"><h3>'+(r.tier===0?'2:0':'2:1')+'档 · BO1随机抽签循环赛'+(r.stage>1?'（第'+r.stage+'轮同分加赛）':'')+'</h3><p>'+r.players.length+'名选手争夺'+r.seats+'个名额，共'+r.matches.length+'场BO1。</p><div class="group-grid">';
+  for(let mi=0;mi<r.matches.length;mi++){
+   const m=r.matches[mi],key='tie_'+ri+'_'+mi;
+   const points=Array.isArray(m.points)?m.points:(m.score===0?[1,0]:m.score===1?[0,1]:[0,0]);
+   html+=matchCard(m.a,m.b,points,1,key).replace('class="match ', 'class="match tie-match ');
+  }
+  html+='</div>';
+  const ranked=standings(r);
+  html+='<table class="qual-table"><thead><tr><th>选手</th><th>胜场</th><th>负场</th></tr></thead><tbody>'+ranked.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+x.w+'</td><td>'+x.l+'</td></tr>').join('')+'</tbody></table></div>';
+ }
+ if(q.ready){html+='<h3>✓ '+label+'名单已确定</h3><p>'+q.chosen.map(esc).join('、')+'</p><button id="seedBracket">🎲 生成'+label+'对阵树</button>'}
+ else if(q.needRound){html+='<p>正在生成下一轮随机BO1加赛，请稍候。</p>'}
+ else if(q.pending!==undefined){html+='<p>请完成以上BO1加赛，系统将自动确定晋级名单。</p>'}
+ html+='</div>';return html;
+}
+function koCard(stage,i){const [a,b]=pair(stage,i);return matchCard(a,b,s.bracketScores[stage+'_'+i],stage===finalStage()?3:2,'k'+stage+'_'+i)}
+function koHTML(){
+ if(!s.bracket)return '<div class="empty-stage"><span class="empty-stage-icon">🏆</span><p>暂无比赛对阵</p><small>完成小组赛及必要的BO1加赛后，生成'+targetLabel()+'对阵树</small></div>';
+ const f=finalStage(),semi=f-1,champ=bracketWin(f,0),thirdA=bracketLoser(semi,0),thirdB=bracketLoser(semi,1),v=s.thirdScore;
+ const third=v&&valid(v[0],v[1],3)?(v[0]>v[1]?thirdA:thirdB):null;
+ const col=(stage,indices,title)=>'<div class="ko-col"><h3>'+title+'</h3><div class="ko-stack">'+indices.map(i=>'<div class="ko-node" data-ko-stage="'+stage+'" data-ko-index="'+i+'">'+koCard(stage,i)+'</div>').join('')+'</div></div>';
+ const n=s.bracket.players.length;
+ const left=n===16?
+   col(0,[0,1,2,3],'十六强 · 左半区')+col(1,[0,1],'八强赛 · 左半区')+col(2,[0],'半决赛 · 左半区'):
+   col(0,[0,1],'八强赛 · 左半区')+col(1,[0],'半决赛 · 左半区');
+ const right=n===16?
+   col(2,[1],'半决赛 · 右半区')+col(1,[2,3],'八强赛 · 右半区')+col(0,[4,5,6,7],'十六强 · 右半区'):
+   col(1,[1],'半决赛 · 右半区')+col(0,[2,3],'八强赛 · 右半区');
+ return '<div class="ko-scroll"><div class="ko-bracket '+(n===16?'ko16':'')+'"><svg class="ko-lines" aria-hidden="true"></svg><div class="ko-wing left">'+left+'</div><div class="ko-center"><div class="ko-final-spot"><h3>🏆 决赛 · BO5</h3>'+koCard(f,0)+'<p class="champion">'+(champ?'冠军：'+esc(champ):'冠军待定')+'</p></div><div class="ko-third"><h2 style="text-align:center">🥉 季军赛 · BO5</h2>'+matchCard(thirdA,thirdB,v,3,'third')+'<p class="champion">'+(third?'季军：'+esc(third):'季军待定')+'</p></div></div><div class="ko-wing right">'+right+'</div></div></div>';
+}
+function saveKO(stage,i){
+ const [a,b]=pair(stage,i),need=stage===finalStage()?3:2;
+ if(!a||!b){say('请先完成前一轮比赛');return}
+ const x=+$('k'+stage+'_'+i+'A').value,y=+$('k'+stage+'_'+i+'B').value;
+ if(!valid(x,y,need)){say('请输入有效的BO'+(need*2-1)+'终局比分');return}
+ const old=bracketWin(stage,i);
+ s.bracketScores[stage+'_'+i]=[x,y];
+ if(old!==bracketWin(stage,i))clearDescendants(stage,i);
+ persist();render();say('');
+}
+function saveThird(){
+ const a=bracketLoser(semiStage(),0),b=bracketLoser(semiStage(),1);
+ if(!a||!b){say('请先完成半决赛');return}
+ const x=+$('thirdA').value,y=+$('thirdB').value;
+ if(!valid(x,y,3)){say('季军赛请输入有效BO5比分');return}
+ s.thirdScore=[x,y];persist();render();say('');
+}
+function awards(){
+ const f=finalStage(),semi=f-1,champ=s.bracket?bracketWin(f,0):null;
+ const finalists=s.bracket?pair(f,0):[null,null];
+ const runner=champ?(champ===finalists[0]?finalists[1]:finalists[0]):null;
+ const [a,b]=s.bracket?[bracketLoser(semi,0),bracketLoser(semi,1)]:[null,null],v=s.thirdScore;
+ const third=a&&b&&v&&valid(v[0],v[1],3)?(v[0]>v[1]?a:b):null;
+ $('awards').innerHTML='<p>🥇 冠军：'+esc(champ||'待定')+'　🥈 亚军：'+esc(runner||'待定')+'　🥉 季军：'+esc(third||'待定')+'</p>'+Object.entries(s.awards).filter(([k])=>k!=='十六强奖'||hasSixteenRound()).map(([k,val])=>'<label style="display:block;margin:12px 0">'+esc(k)+' <input class="awardInput" data-award="'+esc(k)+'" style="width:min(340px,100%);padding:9px;background:#101d30;color:white;border:1px solid #516b83" value="'+esc(val)+'"></label>').join('')
+}
+// V44: Click a score to add one game; Enter/Backspace/Delete clears the selected score.
+// Partial scores are persisted, but only completed BO3/BO5 results produce winners.
+function setClickScore(key, side, nextValue){
+  const left=$(key+'A'),right=$(key+'B');
+  if(!left||!right||left.disabled||right.disabled)return;
+  const need=key.startsWith('tie_')?1:(key==='third'||key==='k'+finalStage()+'_0'?3:2);
+  const values=[Number(left.value)||0,Number(right.value)||0];
+  const oldValue=values[side];
+  nextValue=Math.max(0,Math.min(need,nextValue));
+  if(oldValue===nextValue)return;
+  values[side]=nextValue;
+  // A BO3/BO5 cannot finish with both players reaching the winning score.
+  if(values[0]===need&&values[1]===need)return;
+  const completed=valid(values[0],values[1],need);
+  if(key.startsWith('tie_')){
+    const [ri,mi]=key.slice(4).split('_').map(Number);
+    const round=s.tieRounds[ri],match=round?.matches[mi];
+    if(!match)return;
+    const previous=match.score;
+    match.points=values;
+    match.score=completed?(values[0]===1?0:1):null;
+    // A changed outcome invalidates all later tiebreak rounds and knockout scores.
+    if(previous!==match.score){
+      s.tieRounds=s.tieRounds.slice(0,ri+1);
+      s.bracket=null;s.bracketScores={};s.thirdScore=null;
+    }
+  }else if(key[0]==='g'){
+    const i=Number(key.slice(1));
+    const old=s.groupScores[i];
+    s.groupScores[i]=values;
+    // Re-evaluate qualifications if an already completed match is edited.
+    if(old&&valid(old[0],old[1],2)&&
+       (old[0]!==values[0]||old[1]!==values[1]))clearLater();
+  }else if(key==='third'){
+    s.thirdScore=values;
+  }else if(key[0]==='k'){
+    const [stage,i]=key.slice(1).split('_').map(Number);
+    const oldWinner=bracketWin(stage,i);
+    s.bracketScores[stage+'_'+i]=values;
+    const newWinner=bracketWin(stage,i);
+    if(oldWinner!==newWinner)clearDescendants(stage,i);
+  }else return;
+  persist();
+  // Rerender keeps match winner, qualification and awards in sync.
+  // Restore focus so Enter can immediately clear the just-clicked score.
+  render();
+  const replacement=$(key+(side===0?'A':'B'));
+  if(replacement&&!replacement.disabled){
+    try{replacement.focus({preventScroll:true})}catch(e){replacement.focus()}
+  }
+  say('');
+}
+
+// V47: Draw full tournament-tree links based on actual on-screen card geometry.
+// Recalculate after every score change, tab switch, or window resize.
+function drawKoConnections(){
+ const root=document.querySelector('#eightMatches .ko-bracket');
+ if(!root||!root.getClientRects().length)return;
+ const svg=root.querySelector('.ko-lines');if(!svg)return;
+ const bounds=root.getBoundingClientRect();
+ const W=root.scrollWidth,H=root.scrollHeight;
+ svg.setAttribute('width',W);svg.setAttribute('height',H);
+ svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+ const pos=(el)=>{
+  if(!el)return null;
+  const r=el.getBoundingClientRect();
+  return {l:r.left-bounds.left,r:r.right-bounds.left,y:(r.top+r.bottom)/2-bounds.top};
+ };
+ const node=(wing,stage,index)=>pos(root.querySelector(`.ko-wing.${wing} .ko-node[data-ko-stage="${stage}"][data-ko-index="${index}"] .match`));
+ const final=pos(root.querySelector('.ko-final-spot .match'));
+ const paths=[];
+ const path=(d)=>{if(d)paths.push(`<path d="${d}"/>`)};
+ // Connect two earlier-round cards into the following round as a fork.
+ function fork(a,b,dest,side){
+  if(!a||!b||!dest)return;
+  const x1=side==='left'?a.r:a.l, x2=side==='left'?b.r:b.l;
+  const tx=side==='left'?dest.l:dest.r;
+  const branch=(Math.max(x1,x2)+tx)/2;
+  // For right half the preceding cards are to the right of the target.
+  const jx=side==='left'?branch:(Math.min(x1,x2)+tx)/2;
+  const mid=(a.y+b.y)/2;
+  path(`M ${x1} ${a.y} H ${jx} M ${x2} ${b.y} H ${jx} M ${jx} ${a.y} V ${b.y} M ${jx} ${mid} V ${dest.y} H ${tx}`);
+ }
+ function single(src,dest,side){
+  if(!src||!dest)return;
+  const sx=side==='left'?src.r:src.l,tx=side==='left'?dest.l:dest.r;
+  // V50: 半决赛至决赛只绘制一条直线，不再使用折线。
+  path(`M ${sx} ${src.y} L ${tx} ${dest.y}`);
+ }
+ const n=root.classList.contains('ko16')?16:8;
+ if(n===16){
+  for(let k=0;k<2;k++)fork(node('left',0,2*k),node('left',0,2*k+1),node('left',1,k),'left');
+  fork(node('left',1,0),node('left',1,1),node('left',2,0),'left');
+  for(let k=0;k<2;k++)fork(node('right',0,4+2*k),node('right',0,5+2*k),node('right',1,2+k),'right');
+  fork(node('right',1,2),node('right',1,3),node('right',2,1),'right');
+  single(node('left',2,0),final,'left');
+  single(node('right',2,1),final,'right');
+ }else{
+  fork(node('left',0,0),node('left',0,1),node('left',1,0),'left');
+  fork(node('right',0,2),node('right',0,3),node('right',1,1),'right');
+  single(node('left',1,0),final,'left');
+  single(node('right',1,1),final,'right');
+ }
+ svg.innerHTML=paths.join('');
+}
+window.addEventListener('resize',()=>requestAnimationFrame(drawKoConnections));
+
+function render(){
+  if(document.activeElement!==$('names'))$('names').value=s.names.join('\n');
+  $('count').textContent='当前 '+s.names.length+' 人';
+  $('groupMatches').innerHTML=groupHTML();
+  $('qualification').innerHTML=qualHTML();
+  $('eightMatches').innerHTML=koHTML();
+  requestAnimationFrame(drawKoConnections);
+  awards();
+  document.querySelectorAll('[data-auto]').forEach(el=>{
+    const key=el.dataset.auto,side=el.id.endsWith('A')?0:1;
+    el.addEventListener('click',()=>{
+      if(!el.disabled)setClickScore(key,side,(Number(el.value)||0)+1);
+    });
+    el.addEventListener('keydown',event=>{
+      if(el.disabled)return;
+      if(['Enter','Backspace','Delete'].includes(event.key)){
+        event.preventDefault();
+        setClickScore(key,side,0);
+      }else if([' ','+','ArrowUp'].includes(event.key)){
+        event.preventDefault();
+        setClickScore(key,side,(Number(el.value)||0)+1);
+      }else if(event.key==='ArrowDown'){
+        event.preventDefault();
+        setClickScore(key,side,(Number(el.value)||0)-1);
+      }
+    });
+  });
+  const seed=$('seedBracket');if(seed)seed.onclick=seedBracket;
+  document.querySelectorAll('.awardInput').forEach(el=>el.onchange=()=>{
+    s.awards[el.dataset.award]=el.value;persist();say('✓ 奖励已保存');
+  });
+}
+function updateNames(arr){const names=[...new Set(arr.map(x=>String(x??'').trim()).filter(Boolean))];if(names.length<16||names.length%2){say('请提供至少16名且为偶数人数的选手，才能保证全员首轮1v1并产生无轮空淘汰赛。');return}if(s.groups.length&&!confirm('更改名单将清空当前所有比赛数据，继续吗？'))return;s.names=names;s.groups=[];s.groupScores={};clearLater();persist();render();say('✓ 已保存'+names.length+'名选手')}
+$('saveNames').onclick=()=>updateNames($('names').value.split(/\r?\n/));$('draw').onclick=draw;$('reset').onclick=()=>{const dlg=$('resetDialog');dlg.hidden=false;$('resetConfirm').focus();};
+function closeResetDialog(){$('resetDialog').hidden=true;$('reset').focus();}
+$('resetCancel').onclick=closeResetDialog;
+$('resetDialog').addEventListener('click',e=>{if(e.target===$('resetDialog'))closeResetDialog()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('resetDialog').hidden)closeResetDialog()});
+$('resetConfirm').onclick=()=>{
+ const keptAwards={...s.awards};
+ s=initial();s.awards=keptAwards;
+ try{localStorage.removeItem(KEY)}catch(e){}
+ persist();
+ $('resetDialog').hidden=true;
+ document.body.classList.remove('report-preview-active');
+ $('names').value='';$('file').value='';
+ show('List');say('比赛数据已重置，奖励设置已保留。');
+};$('importBtn').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{let arr;if(/\.(csv|tsv)$/i.test(f.name)){arr=(await f.text()).split(/\r?\n/).map(x=>x.split(/[\t,]/)[0])}else{if(!window.XLSX)throw Error('Excel组件加载失败，请检查网络或使用CSV');const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});arr=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1}).map(x=>x[0])}updateNames(arr.map(x=>String(x??'').trim()).filter(x=>x&&!/^(角色名|玩家id|昵称|姓名)$/i.test(x)))}catch(err){say('导入失败：'+err.message)}e.target.value=''};document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>show(b.dataset.tab));
+// V36: Generate a print-only report from saved match state; never print the editable screen.
+// V40: promotional poster instead of an internal results report.
+function buildCompetitionReport(){
+  const report=$('printReport');
+  if(!report)throw new Error('海报容器未找到');
+  const bg=getComputedStyle(document.querySelector('h1'),'::before').backgroundImage;
+  const m=bg&&bg.match(/url\(["']?(data:image\/[^"')]+)["']?\)/i);
+  const logo=m?'<img class="pr-logo" src="'+m[1]+'" alt="牛牛利亚共和国帮会头像">':'<span class="pr-logo-fallback">🐮</span>';
+  const award=(key)=>esc(s.awards?.[key]||'待公布');
+  report.innerHTML=`<div class="poster-frame">
+    <div class="poster-decor poster-decor-a"></div><div class="poster-decor poster-decor-b"></div>
+    <div class="poster-inner">
+      <div class="poster-topline">✦ N I U N I U L I Y A ✦</div>
+      <header class="poster-head">${logo}<div class="poster-guild">牛牛利亚共和国</div><div class="poster-sub">逆水寒手游 · 帮会活动</div></header>
+      <div class="poster-hero"><div class="poster-kicker">⚔️ 1 V 1 · 荣 耀 之 战 ⚔️</div>
+        <div class="poster-big">帮会插旗赛</div><div class="poster-en">GUILD DUEL TOURNAMENT</div>
+        <div class="poster-hero-rule">以武会友 · 一决高下 · 角逐荣耀</div></div>
+      <div class="poster-section-title"><span>✦</span> 丰 厚 奖 励 <span>✦</span></div>
+      <div class="poster-prizes">
+        <div class="poster-prize poster-prize-gold"><span class="poster-medal">🥇</span><span class="poster-prize-label">冠 军 大 奖</span><strong>${award('冠军')}</strong><span class="poster-prize-line">CHAMPION</span></div>
+        <div class="poster-prize poster-prize-silver"><span class="poster-medal">🥈</span><span class="poster-prize-label">亚 军 奖 励</span><strong>${award('亚军')}</strong><span class="poster-prize-line">RUNNER-UP</span></div>
+        <div class="poster-prize poster-prize-bronze"><span class="poster-medal">🥉</span><span class="poster-prize-label">季 军 奖 励</span><strong>${award('季军')}</strong><span class="poster-prize-line">THIRD PLACE</span></div>
+      </div>
+      <div class="poster-extra ${hasSixteenRound()?'poster-extra-three':''}">
+        ${hasSixteenRound()?`<div><span>🥤 十六强奖励</span><strong>${award('十六强奖')}</strong></div>`:''}
+        <div><span>🏅 八强奖励</span><strong>${award('八强奖')}</strong></div>
+        <div><span>🎁 参与奖励</span><strong>${award('参与奖')}</strong></div></div>
+      <div class="poster-rules"><div class="poster-rules-title">比 赛 赛 制</div><div class="poster-rules-grid"><span>小组赛 / ${hasSixteenRound()?'十六强 / ':''}八强 / 半决赛 <b>BO3</b></span><span>决赛 / 季军赛 <b>BO5</b></span></div></div>
+      <div class="poster-call">✨ 欢迎帮会成员踊跃参与 ✨</div>
+      <div class="poster-bottom">牛牛利亚共和国 · 以武会友 · 快乐插旗</div>
+    </div>
+  </div>`;
+}
+// Support both the export button and Ctrl+P / the browser Print menu.
+// Browsers dispatch beforeprint before collecting printable content.
+// V38: keep the browser print call inside the original user-click event.
+// Waiting on img.decode() first can cause some browsers to ignore window.print().
+let printPreparedByButton=false;
+function printCompetitionReport(){
+  try{
+    buildCompetitionReport();
+    printPreparedByButton=true;
+    window.print();
+  }catch(err){
+    printPreparedByButton=false;
+    console.error('比赛报告导出失败：',err);
+    alert('海报生成失败，请刷新页面后重试。\n'+(err&&err.message?err.message:String(err)));
+  }
+}
+window.addEventListener('beforeprint',()=>{
+  // Ctrl+P still generates a full report; button clicks don't rebuild it twice.
+  if(printPreparedByButton){printPreparedByButton=false;return;}
+  try{buildCompetitionReport();}
+  catch(err){console.error('打印报告生成失败：',err);}
+});
+window.addEventListener('afterprint',()=>{printPreparedByButton=false;});
+// V39: preview first, then print. A visible fallback is available even if printing is blocked.
+function showReportPreview(){
+  try{
+    buildCompetitionReport();
+    document.body.classList.add('report-preview-active');
+    $('reportFeedback').textContent='宣传海报已生成，可下载 PNG 图片分享，也可打印 PDF。';
+    window.scrollTo(0,0);
+  }catch(err){
+    console.error('预览宣传海报失败：',err);
+    alert('无法生成宣传海报：'+(err&&err.message?err.message:String(err)));
+  }
+}
+$('print').onclick=showReportPreview;
+$('reportPrint').onclick=()=>{
+  $('reportFeedback').textContent='正在打开打印窗口；若未弹出，请在当前页面按 Ctrl+P。';
+  try{buildCompetitionReport();window.print()}catch(err){console.error(err);alert('打印调用失败：'+err.message)}
+};
+
+async function downloadPosterPNG(){
+  try{
+    buildCompetitionReport();
+    const W=1200,H=1600,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+    const c=canvas.getContext('2d');if(!c)throw new Error('浏览器不支持 Canvas');
+    const rr=(x,y,w,h,r,fill,stroke)=>{c.beginPath();c.roundRect(x,y,w,h,r);if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=2;c.stroke()}};
+    const txt=(str,x,y,size,color='#7b4961',weight='700',align='center')=>{c.fillStyle=color;c.font=weight+' '+size+'px "Microsoft YaHei","PingFang SC",sans-serif';c.textAlign=align;c.textBaseline='middle';c.fillText(String(str),x,y,980)};
+    const bg=c.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#fff5ed');bg.addColorStop(.48,'#fff0f4');bg.addColorStop(1,'#edf9ff');c.fillStyle=bg;c.fillRect(0,0,W,H);
+    c.fillStyle='#ffe1e6';c.beginPath();c.arc(20,65,230,0,Math.PI*2);c.fill();c.fillStyle='#dcf4ff';c.beginPath();c.arc(1160,1510,245,0,Math.PI*2);c.fill();
+    rr(24,24,1152,1552,28,null,'#d8aab9');rr(43,43,1114,1514,18,null,'#eacbd5');
+    txt('✦  N I U N I U L I Y A  ✦',600,100,20,'#b88b9e','800');
+    const img=$('printReport').querySelector('.pr-logo');
+    if(img){try{await img.decode();c.save();c.beginPath();c.arc(600,231,89,0,Math.PI*2);c.clip();c.drawImage(img,511,142,178,178);c.restore();c.strokeStyle='#fff';c.lineWidth=8;c.beginPath();c.arc(600,231,89,0,Math.PI*2);c.stroke()}catch(e){txt('🐮',600,232,95)}}
+    else txt('🐮',600,232,95);
+    txt('牛牛利亚共和国',600,360,54,'#955a70','900');txt('逆水寒手游 · 帮会活动',600,415,23,'#9a7c88');
+    rr(353,461,494,57,28,'#fff8f9','#d7a0b1');txt('⚔️  1 V 1 · 荣 耀 之 战  ⚔️',600,490,24,'#ae637e','800');
+    txt('帮 会 插 旗 赛',600,593,82,'#a35b76','900');txt('G U I L D   D U E L   T O U R N A M E N T',600,650,21,'#bf8ea2');
+    txt('以武会友  ·  一决高下  ·  角逐荣耀',600,711,25,'#8d7182');
+    txt('✦    丰  厚  奖  励    ✦',600,790,37,'#a15b76','900');
+    const prizes=[['🥇','冠 军 大 奖',s.awards?.冠军||'待公布','CHAMPION'],['🥈','亚 军 奖 励',s.awards?.亚军||'待公布','RUNNER-UP'],['🥉','季 军 奖 励',s.awards?.季军||'待公布','THIRD PLACE']];
+    prizes.forEach((p,i)=>{const x=79+i*354;rr(x,837,334,278,22,['#fff2d8','#f4f5ff','#fff0e5'][i],['#e8cb85','#d5d9eb','#e9cbb7'][i]);txt(p[0],x+167,902,68);txt(p[1],x+167,963,24,'#9a7381','800');txt(p[2],x+167,1031,38,'#7b4961','900');txt(p[3],x+167,1081,16,'#b49aa5')});
+    const extraPrizes=hasSixteenRound()
+      ?[['🥤 十六强奖励',s.awards?.十六强奖||'待公布'],['🏅 八强奖励',s.awards?.八强奖||'待公布'],['🎁 参与奖励',s.awards?.参与奖||'待公布']]
+      :[['🏅 八强奖励',s.awards?.八强奖||'待公布'],['🎁 参与奖励',s.awards?.参与奖||'待公布']];
+    extraPrizes.forEach((p,i)=>{const three=extraPrizes.length===3,w=three?334:511,x=79+i*(three?354:531);
+      rr(x,1142,w,120,17,'#fffafc','#e8ccd5');txt(p[0],x+w/2,1179,three?22:24,'#9a6b7e','800');txt(p[1],x+w/2,1229,three?29:34,'#704f63','900')});
+    rr(79,1291,1042,144,20,'#fffafd','#e5c5d1');txt('比 赛 赛 制',600,1330,31,'#a15d78','900');
+    txt('小组赛 / '+(hasSixteenRound()?'十六强 / ':'')+'八强 / 半决赛   BO3',600,1368,29,'#7d6676');txt('决赛 / 季军赛   BO5',600,1407,29,'#7d6676');
+    txt('✨  欢迎帮会成员踊跃参与  ✨',600,1484,34,'#a55d78','900');txt('牛牛利亚共和国 · 以武会友 · 快乐插旗',600,1540,18,'#b38b9d');
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(!blob)throw new Error('PNG 图片生成失败');
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='牛牛利亚共和国_插旗赛宣传海报.png';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),30000);
+    $('reportFeedback').textContent='已请求下载高清 PNG 海报（1200 × 1600）。';
+  }catch(err){console.error(err);alert('下载海报 PNG 失败：'+(err.message||String(err)))}
+}
+$('reportPNG').onclick=downloadPosterPNG;
+$('reportBack').onclick=()=>{document.body.classList.remove('report-preview-active');window.scrollTo(0,0)};
+render();
 })();</script></body></html>

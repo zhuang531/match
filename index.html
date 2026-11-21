@@ -431,6 +431,50 @@ body.report-preview-active #printReport{max-width:720px!important;padding:0!impo
 #awards .awardInput{width:100%!important;min-width:0;box-sizing:border-box;display:block;}
 @media(max-width:540px){#awards label{grid-template-columns:80px minmax(0,1fr);gap:8px;}.tie-match .names span{font-size:15px;}.tie-match .score-direct input{width:40px;min-height:40px;}}
 </style>
+<style id="v53-two-column-names-uniform-cards">
+/* V53: split long player IDs into TWO vertical columns, without changing card dimensions. */
+.group-grid .match{
+  height:142px!important;min-height:142px!important;max-height:142px!important;
+  box-sizing:border-box;position:relative;display:flex;flex-direction:column;
+  justify-content:center;padding:10px 9px 19px!important;overflow:hidden;
+}
+.group-grid .match .names{flex:1;min-height:0!important;max-height:100%;align-items:center;}
+.group-grid .match .match-winner{
+  position:absolute;left:9px;right:9px;bottom:3px;margin:0!important;
+  font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+/* The outer name occupies its allocated side of the score, never stretches the match. */
+.group-grid .names>.player-label,.ko-bracket .names>.player-label{
+  min-width:0;max-width:100%;overflow:hidden;
+}
+.group-grid .names>.player-label.name-long,.ko-bracket .names>.player-label.name-long{
+  display:flex!important;flex-direction:row-reverse;justify-content:center;
+  align-items:center;gap:2px!important;height:100%;max-height:100%;
+  padding:0!important;white-space:nowrap;text-align:center!important;
+  overflow:hidden;box-sizing:border-box;
+}
+/* Two vertical columns: first half on the right, second half on the left. */
+.group-grid .names .name-column,.ko-bracket .names .name-column{
+  display:block!important;flex:0 0 auto!important;min-width:0!important;
+  width:auto!important;max-width:50%!important;
+  writing-mode:vertical-rl;text-orientation:upright;
+  font-size:var(--name-font,12px)!important;
+  line-height:1.13!important;letter-spacing:0!important;
+  white-space:nowrap!important;overflow:visible!important;
+  font-weight:750!important;
+}
+/* Group cards have more width: keep split names larger and readable. */
+.group-grid .names .name-column{font-size:var(--group-name-font,15px)!important;}
+.ko-bracket .ko-col .ko-node .names{overflow:hidden;}
+.ko-bracket .ko-col .ko-node .match-winner{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+/* Score controls must remain fixed-width; the names absorb available space. */
+.group-grid .score-direct,.ko-bracket .score-direct{flex-shrink:0;}
+@media(max-width:650px){
+ .group-grid .match{height:142px!important;min-height:142px!important;max-height:142px!important;}
+}
+</style>
 </head><body><main><h1>牛牛利亚共和国 <small class="guild-subtitle">⚔️ 逆水寒 · 帮会插旗赛</small></h1>
 <div class="tabs"><button data-tab="List" class="active">① 参赛名单</button><button data-tab="Group">② 小组赛</button><button data-tab="Eight">③ 淘汰赛</button><button data-tab="Award">④ 奖励</button><button id="reset" class="danger" type="button">↻ 重置比赛</button></div>
 <div id="resetDialog" class="reset-modal" role="dialog" aria-modal="true" aria-labelledby="resetDialogTitle" hidden>
@@ -528,10 +572,25 @@ function clearDescendants(stage,i){
  }
  if(stage<=f-1)s.thirdScore=null;
 }
+// V53: Keep the original player ID in state; only split its VISUAL label.
+// Two compact vertical columns prevent long IDs from escaping fixed-size match cards.
+function playerLabel(name,won=false,side='left'){
+ const value=String(name||'待定');
+ const chars=Array.from(value);
+ const classes='player-label'+(won?' win':'')+(chars.length>6?' name-long':'');
+ const sideStyle=side==='right'?' style="text-align:right"':'';
+ if(chars.length<=6)return `<span class="${classes}" title="${esc(value)}"${sideStyle}>${esc(value)}</span>`;
+ const cut=Math.ceil(chars.length/2);
+ const half=Math.max(cut,chars.length-cut);
+ // Shrink only very long names; normal names retain readable 12px lettering.
+ const font=half<=7?12:half<=9?11:half<=11?10:Math.max(8,Math.floor(108/half));
+ const groupFont=half<=5?17:half<=6?15:half<=7?13:half<=9?11:Math.max(8,Math.floor(105/half));
+ return `<span class="${classes}" title="${esc(value)}" aria-label="${esc(value)}" style="--name-font:${font}px;--group-name-font:${groupFont}px"><span class="name-column" aria-hidden="true">${esc(chars.slice(0,cut).join(''))}</span><span class="name-column" aria-hidden="true">${esc(chars.slice(cut).join(''))}</span></span>`;
+}
 function matchCard(a,b,score,need,key,disabled=false){
  const w=score&&valid(score[0],score[1],need)?(score[0]>score[1]?a:b):null;
  const v=score||[0,0],off=!a||!b||disabled?'disabled':'';
- return `<div class="match ${need===3?'final':''}"><div class="names score-top"><span class="${w===a&&w?'win':''}">${esc(a||'待定')}</span><div class="score-direct no-print"><input aria-label="${esc(a||'选手A')}比分" type="number" min="0" max="${need}" value="${v[0]}" id="${key}A" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}><b>:</b><input aria-label="${esc(b||'选手B')}比分" type="number" min="0" max="${need}" value="${v[1]}" id="${key}B" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}></div><span class="${w===b&&w?'win':''}" style="text-align:right">${esc(b||'待定')}</span></div>${w?'<small class="match-winner">获胜：'+esc(w)+'</small>':''}</div>`
+ return `<div class="match ${need===3?'final':''}"><div class="names score-top">${playerLabel(a,w===a&&!!w)}<div class="score-direct no-print"><input aria-label="${esc(a||'选手A')}比分" type="number" min="0" max="${need}" value="${v[0]}" id="${key}A" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}><b>:</b><input aria-label="${esc(b||'选手B')}比分" type="number" min="0" max="${need}" value="${v[1]}" id="${key}B" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}></div>${playerLabel(b,w===b&&!!w,'right')}</div>${w?'<small class="match-winner">获胜：'+esc(w)+'</small>':''}</div>`;
 }
 function groupHTML(){if(!s.groups.length)return '<div class="empty-stage"><span class="empty-stage-icon">🎲</span><p>暂无比赛对阵</p><small>请先在「参赛名单」中保存选手并随机抽签</small></div>';return `<div class="group-grid">${s.groups.map(([a,b],i)=>`<div>${'<h3 style="color:#edc47d;text-align:center">第'+(i+1)+'组</h3>'}${matchCard(a,b,s.groupScores[i],2,'g'+i)}</div>`).join('')}</div>`}
 function qualHTML(){

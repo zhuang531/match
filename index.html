@@ -171,7 +171,7 @@ input:focus,textarea:focus{outline:3px solid #f3c2d4;outline-offset:1px}
 .empty-stage p{font-size:20px;font-weight:750;color:#ae6c85;margin:0}
 .empty-stage small{font-size:15px;line-height:1.6;color:#977c88}
 #pageGroup .stage-heading,#pageEight .stage-heading{margin-bottom:0}
-#pageGroup #groupStatus:empty{display:none}
+
 @media(max-width:600px){.empty-stage{min-height:160px;padding:22px 12px}.empty-stage p{font-size:18px}.empty-stage small{font-size:13px}}
 </style>
 <style id="v37-pdf-export-style">
@@ -442,7 +442,7 @@ body.report-preview-active #printReport{max-width:720px!important;padding:0!impo
 </div>
 <p id="msg" role="status" aria-live="polite"></p>
 <section id="pageList"><div class="panel"><h2>参赛名单</h2><textarea id="names" placeholder="参赛人员"></textarea><div class="row roster-actions"><button id="saveNames">保存名单</button><button id="importBtn" class="secondary">📄 导入Excel</button><input id="file" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden><button id="draw">🎲 随机生成1v1对阵</button></div><p id="count"></p></div></section>
-<section id="pageGroup" class="hidden"><div class="panel"><div class="stage-heading"><h2>⚔️ 小组赛</h2><span class="stage-rules">BO3</span></div><p id="groupStatus" role="status" aria-live="polite" style="color:#9fe2b9;font-weight:600;min-height:1.5em"></p><div id="groupMatches"></div><div id="qualification"></div></div></section>
+<section id="pageGroup" class="hidden"><div class="panel"><div class="stage-heading"><h2>⚔️ 小组赛</h2><span class="stage-rules">BO3</span></div><div id="groupMatches"></div><div id="qualification"></div></div></section>
 <section id="pageEight" class="hidden"><div class="panel"><div class="stage-heading"><h2>🏆 淘汰赛</h2><span class="stage-rules">十六强、八强、半决赛：BO3　｜　决赛、季军赛：BO5</span></div><div id="eightMatches"></div></div></section>
 <section id="pageAward" class="hidden"><div class="panel"><h2>奖项设置</h2><div id="awards"></div><button id="print" class="secondary">🎨 导出海报</button></div></section></main><div id="reportControls" role="toolbar" aria-label="比赛报告操作"><strong>🐮 宣传海报预览</strong><button type="button" id="reportPrint">🖨️ 打印 / 保存 PDF</button><button type="button" id="reportPNG" class="secondary">🖼️ 下载海报 PNG</button><button type="button" id="reportBack" class="secondary">↩ 返回比赛</button><span id="reportFeedback" role="status" style="font-size:13px;color:#8b6578"></span></div><article id="printReport" aria-label="比赛结果打印报告"></article>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>
@@ -456,7 +456,7 @@ const awardDefaults={冠军:'288时装',亚军:'128时装',季军:'68时装',八
 if(!s.awards||typeof s.awards!=='object')s.awards={};
 for(const [k,v] of Object.entries(awardDefaults)){if(s.awards[k]===undefined||s.awards[k]==='待定'||(k==='冠军'&&s.awards[k]==='288')||(k==='亚军'&&s.awards[k]==='128')||(k==='季军'&&s.awards[k]==='68'))s.awards[k]=v;}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(s));return true}catch(e){say('⚠ 比分已更新，但浏览器未允许永久保存：'+e.message);return false}}
-function say(t){const message=String(t||'');const visible=message.trim().startsWith('✓')?'':message;$('msg').textContent=visible;const g=$('groupStatus');if(g)g.textContent=visible}
+function say(t){const message=String(t||'');const visible=message.trim().startsWith('✓')?'':message;$('msg').textContent=visible}
 function shuffle(arr){arr=[...arr];for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function show(t){for(const x of ['List','Group','Eight','Award']){$('page'+x).classList.toggle('hidden',x!==t);document.querySelector('[data-tab="'+x+'"]').classList.toggle('active',x===t)}render()}
 function groupWin(i){const sc=s.groupScores[i];if(!sc||!valid(sc[0],sc[1],2))return null;return sc[0]>sc[1]?s.groups[i][0]:s.groups[i][1]}
@@ -668,6 +668,19 @@ function drawKoConnections(){
  };
  const node=(wing,stage,index)=>pos(root.querySelector(`.ko-wing.${wing} .ko-node[data-ko-stage="${stage}"][data-ko-index="${index}"] .match`));
  const final=pos(root.querySelector('.ko-final-spot .match'));
+ // V52: 将左右半决赛卡片的垂直中心与决赛卡片对齐，
+ // 保证连接线真正水平，而不只是把斜线换成水平指令。
+ const semiStage=root.classList.contains('ko16')?2:1;
+ for(const [wing,index] of [['left',0],['right',1]]){
+  const semiNode=root.querySelector(`.ko-wing.${wing} .ko-node[data-ko-stage="${semiStage}"][data-ko-index="${index}"]`);
+  if(!semiNode||!final)continue;
+  semiNode.style.transform='none';
+  const original=pos(semiNode.querySelector('.match'));
+  if(original){
+   const shift=final.y-original.y;
+   semiNode.style.transform=`translateY(${shift}px)`;
+  }
+ }
  const paths=[];
  const path=(d)=>{if(d)paths.push(`<path d="${d}"/>`)};
  // Connect two earlier-round cards into the following round as a fork.
@@ -684,8 +697,8 @@ function drawKoConnections(){
  function single(src,dest,side){
   if(!src||!dest)return;
   const sx=side==='left'?src.r:src.l,tx=side==='left'?dest.l:dest.r;
-  // V50: 半决赛至决赛只绘制一条直线，不再使用折线。
-  path(`M ${sx} ${src.y} L ${tx} ${dest.y}`);
+  // V52: 半决赛和决赛中心已对齐，画一条完全水平的金色直线。
+  path(`M ${sx} ${dest.y} H ${tx}`);
  }
  const n=root.classList.contains('ko16')?16:8;
  if(n===16){

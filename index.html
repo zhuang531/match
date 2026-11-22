@@ -1,6 +1,117 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国</title><meta name="description" content="免费的逆水寒手游帮会插旗赛管理工具。支持玩家名单、随机1v1小组赛、BO3点击计分、BO1加赛、自适应八强或十六强淘汰赛树状图、冠军季军赛和奖励管理。每位访客独立使用。"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#fff8f2"><meta property="og:type" content="website"><meta property="og:title" content="逆水寒手游帮会插旗赛管理系统｜牛牛利亚共和国"><meta property="og:description" content="免费在线创建帮会插旗赛：随机抽签、比分录入、八强或十六强树状对阵、奖励管理。"><link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0d1628;color:#e8effb;font:16px system-ui,-apple-system,sans-serif}main{max-width:1450px;margin:auto;padding:22px}h1{color:#f4c778}h2{font-size:20px}p{color:#acbdd2}.panel,.match{background:#1b2b40;border:1px solid #354e69;border-radius:14px;padding:17px;margin:14px 0}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,input,textarea{font:inherit;border-radius:8px}button{border:0;background:#eac27a;color:#1d2430;padding:12px 16px;cursor:pointer;font-weight:700}button.secondary{background:#344d69;color:white}button.danger{background:#7b3648;color:white}button:disabled{opacity:.45}textarea{width:100%;min-height:130px;padding:12px;background:#101d30;color:white;border:1px solid #4d627a}input[type=number]{width:60px;padding:9px;background:#101d30;color:white;border:1px solid #516b83;text-align:center}.hint{font-size:13px}.status{color:#9fe2b9}.rounds{display:flex;gap:16px;overflow-x:auto;padding-bottom:20px}.round{flex:0 0 260px}.round h3{text-align:center;color:#f0c67e}.match{padding:13px}.match .names{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:38px}.names span{overflow-wrap:anywhere;flex:1;min-width:0}.names b{white-space:nowrap;color:#f1c97d}.score{display:flex;gap:8px;align-items:center;margin:10px 0}.score button{padding:9px}.win{color:#83e2b4}.note{background:#263b52;padding:10px;border-radius:8px}.final{border-color:#e6b85f;box-shadow:0 0 0 1px #e6b85f}.tabs{display:flex;flex-wrap:wrap;gap:8px}.tabs button{background:#334c68;color:white}.tabs button.active{background:#eac27a;color:#172333}.hidden{display:none}.center{max-width:600px;margin:auto}#msg{min-height:24px;color:#a7e9bc}.bracket{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,1fr) minmax(240px,1fr);gap:14px;align-items:start}.wing{display:flex;gap:10px;overflow-x:auto}.wing .round{flex-basis:235px}.wing.right{flex-direction:row-reverse}.wing.right .round{direction:ltr}.bracket .center{width:100%}@media(max-width:850px){.bracket{display:block}.wing{margin:12px 0}.bracket .center{margin:20px auto}}@media print{button,.tabs,.no-print{display:none!important}body{background:white;color:black}.panel,.match{color:black;background:white;border-color:#888}}
-.stage{margin:20px 0}.stage h3{color:#f0c67e}.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:14px}.stage-grid .match{margin:0}.final-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:20px}.champion{text-align:center;color:#f0c67e;font-weight:700}.tabs{position:sticky;top:0;z-index:3;background:#0d1628;padding:10px 0}.tabs button{padding:10px 12px}@media(max-width:650px){main{padding:12px}.tabs{position:static}} </style><style id="v15-tree-style">
+.stage{margin:20px 0}.stage h3{color:#f0c67e}.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:14px}.stage-grid .match{margin:0}.final-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:20px}.champion{text-align:center;color:#f0c67e;font-weight:700}.tabs{position:sticky;top:0;z-index:3;background:#0d1628;padding:10px 0}.tabs button{padding:10px 12px}@media(max-width:650px){main{padding:12px}.tabs{position:static}} 
+/* V54: independent 3v3 mode */
+.mode3 .team-bracket-below{margin-top:32px;padding-top:22px;border-top:1px solid #efd5df}
+.mode3 .team-bracket-below>h2{margin-bottom:18px}
+.mode-switch{display:flex;gap:12px;justify-content:center;margin:14px 0 18px;flex-wrap:wrap}
+.mode-switch button{min-width:170px;font-size:18px;font-weight:800;padding:12px 20px;border-radius:15px;background:#fff1f6;color:#a05a7a;border:2px solid #e7c4d3}
+.mode-switch button.active{background:#a85e83;color:#fff;border-color:#a85e83}
+body.mode3 .tabs,body.mode3 #pageList,body.mode3 #pageGroup,body.mode3 #pageEight,body.mode3 #pageAward{display:none!important}
+#teamApp{display:none}body.mode3 #teamApp{display:block}
+.team-tabs{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+.team-tabs button{background:#fcebf2;color:#925776;border:1px solid #dfc2d0;border-radius:12px;padding:11px 15px;font-weight:750}
+.team-tabs button.active{background:#a35d7c;color:white}
+.team-panel{background:#fffafc;border:1px solid #efd7e0;border-radius:18px;padding:22px;margin:14px 0;color:#704d62}
+.team-panel h2{color:#a25d7b;margin:0 0 15px}
+.team-panel textarea{width:100%;min-height:220px;box-sizing:border-box;font:16px/1.8 monospace;border-radius:12px;border:1px solid #e4bfcd;padding:12px;background:white;color:#593e50}
+.team-panel button{border:0;border-radius:10px;background:#a45e7e;color:#fff;padding:11px 16px;margin:6px 6px 6px 0;cursor:pointer}
+.team-panel button:disabled{opacity:.45;cursor:not-allowed}
+.team-note{background:#fff0f5;border-radius:12px;padding:12px;line-height:1.8;margin:10px 0}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.team-match{background:#23334d;color:white;border:1px solid #c9a5b6;border-radius:15px;padding:13px;min-height:153px;box-sizing:border-box}
+.team-match strong{color:#f7d2e2;display:block;margin-bottom:10px}
+.team-side{display:grid;grid-template-columns:minmax(0,1fr) 52px;align-items:center;gap:8px;min-height:47px}
+.team-side .team-name{overflow-wrap:anywhere;font-weight:750;line-height:1.4}
+.team-score{height:39px!important;min-width:45px!important;background:#ffe0eb!important;color:#803b60!important;font-size:22px!important;font-weight:900!important;padding:3px!important}
+.team-bracket-round{margin:22px 0}.team-bracket-round h3{color:#9f5676}
+.team-winner{color:#f5d07b;font-weight:800}.team-prizes{display:grid;grid-template-columns:125px minmax(0,360px);gap:10px;align-items:center;max-width:530px}
+.team-prizes input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #e4c4d0;border-radius:10px}
+@media(max-width:520px){.team-panel{padding:13px}.team-grid{grid-template-columns:minmax(0,1fr)}.mode-switch button{min-width:125px}}
+@media print{body.mode3 main{display:none!important}body.mode3 #reportControls{display:none!important}body.mode3 #printReport{display:block!important}}
+
+/* V55: 3V3 shares the V53 group grid and symmetric bracket geometry. */
+.mode3 .team-group-layout{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.mode3 .team-group-layout .team-match{height:166px;min-height:166px;max-height:166px;margin:0;overflow:hidden}
+.mode3 .team-ko-bracket{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(245px,1.3fr) minmax(0,1fr) minmax(0,1fr);min-width:1000px;min-height:640px}
+.mode3 .team-ko-bracket .ko-col{width:auto;min-width:0}
+.mode3 .team-ko-bracket .ko-node{min-width:0}
+.mode3 .team-ko-bracket .team-match{height:172px!important;min-height:172px!important;max-height:172px!important;margin:0;overflow:hidden;padding:10px!important}
+.mode3 .team-ko-bracket .ko-stack{height:560px;justify-content:space-around}
+.mode3 .team-ko-bracket .ko-final-spot .team-match,.mode3 .team-ko-bracket .ko-third .team-match{height:172px!important}
+.mode3 .team-ko-bracket .team-side{min-height:54px}
+.mode3 .team-ko-bracket .team-name{font-size:14px;line-height:1.25}
+.mode3 .team-ko-bracket .team-score{min-width:38px!important;width:38px!important;height:35px!important}
+.mode3 .team-ko-bracket .ko-lines{pointer-events:none}
+.mode3 .team-ko-bracket .team-wait{display:flex;flex-direction:column;justify-content:center}
+@media(max-width:1050px){.mode3 .team-ko-scroll{overflow-x:auto}}
+.mode3 .team-side .team-name{font-size:15px;line-height:1.4;font-weight:750;}
+
+/* V59: 3V3 shares the 1V1 score-card layout in both group and knockout rounds. */
+.mode3 .team-group-layout{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:start}
+.mode3 .team-group-item{min-width:0}
+.mode3 .team-group-label{text-align:center;color:#edc47d;font-size:18px;margin:12px 0 16px}
+.mode3 .team-group-layout .team-match{height:auto!important;min-height:120px!important;max-height:none!important}
+.mode3 .team-duel,.mode3 .team-ko-card{background:#fff!important;color:#65445a!important;border:2px solid #efd3d4!important;border-radius:18px!important;display:flex;align-items:center;justify-content:center;padding:13px 9px!important;overflow:visible!important}
+.mode3 .team-duel-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:4px;width:100%;min-width:0}
+.mode3 .team-duel-name{font-size:clamp(13px,1.2vw,18px);font-weight:750;line-height:1.4;color:#65445a;min-width:0;overflow-wrap:anywhere;text-align:left}
+.mode3 .team-duel-name.right{text-align:right}
+.mode3 .team-duel-scores{display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap}
+.mode3 .team-duel-scores .team-score{width:clamp(32px,2.7vw,48px)!important;min-width:32px!important;height:44px!important;padding:3px!important;margin:0!important;background:#fff!important;border:2px solid #edc8d5!important;border-radius:11px!important;color:#a75e7d!important;font-size:clamp(17px,1.4vw,23px)!important;font-weight:800!important;box-shadow:none!important}
+.mode3 .team-duel-colon{color:#d28c7b;font-size:19px;font-weight:800}
+.mode3 .team-ko-bracket .team-ko-card{height:172px!important;min-height:172px!important;max-height:172px!important}
+.mode3 .team-ko-bracket .team-duel-name{font-size:clamp(11px,.85vw,15px)}
+.mode3 .team-ko-bracket .team-score{width:34px!important;min-width:34px!important;height:37px!important;font-size:17px!important}
+.mode3 .team-ko-bracket .team-wait{background:#fff!important;color:#846d7b!important;border:2px solid #efd3d4!important}
+@media(max-width:700px){.mode3 .team-group-layout{grid-template-columns:minmax(0,1fr)}.mode3 .team-group-layout .team-match{min-height:118px!important}}
+
+/* V69: unified edit-mode switch at top, edit cards in place */
+.quick-edit-toggle{display:none!important}
+.edit-mode-master{border:1px solid #c9dfe8!important;background:#e2f0f5!important;color:#506b7e!important;border-radius:14px!important;padding:12px 17px!important;font-weight:800!important;cursor:pointer}
+body.edit-mode-on .edit-mode-master{background:#e8c4d5!important;color:#74475d!important;border-color:#d8a2b9!important}
+body.edit-mode-on .editable-match{cursor:pointer;outline:2px dashed #d5a7b9;outline-offset:3px}
+body.edit-mode-on .editable-match:has(.quick-edit:not([hidden])){outline:2px solid #d5a7b9}
+body:not(.edit-mode-on) .quick-edit{display:none!important}
+/* V72: 精简编辑区，两个对手、处理方式、一个确认按钮 */
+.quick-edit{padding:12px!important;gap:8px!important}
+.quick-edit-row{gap:8px!important}
+.quick-edit-row select{min-width:0;flex:1}
+.quick-edit .quick-save{white-space:nowrap}
+.quick-edit .quick-add-person{margin-top:8px}
+@media(max-width:700px){.quick-edit-row{flex-wrap:wrap}.quick-edit-row select{flex-basis:40%}}
+
+.add-group-admin{display:none;margin:6px 0 14px}
+body.edit-mode-on .add-group-admin{display:block}
+.add-group-admin .add-group-open{background:#e3eef3;color:#52677a;border:1px solid #c7dce6;border-radius:13px;padding:10px 18px;font-weight:700;cursor:pointer}
+.add-group-form{margin-top:10px;padding:14px;border:1px solid #e8cbd6;background:#fffafd;border-radius:14px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.add-group-form[hidden]{display:none}
+.add-group-form select{flex:1 1 180px;min-width:0;padding:10px;border:1px solid #e1c3ce;border-radius:9px;background:#fff;color:#75566a}
+.add-group-form button{padding:10px 14px;border-radius:10px;border:1px solid #e6c58c;background:#f2d9a7;color:#76533d;font-weight:700;cursor:pointer}
+.add-group-form small{width:100%;color:#967d89}
+.delete-group-button{display:none;margin:8px auto 4px;padding:7px 14px!important;background:#fff0f2!important;color:#a45c72!important;border:1px solid #e5bdc9!important;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer}
+body.edit-mode-on .delete-group-button{display:block!important}
+
+/* V79: editing control only on match pages */
+body:not(.mode3) .edit-toolbar:not(.team-edit-toolbar){display:none!important}
+body:not(.mode3):has(.tabs [data-tab="Group"].active) .edit-toolbar:not(.team-edit-toolbar),
+body:not(.mode3):has(.tabs [data-tab="Eight"].active) .edit-toolbar:not(.team-edit-toolbar){display:flex!important}
+body.mode3 .team-edit-toolbar{display:none!important}
+body.mode3:has(.team-tabs [data-team-tab="groups"].active) .team-edit-toolbar,
+body.mode3:has(.team-tabs [data-team-tab="knockout"].active) .team-edit-toolbar{display:flex!important}
+/* add-group card is the last cell, directly to the right of the latest group when space allows */
+#addGroupOne.add-group-admin,#addGroupThree.add-group-admin{align-self:stretch;margin:0!important;min-height:150px;box-sizing:border-box;border:2px dashed #d6b7c6;border-radius:20px;padding:12px;align-content:center;text-align:center}
+#addGroupOne .add-group-open,#addGroupThree .add-group-open{width:100%;min-height:75px;font-size:17px}
+#addGroupOne .add-group-form,#addGroupThree .add-group-form{text-align:left}
+.add-group-new-entry{display:flex;flex-direction:column;gap:8px;margin:8px 0;padding:12px;border:1px solid #e4cbd5;border-radius:12px;background:#fffafa}.add-group-new-entry[hidden]{display:none}.add-group-new-entry input{width:100%;box-sizing:border-box;min-width:0}.add-group-form>button{margin-top:8px}
+.add-group-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;align-items:stretch}
+.add-group-actions>button{min-width:0;width:100%;margin:0!important;white-space:normal}
+@media(max-width:420px){.add-group-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.add-group-actions>button{font-size:12px;padding:9px 5px}}
+
+/* V97: 新增小组中“保存新选手”输入区与上方选手框等宽 */
+#addGroupOne .add-group-new-entry,#addGroupThree .add-group-new-entry{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;flex:0 0 100%!important;margin:8px 0!important;}
+#addGroupOne .add-group-new-entry input,#addGroupThree .add-group-new-entry input,#addGroupOne .add-group-new-entry button,#addGroupThree .add-group-new-entry button{display:block;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;margin:0!important;}
+#addGroupOne .add-group-form,#addGroupThree .add-group-form{min-width:0;box-sizing:border-box;}
+</style><style id="v15-tree-style">
 .tree-scroll{overflow-x:auto;padding:16px 10px 30px;overscroll-behavior-x:contain}
 .tree-layout{display:flex;align-items:stretch;gap:46px;width:max-content;min-width:100%}
 .tree-column{width:290px;flex:none;display:flex;flex-direction:column}
@@ -475,8 +586,160 @@ body.report-preview-active #printReport{max-width:720px!important;padding:0!impo
  .group-grid .match{height:142px!important;min-height:142px!important;max-height:142px!important;}
 }
 </style>
-</head><body><main><h1>牛牛利亚共和国 <small class="guild-subtitle">⚔️ 逆水寒 · 帮会插旗赛</small></h1>
-<div class="tabs"><button data-tab="List" class="active">① 参赛名单</button><button data-tab="Group">② 小组赛</button><button data-tab="Eight">③ 淘汰赛</button><button data-tab="Award">④ 奖励</button><button id="reset" class="danger" type="button">↻ 重置比赛</button></div>
+
+<style id="v60-unified-mode-layout">
+/* V61: 3V3 uses the same four-page navigation as 1V1. */
+body.mode3 #teamApp{display:block;width:100%;margin:0;padding:0}
+body.mode3 .team-tabs{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:10px 12px;background:rgba(255,250,241,.93);border:1px solid #f2ddd6;border-radius:18px;box-shadow:0 5px 16px #cfb4a51e;backdrop-filter:blur(7px);position:sticky;top:0;z-index:3}
+body.mode3 .team-tabs button{margin:0!important;padding:10px 12px!important;min-height:42px;border-radius:14px!important;background:#e5f0f4!important;color:#657889!important;border:1px solid #d5e5eb!important;font-weight:750;box-shadow:0 3px 0 #d9b98a33}
+body.mode3 .team-tabs button.active{background:#f8d8a0!important;color:#755c45!important;border-color:#eecb91!important}
+body.mode3 .team-tabs #teamReset{margin-left:auto!important;background:#e99eae!important;color:white!important;border-color:#e99eae!important}
+body.mode3 .team-panel[hidden]{display:none!important}
+body.mode3 .team-panel{background:rgba(255,255,252,.94)!important;border:1px solid #efd6ce!important;border-radius:25px!important;box-shadow:0 9px 25px #bd8b8320!important;padding:clamp(14px,2vw,25px)!important;margin:0 0 20px!important;color:#604c4c!important}
+body.mode3 .team-panel h2{color:#a8667e!important;font-size:clamp(20px,2vw,26px);margin:0 0 18px}
+body.mode3 .team-note{background:#fff3f5!important;color:#977783!important;border:1px solid #f6e4e9;border-radius:12px!important;padding:12px 16px!important;margin:0 0 14px!important}
+body.mode3 .team-panel textarea{display:block;width:100%;min-height:190px;resize:vertical;box-sizing:border-box;background:#fff!important;color:#604c4c!important;border:1px solid #e7bfce!important;border-radius:13px!important;font:inherit!important;line-height:1.75!important;padding:15px 17px!important}
+body.mode3 .team-panel textarea:focus{outline:2px solid #edc8d5;outline-offset:1px}
+body.mode3 .team-panel button:not(.team-score){background:#f7d6a1!important;color:#6b524b!important;border:1px solid #edc999!important;box-shadow:0 3px 0 #d9b98a33!important;border-radius:14px!important;padding:12px 18px!important;font-weight:750}
+body.mode3 #teamRoster>div:has(#teamSave){display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+body.mode3 #teamRoster>div:has(#teamSave) button{flex:1 1 220px;margin:0!important}
+body.mode3 #teamImportBtn{background:#dfeef2!important;color:#657889!important;border-color:#d2e4e9!important}
+body.mode3 .team-roster-actions{display:flex;gap:12px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+body.mode3 .team-roster-actions button{white-space:nowrap;min-width:max-content}
+body.mode3 .team-note{margin:0 0 12px!important}
+body.mode3 #teamCount{color:#967a79!important;margin:16px 0 0}
+body.mode3 .team-prizes input{background:#fff;color:#604c4c;border-color:#e7bfce}
+@media(max-width:700px){body.mode3 .team-tabs{position:static}body.mode3 .team-tabs #teamReset{margin-left:0!important}body.mode3 .team-panel{padding:14px!important}}
+</style>
+<style>
+.admin-adjust{margin:8px 0 16px;padding:10px 17px!important;border-radius:14px!important;background:#d9e9ef!important;color:#53677a!important;border:1px solid #bfd8e2!important;font-weight:750;cursor:pointer}.admin-adjust:hover{filter:brightness(.97)}
+</style><style>
+#adjustDialog[hidden]{display:none!important}#adjustDialog{position:fixed;inset:0;z-index:999999;background:rgba(40,30,44,.5);display:flex;align-items:center;justify-content:center;padding:18px}#adjustDialog .adjust-card{width:min(540px,100%);max-height:85vh;overflow:auto;background:#fffafc;border:2px solid #e8cad5;border-radius:22px;padding:22px;box-shadow:0 20px 60px #0003;color:#76576a}#adjustDialog h3{margin:0 0 14px;font-size:21px;white-space:pre-wrap}#adjustDialog .adjust-choices{display:grid;gap:9px}#adjustDialog .adjust-choice{background:#f5e8ee;color:#704c60;border:1px solid #e8c7d3;border-radius:12px;padding:12px;text-align:left;cursor:pointer;font-weight:650}#adjustDialog .adjust-choice:hover{background:#e6f1f5}#adjustDialog .adjust-actions{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}#adjustDialog .adjust-actions button{padding:10px 20px;border-radius:12px}#adjustDialog input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #dbbdc8;border-radius:10px;font-size:17px}
+</style><style>
+.quick-edit{margin:8px 0 14px;padding:12px;border:1px solid #e9cad5;border-radius:14px;background:#fffafd;display:grid;gap:9px;font-size:14px;color:#805b70}
+.quick-edit[hidden]{display:none!important}
+.quick-edit-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.quick-edit select,.quick-edit input{min-width:0;max-width:100%;flex:1 1 140px;padding:9px;border:1px solid #dfbfcb;border-radius:9px;background:white;color:#704f63;font:inherit}
+.quick-edit button,.quick-edit-toggle{border:1px solid #c9dfe8;border-radius:10px;background:#e4f0f4;color:#52677a;padding:8px 12px;cursor:pointer;font-weight:700}
+.quick-edit .quick-save{background:#f2d9a7;border-color:#e6c58c;color:#76533d}
+.quick-edit-toggle{margin:8px 0;display:block;font-size:13px}
+.quick-edit-note{font-size:12px;color:#977f8b}
+</style><style id="v70-style">
+.edit-toolbar{display:flex;justify-content:flex-start;align-items:center;gap:12px;margin:10px 0 18px;padding:0 4px}
+.edit-toolbar .edit-mode-master{font-size:15px;min-height:45px}
+.team-edit-toolbar{margin:10px 0 18px}
+.quick-add-person{border:1px dashed #d4a5b9;border-radius:12px;padding:10px;background:#fff4f8;display:grid;gap:8px}
+.quick-add-person[hidden]{display:none!important}
+.quick-add-person .quick-edit-row input{flex:1 1 130px}
+.quick-add-person .quick-edit-note{line-height:1.5}
+@media(max-width:700px){.edit-toolbar{margin:8px 0 14px}.edit-toolbar .edit-mode-master{width:100%}}
+</style><style id="v73-tight-edit-spacing">
+/* Keep the edit switch close to the match content in both modes. */
+.edit-toolbar,.team-edit-toolbar{margin-top:5px!important;margin-bottom:3px!important}
+#msg:empty{display:none!important}
+#msg{margin-top:0!important;margin-bottom:2px!important}
+#pageGroup>.panel,#pageEight>.panel{margin-top:5px!important}
+body.mode3 .team-edit-toolbar + .team-panel{margin-top:5px!important}
+body.mode3 .team-edit-toolbar{margin-bottom:5px!important}
+</style><style id="v80-inline-edit-toggle">
+.tabs .edit-mode-master,.team-tabs .edit-mode-master{display:none!important;margin-left:auto!important;margin-right:8px!important;background:#dcebf1!important;color:#526d82!important;border:1px solid #c6dce5!important;white-space:nowrap}
+body:not(.mode3):has(.tabs [data-tab="Group"].active) .tabs .edit-mode-master,
+body:not(.mode3):has(.tabs [data-tab="Eight"].active) .tabs .edit-mode-master,
+body.mode3:has(.team-tabs [data-team-tab="groups"].active) .team-tabs .edit-mode-master,
+body.mode3:has(.team-tabs [data-team-tab="knockout"].active) .team-tabs .edit-mode-master{display:inline-flex!important;align-items:center;justify-content:center}
+.tabs #reset,.team-tabs #teamReset{margin-left:0!important}
+@media(max-width:700px){.tabs .edit-mode-master,.team-tabs .edit-mode-master{margin-left:auto!important;margin-right:4px!important}}
+</style><style id="v81-unified-navigation">
+/* Both modes share the 1V1 navigation geometry and controls. */
+.tabs,.team-tabs,body.mode3 .team-tabs{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:8px!important;padding:10px 12px!important;background:rgba(255,250,241,.93)!important;border:1px solid #f2ddd6!important;border-radius:18px!important}
+.tabs .edit-mode-master,.team-tabs .edit-mode-master{margin-left:auto!important;margin-right:0!important}
+.tabs #reset,.team-tabs #teamReset,body.mode3 .team-tabs #teamReset{margin-left:0!important;margin-right:0!important;background:#e99eae!important;color:#fff!important}
+/* Only match pages display administrative controls. */
+.tabs #reset,.team-tabs #teamReset{display:none!important}
+body:not(.mode3):has(.tabs [data-tab="Group"].active) .tabs #reset,
+body:not(.mode3):has(.tabs [data-tab="Eight"].active) .tabs #reset,
+body.mode3:has(.team-tabs [data-team-tab="groups"].active) .team-tabs #teamReset,
+body.mode3:has(.team-tabs [data-team-tab="knockout"].active) .team-tabs #teamReset{display:inline-flex!important;align-items:center;justify-content:center}
+@media(max-width:700px){.tabs .edit-mode-master,.team-tabs .edit-mode-master{margin-left:auto!important}}
+</style><style id="v82-fixes">
+/* Identical button sizing for both modes; reset keeps its original location. */
+.tabs .edit-mode-master,.team-tabs .edit-mode-master,
+.tabs #reset,.team-tabs #teamReset{
+  box-sizing:border-box!important;min-height:48px!important;height:48px!important;
+  padding:10px 17px!important;font-size:15px!important;line-height:1.25!important;
+  font-weight:800!important;border-radius:14px!important;white-space:nowrap!important;
+  flex:0 0 auto!important;
+}
+/* The add card is part of the group grid, not a text placeholder. */
+#addGroupOne,#addGroupThree{min-width:0!important;}
+</style><style id="v88-undo-button">
+.tabs .nav-undo,.team-tabs .nav-undo{display:none!important;box-sizing:border-box!important;height:48px!important;min-height:48px!important;padding:10px 17px!important;font-size:15px!important;line-height:1.25!important;font-weight:800!important;border-radius:14px!important;white-space:nowrap!important;background:#e2edf2!important;color:#526b7d!important;border:1px solid #c9dce4!important;cursor:pointer}
+body:not(.mode3):has(.tabs [data-tab="Group"].active) .tabs .nav-undo,
+body:not(.mode3):has(.tabs [data-tab="Eight"].active) .tabs .nav-undo,
+body.mode3:has(.team-tabs [data-team-tab="groups"].active) .team-tabs .nav-undo,
+body.mode3:has(.team-tabs [data-team-tab="knockout"].active) .team-tabs .nav-undo{display:inline-flex!important;align-items:center;justify-content:center}
+@media(max-width:700px){.tabs .nav-undo,.team-tabs .nav-undo{padding:9px 12px!important;font-size:13px!important}}
+</style>
+<style id="v92-winner-caption-position">
+/* V92: keep the winner caption comfortably inside knockout cards. */
+.ko-bracket .ko-col .ko-node .match-winner{
+  position:absolute!important;bottom:14px!important;left:8px!important;right:8px!important;
+  margin:0!important;line-height:1.35!important;text-align:center!important;
+  font-size:11px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  z-index:2;pointer-events:none;
+}
+.ko-bracket .ko-col .ko-node .names{padding-bottom:18px!important;}
+.ko-bracket .ko-final-spot .match-winner,.ko-bracket .ko-third .match-winner{
+  margin-top:7px!important;line-height:1.4!important;
+}
+</style>
+<style id="v93-knockout-editor-layout">
+/* Knockout editing uses a viewport dialog instead of overflowing the bracket columns. */
+body.edit-mode-on .ko-bracket .ko-node.editable-match{cursor:pointer}
+body.edit-mode-on .ko-bracket .ko-node .quick-edit:not([hidden]),
+body.edit-mode-on .team-ko-bracket .ko-node .quick-edit:not([hidden]){
+ position:fixed!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
+ transform:translate(-50%,-50%)!important;width:min(440px,calc(100vw - 32px))!important;
+ max-width:calc(100vw - 32px)!important;max-height:min(78vh,700px)!important;
+ overflow-y:auto!important;overflow-x:hidden!important;box-sizing:border-box!important;
+ z-index:10020!important;margin:0!important;padding:18px!important;
+ border:2px solid #dbb7c7!important;border-radius:18px!important;
+ background:#fffafd!important;box-shadow:0 0 0 100vmax #35263675,0 16px 45px #4b344450!important;
+ display:flex!important;flex-direction:column!important;gap:10px!important;
+}
+.ko-bracket .quick-edit .quick-edit-row,.team-ko-bracket .quick-edit .quick-edit-row{display:flex!important;flex-wrap:wrap!important;gap:9px!important;width:100%!important}
+.ko-bracket .quick-edit select,.team-ko-bracket .quick-edit select,
+.ko-bracket .quick-edit input,.team-ko-bracket .quick-edit input{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;flex:1 1 150px!important}
+.ko-bracket .quick-edit .quick-save,.team-ko-bracket .quick-edit .quick-save{flex:1 1 120px!important}
+.ko-bracket .quick-edit .quick-add-person,.team-ko-bracket .quick-edit .quick-add-person{width:100%!important}
+.ko-bracket .quick-edit .v93-close,.team-ko-bracket .quick-edit .v93-close{align-self:flex-end!important;background:#f7e9ed!important;color:#835d70!important}
+@media(max-width:600px){.ko-bracket .quick-edit select,.team-ko-bracket .quick-edit select{flex-basis:100%!important}}
+</style><style id="v94-editor-portal-fix">
+/* Render editing controls above the entire bracket, never inside its stacking context. */
+#v94-editor-backdrop[hidden]{display:none!important}
+#v94-editor-backdrop{position:fixed;inset:0;background:rgba(39,30,43,.55);z-index:2147483000}
+body>.quick-edit.v94-floating-editor:not([hidden]){position:fixed!important;z-index:2147483001!important;top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:min(540px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;max-height:calc(100dvh - 42px)!important;overflow:auto!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;gap:12px!important;padding:20px!important;background:#fffafd!important;border:2px solid #e0c2cf!important;border-radius:20px!important;box-shadow:0 22px 65px #24192355!important;isolation:isolate!important}
+body>.quick-edit.v94-floating-editor[hidden]{display:none!important}
+body>.quick-edit.v94-floating-editor .quick-edit-row{display:flex!important;flex-wrap:wrap!important;gap:10px!important;width:100%!important}
+body>.quick-edit.v94-floating-editor select,body>.quick-edit.v94-floating-editor input{box-sizing:border-box!important;min-width:0!important;max-width:100%!important;flex:1 1 180px!important;width:auto!important}
+body>.quick-edit.v94-floating-editor .v93-close{align-self:flex-end!important}
+@media(max-width:520px){body>.quick-edit.v94-floating-editor{padding:14px!important}body>.quick-edit.v94-floating-editor select{flex-basis:100%!important}}
+</style><style id="v95-editor-compact-fix">
+/* In a column flex dialog, select elements must NOT use flex:1: it stretches
+   the score policy control into a huge empty rectangle on Safari/iPad. */
+body>.quick-edit.v94-floating-editor:not([hidden]){gap:10px!important;max-height:calc(100dvh - 32px)!important;overscroll-behavior:contain!important}
+body>.quick-edit.v94-floating-editor>select{display:block!important;flex:0 0 auto!important;align-self:stretch!important;width:100%!important;height:46px!important;min-height:46px!important;max-height:46px!important;padding:8px 14px!important;line-height:1.35!important;appearance:auto!important}
+body>.quick-edit.v94-floating-editor .quick-edit-row>select{flex:1 1 0!important;width:0!important;min-width:0!important;height:46px!important;min-height:46px!important;max-height:46px!important;padding:8px 12px!important}
+body>.quick-edit.v94-floating-editor .quick-edit-row>button{flex:0 0 auto!important;min-height:44px!important}
+body>.quick-edit.v94-floating-editor .quick-add-person[hidden]{display:none!important}
+body>.quick-edit.v94-floating-editor .quick-add-person{flex:0 0 auto!important;width:100%!important}
+body>.quick-edit.v94-floating-editor .quick-edit-row{flex:0 0 auto!important;align-items:center!important}
+body>.quick-edit.v94-floating-editor .quick-save{min-height:46px!important;cursor:pointer!important;position:relative!important;z-index:1!important}
+@media(max-width:520px){body>.quick-edit.v94-floating-editor .quick-edit-row>select{flex:1 1 100%!important;width:100%!important}}
+</style></head><body><main><h1>牛牛利亚共和国 <small class="guild-subtitle">⚔️ 逆水寒 · 帮会插旗赛</small></h1>
+<div class="mode-switch" aria-label="比赛模式"><button id="modeOne" class="active" type="button">⚔️ 1V1 单人赛</button><button id="modeThree" type="button">🐮 3V3 团队赛</button></div>
+<div class="tabs"><button data-tab="List" class="active">① 参赛名单</button><button data-tab="Group">② 小组赛</button><button data-tab="Eight">③ 淘汰赛</button><button data-tab="Award">④ 奖励</button><button class="edit-mode-master no-print" type="button">✏️ 开启对阵修改</button><button class="nav-undo no-print" type="button" data-undo-mode="one">↶ 撤销修改</button><button id="reset" class="danger" type="button">↻ 重置比赛</button></div>
+
 <div id="resetDialog" class="reset-modal" role="dialog" aria-modal="true" aria-labelledby="resetDialogTitle" hidden>
  <div class="reset-modal-card">
   <h2 id="resetDialogTitle">确认重置比赛？</h2>
@@ -486,14 +749,24 @@ body.report-preview-active #printReport{max-width:720px!important;padding:0!impo
 </div>
 <p id="msg" role="status" aria-live="polite"></p>
 <section id="pageList"><div class="panel"><h2>参赛名单</h2><textarea id="names" placeholder="参赛人员"></textarea><div class="row roster-actions"><button id="saveNames">保存名单</button><button id="importBtn" class="secondary">📄 导入Excel</button><input id="file" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden><button id="draw">🎲 随机生成1v1对阵</button></div><p id="count"></p></div></section>
-<section id="pageGroup" class="hidden"><div class="panel"><div class="stage-heading"><h2>⚔️ 小组赛</h2><span class="stage-rules">BO3</span></div><div id="groupMatches"></div><div id="qualification"></div></div></section>
+<section id="pageGroup" class="hidden"><div class="panel"><div class="stage-heading"><h2>⚔️ 小组赛</h2><span class="stage-rules">BO3</span></div><div id="groupMatches"></div><div id="addGroupOne" class="add-group-admin no-print"></div><div id="qualification"></div></div></section>
 <section id="pageEight" class="hidden"><div class="panel"><div class="stage-heading"><h2>🏆 淘汰赛</h2><span class="stage-rules">十六强、八强、半决赛：BO3　｜　决赛、季军赛：BO5</span></div><div id="eightMatches"></div></div></section>
-<section id="pageAward" class="hidden"><div class="panel"><h2>奖项设置</h2><div id="awards"></div><button id="print" class="secondary">🎨 导出海报</button></div></section></main><div id="reportControls" role="toolbar" aria-label="比赛报告操作"><strong>🐮 宣传海报预览</strong><button type="button" id="reportPrint">🖨️ 打印 / 保存 PDF</button><button type="button" id="reportPNG" class="secondary">🖼️ 下载海报 PNG</button><button type="button" id="reportBack" class="secondary">↩ 返回比赛</button><span id="reportFeedback" role="status" style="font-size:13px;color:#8b6578"></span></div><article id="printReport" aria-label="比赛结果打印报告"></article>
+<section id="pageAward" class="hidden"><div class="panel"><h2>奖项设置</h2><div id="awards"></div><button id="print" class="secondary">🎨 导出海报</button></div></section>
+<section id="teamApp" aria-label="3V3 团队赛">
+<div class="team-tabs"><button data-team-tab="roster" class="active">① 参赛名单</button><button data-team-tab="groups">② 小组赛</button><button data-team-tab="knockout">③ 淘汰赛</button><button data-team-tab="prizes">④ 奖励</button><button class="edit-mode-master no-print" type="button">✏️ 开启对阵修改</button><button class="nav-undo no-print" type="button" data-undo-mode="three">↶ 撤销修改</button><button id="teamReset" type="button">↻ 重置比赛</button></div>
+
+<div class="team-panel" id="teamRoster"><h2>参赛名单</h2><p class="team-note">每行一队，格式：<b>队伍名称 | 奶妈昵称 | DPS1昵称 | DPS2昵称</b></p><textarea id="teamInput" placeholder="参赛队伍"></textarea><div class="team-roster-actions"><button id="teamSave">保存名单</button><button id="teamImportBtn" class="secondary" type="button">📄 导入Excel</button><input id="teamFile" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden><button id="teamDraw">🎲 随机生成3v3对阵</button></div><p id="teamCount"></p></div>
+<div class="team-panel" id="teamGroups" hidden><h2>⚔️ 小组赛</h2><div id="teamGroupContent"></div><div id="addGroupThree" class="add-group-admin no-print"></div></div>
+<div class="team-panel" id="teamBracket" hidden><h2>🏆 淘汰赛</h2><div id="teamBracketContent"></div></div>
+<div class="team-panel" id="teamPrizes" hidden><h2>奖项设置</h2><div class="team-prizes" id="teamPrizesFields"></div><button id="teamPoster">🎨 导出 3V3 海报</button></div>
+</section>
+</main><div id="reportControls" role="toolbar" aria-label="比赛报告操作"><strong>🐮 宣传海报预览</strong><button type="button" id="reportPrint">🖨️ 打印 / 保存 PDF</button><button type="button" id="reportPNG" class="secondary">🖼️ 下载海报 PNG</button><button type="button" id="reportBack" class="secondary">↩ 返回比赛</button><span id="reportFeedback" role="status" style="font-size:13px;color:#8b6578"></span></div><article id="printReport" aria-label="比赛结果打印报告"></article>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script>
 (()=>{'use strict';
 const KEY='nsh_duel_v20_qualifier';const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const initial=()=>({names:[],groups:[],groupScores:{},tieRounds:[],bracket:null,bracketScores:{},thirdScore:null,awards:{冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',十六强奖:'奶茶一杯',参与奖:'柠檬茶'}});
+const initial=()=>({names:[],groups:[],groupBye:null,fastByes:[],fastMode:false,groupScores:{},tieRounds:[],bracket:null,bracketScores:{},thirdScore:null,awards:{冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',十六强奖:'奶茶一杯',参与奖:'柠檬茶'}});
 let s=initial();try{const old=JSON.parse(localStorage.getItem(KEY));if(old&&Array.isArray(old.names))s={...s,...old}}catch(e){}
 // Upgrade untouched default awards while keeping user-customized prizes.
 const awardDefaults={冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',十六强奖:'奶茶一杯',参与奖:'柠檬茶'};
@@ -504,51 +777,81 @@ function say(t){const message=String(t||'');const visible=message.trim().startsW
 function shuffle(arr){arr=[...arr];for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function show(t){for(const x of ['List','Group','Eight','Award']){$('page'+x).classList.toggle('hidden',x!==t);document.querySelector('[data-tab="'+x+'"]').classList.toggle('active',x===t)}render()}
 function groupWin(i){const sc=s.groupScores[i];if(!sc||!valid(sc[0],sc[1],2))return null;return sc[0]>sc[1]?s.groups[i][0]:s.groups[i][1]}
-function groupResult(){const wins=[];if(!s.groups.length)return {ready:false,wins};for(let i=0;i<s.groups.length;i++){const w=groupWin(i);if(!w)return {ready:false,wins};wins.push({name:w,score:s.groupScores[i].includes(0)?'2:0':'2:1',tier:s.groupScores[i].includes(0)?2:1})}return {ready:true,wins}}
+function groupResult(){const wins=[];if(!s.groups.length&&!s.fastMode)return {ready:false,wins};if(s.fastMode){if(s.groupBye)wins.push({name:s.groupBye,score:'首轮轮空',tier:0})}else if(s.groupBye)wins.push({name:s.groupBye,score:'轮空',tier:0});for(let i=0;i<s.groups.length;i++){const w=groupWin(i);if(!w)return {ready:false,wins};const score=s.groupScores[i].map(Number);const loserScore=Math.min(score[0],score[1]);wins.push({name:w,score:loserScore===0?'2:0':'2:1',tier:loserScore===0?2:1})}return {ready:true,wins}}
 function valid(a,b,n){return Number.isInteger(a)&&Number.isInteger(b)&&a>=0&&b>=0&&Math.max(a,b)===n&&Math.min(a,b)<n}
-function targetSize(){return s.names.length>=32?16:8}
-function hasSixteenRound(){return (s.bracket&&s.bracket.players?.length===16)||s.names.length>=32}
+// V103: 1V1 24+ entrants enter the sixteen-player knockout; 3V3 remains unchanged.
+function targetSize(){return s.names.length>=24?16:8}
+function hasSixteenRound(){return (s.bracket&&s.bracket.players?.length===16)||s.names.length>=24}
 function targetLabel(){return targetSize()===16?'十六强':'八强'}
 function finalStage(){return s.bracket&&s.bracket.players.length===16?3:2}
 function semiStage(){return finalStage()-1}
-function pairMatches(players){let matches=[];for(let i=0;i<players.length;i++)for(let j=i+1;j<players.length;j++)matches.push({a:players[i],b:players[j],score:null});return shuffle(matches)}
+// Minimal-match BO1 qualifier: eliminate exactly the excess candidates, never a round robin.
+function qualifierDraw(players,seats){
+ const pool=shuffle(players), eliminations=Math.min(players.length-seats,Math.floor(players.length/2));
+ const fighting=pool.slice(0,eliminations*2), byes=pool.slice(eliminations*2);
+ const matches=[];for(let i=0;i<fighting.length;i+=2)matches.push({a:fighting[i],b:fighting[i+1],score:null});
+ return {matches,byes};
+}
 function roundReady(round){return round.matches.every(m=>m.score===0||m.score===1)}
-function standings(round){const stats=new Map(round.players.map(n=>[n,{name:n,w:0,l:0}]));for(const m of round.matches){if(m.score===0){stats.get(m.a).w++;stats.get(m.b).l++}if(m.score===1){stats.get(m.b).w++;stats.get(m.a).l++}}return [...stats.values()].sort((a,b)=>b.w-a.w||a.name.localeCompare(b.name,'zh'))}
-// Returns a complete, reproducible qualification decision; only a tie spanning the cutoff causes a new BO1 round robin.
-function qualification(){const gr=groupResult();if(!gr.ready)return {ready:false,reason:'请先完成所有小组赛BO3比分。'};
-const tiers=[gr.wins.filter(x=>x.tier===2).map(x=>x.name),gr.wins.filter(x=>x.tier===1).map(x=>x.name)];let chosen=[],roundIndex=0,info=[];
-for(let ti=0;ti<2;ti++){
- const players=tiers[ti],seats=targetSize()-chosen.length;
- if(seats<=0){info.push({tier:ti,players,kind:'excluded'});continue}
- if(players.length<=seats){chosen.push(...players);info.push({tier:ti,players,kind:'direct'});continue}
- // Oversubscribed tier. A sequence of mini-leagues resolves the boundary; locked-in players remain locked in.
- let pool=[...players],remaining=seats,stage=1;
- while(pool.length>remaining){
-  const round=s.tieRounds[roundIndex];
-  if(!round||round.tier!==ti||round.stage!==stage||round.seats!==remaining||JSON.stringify([...round.players].sort())!==JSON.stringify([...pool].sort())){
-    return {ready:false,needRound:{tier:ti,stage,players:pool,seats:remaining,index:roundIndex},chosen,info};
+function roundWinners(round){return [...(round.byes||[]),...round.matches.filter(m=>m.score===0||m.score===1).map(m=>m.score===0?m.a:m.b)]}
+function qualification(){
+ const gr=groupResult();if(!gr.ready)return {ready:false,reason:'请先完成所有小组赛BO3比分。'};
+ if(s.fastMode){
+  const first=[...gr.wins.map(x=>x.name)];
+  const losers=s.groups.map((pair,i)=>pair.find(n=>n!==groupWin(i)));
+  const seats=8-first.length;
+  let pool=losers,stage=1,roundIndex=0,info=[];
+  while(pool.length>seats){
+   const round=s.tieRounds[roundIndex];
+   if(!round||round.format!=='minimal'||round.tier!==3||round.stage!==stage||round.seats!==seats||JSON.stringify([...round.players].sort())!==JSON.stringify([...pool].sort()))return {ready:false,needRound:{tier:3,stage,players:pool,seats,index:roundIndex},chosen:first,info};
+   if(!roundReady(round))return {ready:false,pending:roundIndex,chosen:first,info};
+   pool=roundWinners(round);info.push({tier:3,kind:'round',stage,players:round.players,winners:pool});stage++;roundIndex++;
   }
-  if(!roundReady(round))return {ready:false,pending:roundIndex,chosen,info};
-  const ranked=standings(round);const cutoff=ranked[remaining-1].w;
-  const above=ranked.filter(x=>x.w>cutoff).map(x=>x.name);
-  const equal=ranked.filter(x=>x.w===cutoff).map(x=>x.name);
-  chosen.push(...above);remaining-=above.length;
-  info.push({tier:ti,players:pool,kind:'round',stage,ranked,above,equal,cutoff});
-  if(equal.length===remaining){chosen.push(...equal);remaining=0;break}
-  pool=equal;stage++;roundIndex++;
+  return {ready:true,chosen:[...first,...pool],info};
  }
- if(remaining===pool.length&&remaining>0)chosen.push(...pool);
- roundIndex++;
+ // V102: 24–31 entrants yield fewer than 16 first-round winners.
+ // Fill the remaining slots with first-round losers through minimal BO1 qualification.
+ // Priority: 2:0 winners > 2:1 winners > first-round bye > losers.
+ // First-round losers only compete for genuinely unfilled seats.
+ const firstRoundLosers=s.groups.map((pair,i)=>pair.find(n=>n!==groupWin(i)));
+ const tiers=[gr.wins.filter(x=>x.tier===2).map(x=>x.name),gr.wins.filter(x=>x.tier===1).map(x=>x.name),gr.wins.filter(x=>x.tier===0).map(x=>x.name)];
+ if(targetSize()===16)tiers.push(firstRoundLosers);
+ let chosen=[],roundIndex=0,info=[];
+ for(let ti=0;ti<tiers.length;ti++){
+  let pool=tiers[ti],seats=targetSize()-chosen.length;
+  if(seats<=0){info.push({tier:ti,players:pool,kind:'excluded'});continue}
+  if(pool.length<=seats){chosen.push(...pool);info.push({tier:ti,players:pool,kind:'direct'});continue}
+  let stage=1;
+  while(pool.length>seats){
+   const round=s.tieRounds[roundIndex];
+   if(!round||round.format!=='minimal'||round.tier!==ti||round.stage!==stage||round.seats!==seats||JSON.stringify([...round.players].sort())!==JSON.stringify([...pool].sort())){
+    return {ready:false,needRound:{tier:ti,stage,players:pool,seats,index:roundIndex},chosen,info};
+   }
+   if(!roundReady(round))return {ready:false,pending:roundIndex,chosen,info};
+   const winners=roundWinners(round);
+   info.push({tier:ti,players:pool,kind:'round',stage,winners});
+   pool=winners;stage++;roundIndex++;
+  }
+  chosen.push(...pool);
  }
  return {ready:true,chosen,info};
 }
-function syncTie(){let q=qualification();if(q.needRound){const r=q.needRound;s.tieRounds=s.tieRounds.slice(0,r.index);s.tieRounds.push({tier:r.tier,stage:r.stage,players:r.players,seats:r.seats,matches:pairMatches(r.players)});persist();q=qualification()}return q}
+function syncTie(){
+ let q=qualification(),guard=0;
+ while(q.needRound&&guard++<20){
+  const r=q.needRound,draw=qualifierDraw(r.players,r.seats);
+  s.tieRounds=s.tieRounds.slice(0,r.index);
+  s.tieRounds.push({format:'minimal',tier:r.tier,stage:r.stage,players:r.players,seats:r.seats,matches:draw.matches,byes:draw.byes});
+  persist();q=qualification();
+ }
+ return q;
+}
 function clearLater(){s.tieRounds=[];s.bracket=null;s.bracketScores={};s.thirdScore=null}
-function draw(){if(s.names.length<16||s.names.length%2){say('为了全员首轮1v1、无轮空，请输入至少16名、且为偶数的参赛选手。');return}if(s.groups.length&&!confirm('重新抽签会清空当前所有比分，确定吗？'))return;const a=shuffle(s.names);s.groups=[];for(let i=0;i<a.length;i+=2)s.groups.push([a[i],a[i+1]]);s.groupScores={};clearLater();persist();show('Group');say('✓ 已随机生成'+s.groups.length+'场BO3小组赛')}
+function draw(){if(s.names.length<8){say('当前版本至少需要8名选手才能生成八强对阵。');return}if((s.groups.length||s.fastMode)&&!confirm('重新抽签会清空当前所有比分，确定吗？'))return;const a=shuffle(s.names);s.fastMode=a.length<16;s.fastByes=[];s.groupBye=null;s.groups=[];if(s.fastMode){s.groupBye=a.length%2?a.pop():null;for(let i=0;i<a.length;i+=2)s.groups.push([a[i],a[i+1]]);}else{s.groupBye=a.length%2?a.pop():null;for(let i=0;i<a.length;i+=2)s.groups.push([a[i],a[i+1]]);}s.groupScores={};clearLater();persist();show('Group');say('✓ 已随机生成'+s.groups.length+'场BO3小组赛')}
 function saveGroup(i){const ia=$('g'+i+'A'),ib=$('g'+i+'B');if(!ia||!ib){say('比分输入框未就绪，请重新进入小组赛界面');return}const a=Number(ia.value),b=Number(ib.value);if(ia.value.trim()===''||ib.value.trim()===''||!valid(a,b,2)){say('第'+(i+1)+'组比分无效：只接受2:0、2:1、0:2或1:2');return}const drafts={};for(let j=0;j<s.groups.length;j++){if(j===i)continue;const x=$('g'+j+'A'),y=$('g'+j+'B');if(x&&y)drafts[j]=[x.value,y.value]}const old=s.groupScores[i];s.groupScores[i]=[a,b];if(!old||old[0]!==a||old[1]!==b)clearLater();const ok=persist();render();for(const [j,vals] of Object.entries(drafts)){const x=$('g'+j+'A'),y=$('g'+j+'B');if(x&&y){x.value=vals[0];y.value=vals[1]}}if(ok)say('✓ 第'+(i+1)+'组比分 '+a+':'+b+' 已保存，胜者：'+(a>b?s.groups[i][0]:s.groups[i][1]));else say('⚠ 第'+(i+1)+'组比分已更新，但浏览器禁止永久保存，请用 Safari 正式网址打开')}
 function seedBracket(){
  let q=syncTie(),target=targetSize();
- if(!q.ready){say('请先完成小组赛及全部BO1加赛');render();return}
+ if(!q.ready){say('请先完成资格赛及全部BO1加赛');render();return}
  if(q.chosen.length!==target){say('晋级人数异常，请检查加赛结果');return}
  if(s.bracket&&!confirm('重新抽签'+targetLabel()+'会清空淘汰赛比分，确定吗？'))return;
  s.bracket={players:shuffle(q.chosen)};s.bracketScores={};s.thirdScore=null;persist();show('Eight');say('✓ 已生成'+targetLabel()+'树状图')
@@ -592,25 +895,24 @@ function matchCard(a,b,score,need,key,disabled=false){
  const v=score||[0,0],off=!a||!b||disabled?'disabled':'';
  return `<div class="match ${need===3?'final':''}"><div class="names score-top">${playerLabel(a,w===a&&!!w)}<div class="score-direct no-print"><input aria-label="${esc(a||'选手A')}比分" type="number" min="0" max="${need}" value="${v[0]}" id="${key}A" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}><b>:</b><input aria-label="${esc(b||'选手B')}比分" type="number" min="0" max="${need}" value="${v[1]}" id="${key}B" data-auto="${key}" readonly title="点击加1分；按 Enter、Backspace 或 Delete 清零" ${off}></div>${playerLabel(b,w===b&&!!w,'right')}</div>${w?'<small class="match-winner">获胜：'+esc(w)+'</small>':''}</div>`;
 }
-function groupHTML(){if(!s.groups.length)return '<div class="empty-stage"><span class="empty-stage-icon">🎲</span><p>暂无比赛对阵</p><small>请先在「参赛名单」中保存选手并随机抽签</small></div>';return `<div class="group-grid">${s.groups.map(([a,b],i)=>`<div>${'<h3 style="color:#edc47d;text-align:center">第'+(i+1)+'组</h3>'}${matchCard(a,b,s.groupScores[i],2,'g'+i)}</div>`).join('')}</div>`}
+function groupHTML(){if(!s.groups.length&&!s.fastMode)return '<div class="empty-stage"><span class="empty-stage-icon">🎲</span><p>暂无比赛对阵</p><small>请先在「参赛名单」中保存选手并随机抽签</small></div>';return `${s.fastMode?'<p class="qual-notice">⚡ 小人数快速赛：'+s.names.length+'人争8个名额，只需'+s.groups.length+'场BO3资格赛。抽签免赛：'+esc((s.fastByes||[]).join('、'))+'</p>':''}${s.groupBye?'<p class="qual-notice">🎟️ 首轮随机轮空：<strong>'+esc(s.groupBye)+'</strong>（独立候选，不计作2:0或2:1胜场）</p>':''}<div class="group-grid">${s.groups.map(([a,b],i)=>`<div>${'<h3 style="color:#edc47d;text-align:center">第'+(i+1)+'组</h3>'}${matchCard(a,b,s.groupScores[i],2,'g'+i)}</div>`).join('')}</div>`}
 function qualHTML(){
  if(!s.groups.length)return '';
  const label=targetLabel(),gr=groupResult();
  if(!gr.ready)return '<div class="qual-section"><h3>'+label+'资格</h3><p>完成全部小组赛后，自动统计2:0、2:1胜者，并安排必要的BO1随机抽签加赛。</p></div>';
  let q=syncTie();
- let html='<div class="qual-section"><h3>'+label+'资格 · BO1加赛</h3><p class="qual-notice">本次 '+s.names.length+' 人参赛，晋级 '+targetSize()+' 人。2:0胜者优先直接晋级；不足的名额由2:1胜者争夺。若同档人数超过剩余名额，将随机安排BO1循环赛（每人均有比赛，不轮空）；晋级线同分则继续加赛。若2:0胜者本身超额，也须加赛决定名额。</p>';
- html+='<table class="qual-table"><thead><tr><th>优先级</th><th>小组赛胜者</th><th>人数</th></tr></thead><tbody><tr><td>第一档 · 2:0</td><td>'+esc(gr.wins.filter(x=>x.tier===2).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===2).length+'</td></tr><tr><td>第二档 · 2:1</td><td>'+esc(gr.wins.filter(x=>x.tier===1).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===1).length+'</td></tr></tbody></table>';
+ let html='<div class="qual-section"><h3>'+label+'资格 · BO1加赛</h3><p class="qual-notice">本次 '+s.names.length+' 人参赛，晋级 '+targetSize()+' 人。'+(s.fastMode?'公平快速赛：首轮胜者及唯一奇数轮空者先晋级，败者争夺剩余名额。':'')+'晋级优先级依次为2:0胜者、2:1胜者、首轮轮空选手'+(targetSize()===16&&s.names.length<32?'、首轮败者复活候选':'')+'（首轮轮空与资格赛抽签轮空分别记录）。若候选人数超过剩余名额，只安排必要的BO1淘汰加赛，部分选手随机获得资格赛轮空；正式淘汰赛没有轮空。</p>';
+ html+='<table class="qual-table"><thead><tr><th>优先级</th><th>小组赛胜者</th><th>人数</th></tr></thead><tbody><tr><td>第一档 · 2:0</td><td>'+esc(gr.wins.filter(x=>x.tier===2).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===2).length+'</td></tr><tr><td>第二档 · 2:1</td><td>'+esc(gr.wins.filter(x=>x.tier===1).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===1).length+'</td></tr><tr><td>🍀 首轮轮空 · 独立候选</td><td>'+esc(gr.wins.filter(x=>x.tier===0).map(x=>x.name).join('、')||'无')+'</td><td>'+gr.wins.filter(x=>x.tier===0).length+'</td></tr><tr><td>第四档 · 首轮败者复活候选</td><td>'+esc(s.groups.map((pair,i)=>pair.find(n=>n!==groupWin(i))).join('、')||'无')+'</td><td>'+s.groups.length+'</td></tr></tbody></table>';
  for(let ri=0;ri<s.tieRounds.length;ri++){
   const r=s.tieRounds[ri];
-  html+='<div class="qual-section"><h3>'+(r.tier===0?'2:0':'2:1')+'档 · BO1随机抽签循环赛'+(r.stage>1?'（第'+r.stage+'轮同分加赛）':'')+'</h3><p>'+r.players.length+'名选手争夺'+r.seats+'个名额，共'+r.matches.length+'场BO1。</p><div class="group-grid">';
+  html+='<div class="qual-section"><h3>'+(['2:0胜者','2:1胜者','首轮轮空候选','首轮败者复活'][r.tier]||'资格候选')+' · BO1资格淘汰赛'+(r.stage>1?'（第'+r.stage+'轮同分加赛）':'')+'</h3><p>'+r.players.length+'名选手争夺'+r.seats+'个名额，本轮'+r.matches.length+'场BO1，'+(r.byes||[]).length+'人资格赛抽签轮空。'+((r.byes||[]).length?'本轮免赛：'+esc(r.byes.join('、')):'')+'</p><div class="group-grid">';
   for(let mi=0;mi<r.matches.length;mi++){
    const m=r.matches[mi],key='tie_'+ri+'_'+mi;
    const points=Array.isArray(m.points)?m.points:(m.score===0?[1,0]:m.score===1?[0,1]:[0,0]);
    html+=matchCard(m.a,m.b,points,1,key).replace('class="match ', 'class="match tie-match ');
   }
   html+='</div>';
-  const ranked=standings(r);
-  html+='<table class="qual-table"><thead><tr><th>选手</th><th>胜场</th><th>负场</th></tr></thead><tbody>'+ranked.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+x.w+'</td><td>'+x.l+'</td></tr>').join('')+'</tbody></table></div>';
+  if(roundReady(r))html+='<p>本轮晋级：'+esc(roundWinners(r).join('、'))+'</p>';
  }
  if(q.ready){html+='<h3>✓ '+label+'名单已确定</h3><p>'+q.chosen.map(esc).join('、')+'</p><button id="seedBracket">🎲 生成'+label+'对阵树</button>'}
  else if(q.needRound){html+='<p>正在生成下一轮随机BO1加赛，请稍候。</p>'}
@@ -777,12 +1079,139 @@ function drawKoConnections(){
 }
 window.addEventListener('resize',()=>requestAnimationFrame(drawKoConnections));
 
+
+function floatingEditorBackdrop(){let el=document.getElementById('v94-editor-backdrop');if(!el){el=document.createElement('div');el.id='v94-editor-backdrop';el.hidden=true;el.addEventListener('click',()=>closeFloatingEditor());document.body.append(el)}return el}
+function closeFloatingEditor(panel){
+ document.querySelectorAll('body>.quick-edit.v94-floating-editor').forEach(el=>{el.hidden=true;el.classList.remove('v94-floating-editor');if(el._v94Home&&el._v94Home.isConnected)el._v94Home.append(el);else el.remove()});
+ if(panel){panel.hidden=true;if(panel.classList.contains('v94-floating-editor')){panel.classList.remove('v94-floating-editor');if(panel._v94Home?.isConnected)panel._v94Home.append(panel)}}
+ floatingEditorBackdrop().hidden=true;
+}
+function toggleFloatingEditor(panel){
+ const isOpen=panel.classList.contains('v94-floating-editor')&&!panel.hidden;
+ closeFloatingEditor();if(isOpen)return;
+ panel._v94Home=panel.parentElement;panel.hidden=false;panel.classList.add('v94-floating-editor');
+ document.body.append(panel);floatingEditorBackdrop().hidden=false;
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFloatingEditor()});
+
+function quickOneEditors(){
+ const build=(host,stage,i,players)=>{
+  if(!host||!players.every(Boolean))return;
+  const toggle=document.createElement('button');toggle.className='quick-edit-toggle no-print';toggle.textContent='✏️ 直接修改本场';
+  const panel=document.createElement('div');panel.className='quick-edit no-print';panel.hidden=true;
+  const closeEdit=document.createElement('button');closeEdit.type='button';closeEdit.className='v93-close';closeEdit.textContent='✕ 关闭修改';closeEdit.onclick=(e)=>{e.preventDefault();e.stopPropagation();closeFloatingEditor(panel)};panel.append(closeEdit);
+  const names=s.names;const select=(current)=>{const el=document.createElement('select');names.forEach(n=>{const o=new Option(n,n);el.add(o)});el.value=current;return el};
+  const a=select(players[0]),b=select(players[1]);const policy=document.createElement('select');[['keep','保留本场比分'],['clear','清空本场比分（重新比赛）'],['a20','左方 2:0 获胜'],['a21','左方 2:1 获胜'],['b20','右方 2:0 获胜'],['b21','右方 2:1 获胜']].forEach(([v,t])=>policy.add(new Option(t,v)));
+  if(stage!=='group'){for(const option of [...policy.options])if(!['keep','clear'].includes(option.value))option.remove()}
+  const row=document.createElement('div');row.className='quick-edit-row';row.append(a,b);panel.append(row,policy);
+  const addBox=document.createElement('div');addBox.className='quick-add-person';addBox.hidden=true;
+  const addInput=document.createElement('input');addInput.type='text';addInput.placeholder='新选手昵称';
+  const addConfirm=document.createElement('button');addConfirm.type='button';addConfirm.textContent='＋ 确认新增选手';
+  addConfirm.onclick=()=>{const name=addInput.value.trim();if(!name){alert('请输入选手昵称');return}if(s.names.includes(name)){alert('选手已在名单中');return}if(s.names.length>=256){alert('参赛名单已达到上限');return}adminSnapshot();s.names.push(name);persist();for(const sel of [a,b])sel.add(new Option(name,name));addInput.value='';addBox.hidden=true;alert('已新增 '+name+' 到参赛名单。当前对阵保持不变；需要替换时请手动选择新选手并确认修改。')};
+  const addRow=document.createElement('div');addRow.className='quick-edit-row';addRow.append(addInput,addConfirm);addBox.append(addRow);
+  const addHint=document.createElement('div');addHint.className='quick-edit-note';addHint.textContent='新增选手会加入参赛名单；本场对阵需另点「保存本场」才会生效。';addBox.append(addHint);
+  const addToggle=document.createElement('button');addToggle.type='button';addToggle.textContent='＋ 新增参赛人员';addToggle.onclick=()=>{addBox.hidden=!addBox.hidden;if(!addBox.hidden)addInput.focus()};
+  panel.append(addToggle,addBox);
+
+  const buttons=document.createElement('div');buttons.className='quick-edit-row';
+  const button=(title,fn,cls='')=>{const el=document.createElement('button');el.type='button';el.textContent=title;el.className=cls;el.onclick=(event)=>{event.preventDefault();event.stopPropagation();try{fn()}catch(error){console.error(error);alert('操作失败：'+error.message)}};buttons.append(el)};
+  const apply=(forfeit)=>{
+   if(a.value===b.value){alert('同一场不能出现相同选手');return}
+   const original=stage==='group'?s.groups[i]:s.bracket.players.slice(i*2,i*2+2);
+   const changed=original[0]!==a.value||original[1]!==b.value;
+   if(changed){const occupied=stage==='group'?s.groups.flat().filter(x=>!original.includes(x)):s.bracket.players.filter(x=>!original.includes(x));
+    if(occupied.includes(a.value)||occupied.includes(b.value)){alert('选手已在其他场次，请先在另一场调整，或使用交换位置功能');return}}
+   // 网页预览环境可能拦截原生 confirm；直接执行并保留撤销快照。
+   adminSnapshot();
+   if(stage==='group'){
+    s.groups[i]=[a.value,b.value];
+    if(forfeit!==null)s.groupScores[i]=forfeit===0?[0,2]:[2,0];
+    else if(policy.value==='clear')delete s.groupScores[i];
+    else if(['a20','a21','b20','b21'].includes(policy.value)){const scores={a20:[2,0],a21:[2,1],b20:[0,2],b21:[1,2]};s.groupScores[i]=scores[policy.value]}
+    if(changed||forfeit!==null||policy.value!=='keep')clearLater();
+   }else{
+    s.bracket.players.splice(i*2,2,a.value,b.value);
+    if(forfeit!==null)s.bracketScores['0_'+i]=forfeit===0?[0,2]:[2,0];
+    else if(policy.value==='clear')delete s.bracketScores['0_'+i];
+    if(changed||forfeit!==null||policy.value==='clear')clearDescendants(0,i);
+   }
+   closeFloatingEditor(panel);persist();render();
+  };
+  const action=document.createElement('select');[['save','保存更换'],['left','左方弃权'],['right','右方弃权']].forEach(([v,t])=>action.add(new Option(t,v)));
+  buttons.append(action);
+  button('✓ 确认修改',()=>apply(action.value==='left'?0:action.value==='right'?1:null),'quick-save');
+  panel.append(buttons);
+  toggle.onclick=(e)=>{e.preventDefault();e.stopPropagation();toggleFloatingEditor(panel)};host.append(toggle,panel);
+  host.classList.add("editable-match");host.addEventListener("click",ev=>{if(!document.body.classList.contains("edit-mode-on")||ev.target.closest("button,input,select,textarea,.quick-edit,[data-scorekey],.score"))return;toggleFloatingEditor(panel);});
+ };
+ document.querySelectorAll('#groupMatches .group-grid > div').forEach((el,i)=>build(el,'group',i,s.groups[i]));
+ document.querySelectorAll('#groupMatches .group-grid > div').forEach((el,i)=>{
+   let btn=el.querySelector('.delete-group-button');
+   if(!btn){btn=document.createElement('button');btn.type='button';btn.className='delete-group-button';el.append(btn)}
+   btn.textContent='🗑 删除第'+(i+1)+'组';
+   btn.onclick=(event)=>{event.preventDefault();event.stopPropagation();
+     if(btn.dataset.confirmDelete!=='yes'){
+       btn.dataset.confirmDelete='yes';btn.textContent='⚠️ 再点一次确认删除第'+(i+1)+'组';return;
+     }
+     deleteGroupNow(i,false);
+   };
+ });
+ document.querySelectorAll('#eightMatches .ko-node[data-ko-stage="0"]').forEach(el=>{const i=Number(el.dataset.koIndex);build(el,'ko',i,pair(0,i))});
+}
+function deleteGroupNow(index,isThree){
+ try{
+  const arr=isThree?state.groups:s.groups;
+  if(!Number.isInteger(index)||index<0||index>=arr.length){alert('小组已更新，请重新打开编辑模式');return}
+  // 使用页面内二次点击确认，避免 Safari/嵌入预览拦截 window.confirm。
+  if(isThree){
+   teamSnapshot();state.groups.splice(index,1);
+   const next={};Object.entries(state.groupScores||{}).forEach(([key,value])=>{const n=Number(key);if(n<index)next[n]=value;else if(n>index)next[n-1]=value});
+   state.groupScores=next;state.qualRounds=[];state.bracket=null;state.koScores={};save();location.reload();
+  }else{
+   adminSnapshot();s.groups.splice(index,1);
+   const next={};Object.entries(s.groupScores||{}).forEach(([key,value])=>{const n=Number(key);if(n<index)next[n]=value;else if(n>index)next[n-1]=value});
+   s.groupScores=next;clearLater();persist();render();say('✓ 已删除第'+(index+1)+'组');
+  }
+ }catch(error){console.error('删除小组失败',error);alert('删除小组失败：'+error.message)}
+}
+function renderTeamAfterDeletion(){if(typeof renderTeam==='function')renderTeam();else if(typeof teamRender==='function')teamRender();else if(typeof window.render3v3==='function')window.render3v3();else location.reload()}
+function renderAddGroupOne(){
+ const host=$('addGroupOne');if(!host)return;
+ host.replaceChildren();
+ const open=document.createElement('button');open.type='button';open.className='add-group-open';open.textContent='＋ 新增小组';host.append(open);
+ const form=document.createElement('div');form.className='add-group-form';form.hidden=true;host.append(form);
+ const available=()=>s.names.filter(n=>!s.groups.some(g=>g.includes(n)));
+ const select=()=>{const el=document.createElement('select');el.setAttribute('aria-label','选择选手');return el};
+ const a=select(),b=select();
+ function refresh(){const previous=[a.value,b.value],pool=available();for(const [idx,el] of [a,b].entries()){el.replaceChildren(new Option('选择选手',''));pool.forEach(n=>el.add(new Option(n,n)));if(pool.includes(previous[idx]))el.value=previous[idx]}}
+ const saveButton=document.createElement('button');saveButton.type='button';saveButton.textContent='✓ 添加小组';
+ saveButton.onclick=()=>{const x=a.value,y=b.value;if(!x||!y||x===y){alert('请选择两名不同的未安排选手');return}if(!available().includes(x)||!available().includes(y)){alert('选手已在其他小组，请先调整原有对阵');return}adminSnapshot();s.groups.push([x,y]);if(s.groupBye===x||s.groupBye===y)s.groupBye=null;clearLater();persist();render();say('✓ 已增加第'+s.groups.length+'组')};
+ form.append(a,b);
+ const addToggle=document.createElement('button');addToggle.type='button';addToggle.textContent='＋ 新增参赛人员';
+ const addBox=document.createElement('div');addBox.className='add-group-new-entry';addBox.hidden=true;
+ const input=document.createElement('input');input.type='text';input.placeholder='输入新选手昵称';
+ const addPerson=document.createElement('button');addPerson.type='button';addPerson.textContent='✓ 保存新选手';
+ addPerson.onclick=()=>{const name=input.value.trim();if(!name){alert('请输入选手昵称');return}if(s.names.includes(name)){alert('选手已在名单中');return}if(s.names.length>=256){alert('参赛名单已达到上限');return}adminSnapshot();s.names.push(name);persist();refresh();input.value='';addBox.hidden=true;alert('已加入参赛名单：'+name+'。请选择该选手参加新增小组。')};
+ addToggle.onclick=()=>{addBox.hidden=!addBox.hidden;if(!addBox.hidden)input.focus()};
+ addBox.append(input,addPerson);const actionRow=document.createElement('div');actionRow.className='add-group-actions';actionRow.append(addToggle,saveButton);form.append(actionRow,addBox);
+ const hint=document.createElement('small');hint.textContent='新增选手仅加入名单，不会自动替换现有对阵；保存后可在上方选择。';form.append(hint);
+ open.onclick=()=>{form.hidden=!form.hidden;open.textContent=form.hidden?'＋ 新增小组':'第'+(s.groups.length+1)+'组';if(!form.hidden)refresh()};
+}
 function render(){
   if(document.activeElement!==$('names'))$('names').value=s.names.join('\n');
   $('count').textContent='当前 '+s.names.length+' 人';
   $('groupMatches').innerHTML=groupHTML();
   $('qualification').innerHTML=qualHTML();
   $('eightMatches').innerHTML=koHTML();
+  quickOneEditors();
+  const oneGrid=document.querySelector('#groupMatches .group-grid');
+  if(oneGrid){
+    let addCard=document.getElementById('addGroupOne');
+    if(!addCard){addCard=document.createElement('div');addCard.id='addGroupOne';addCard.className='add-group-admin no-print'}
+    oneGrid.appendChild(addCard);
+    renderAddGroupOne();
+    [...oneGrid.childNodes].filter(n=>n.nodeType===3&&n.textContent.trim()==='null').forEach(n=>n.remove());
+  }
   requestAnimationFrame(drawKoConnections);
   awards();
   document.querySelectorAll('[data-auto]').forEach(el=>{
@@ -809,7 +1238,7 @@ function render(){
     s.awards[el.dataset.award]=el.value;persist();say('✓ 奖励已保存');
   });
 }
-function updateNames(arr){const names=[...new Set(arr.map(x=>String(x??'').trim()).filter(Boolean))];if(names.length<16||names.length%2){say('请提供至少16名且为偶数人数的选手，才能保证全员首轮1v1并产生无轮空淘汰赛。');return}if(s.groups.length&&!confirm('更改名单将清空当前所有比赛数据，继续吗？'))return;s.names=names;s.groups=[];s.groupScores={};clearLater();persist();render();say('✓ 已保存'+names.length+'名选手')}
+function updateNames(arr){const names=[...new Set(arr.map(x=>String(x??'').trim()).filter(Boolean))];if(names.length<8){say('请至少提供8名选手；8–15人使用快速资格赛，16人以上沿用原赛制。');return}if(s.groups.length&&!confirm('更改名单将清空当前所有比赛数据，继续吗？'))return;s.names=names;s.groups=[];s.groupBye=null;s.fastMode=false;s.fastByes=[];s.groupScores={};clearLater();persist();render();say('✓ 已保存'+names.length+'名选手')}
 $('saveNames').onclick=()=>updateNames($('names').value.split(/\r?\n/));$('draw').onclick=draw;$('reset').onclick=()=>{const dlg=$('resetDialog');dlg.hidden=false;$('resetConfirm').focus();};
 function closeResetDialog(){$('resetDialog').hidden=true;$('reset').focus();}
 $('resetCancel').onclick=closeResetDialog;
@@ -937,5 +1366,346 @@ async function downloadPosterPNG(){
 }
 $('reportPNG').onclick=downloadPosterPNG;
 $('reportBack').onclick=()=>{document.body.classList.remove('report-preview-active');window.scrollTo(0,0)};
+
+// V66: tournament adjustment console (1V1). Snapshots are stored separately for undo.
+const ADMIN_HISTORY='nsh_v66_1v1_history';
+function adminSnapshot(){try{localStorage.setItem(ADMIN_HISTORY,JSON.stringify(s))}catch(e){}}
+async function adminUndo(){const raw=localStorage.getItem(ADMIN_HISTORY);if(!raw){alert('暂无可撤销的调整');return}if((await adjustUI('撤销最近一次管理员调整？',['确认撤销']))===null)return;const previous=JSON.parse(raw);s=previous;persist();localStorage.removeItem(ADMIN_HISTORY);render();alert('已撤销最近一次调整')}
+async function adminSelect(message,options){const n=await adjustUI(message,options);return n===null?-1:n}
+async function adminAdjust(stage){
+ if(stage==='group'&&!s.groups.length){alert('请先抽签');return}
+ if(stage==='ko'&&!s.bracket){alert('请先生成淘汰赛对阵');return}
+ const isGroup=stage==='group',f=finalStage();
+ const rounds=isGroup?['小组赛']:['首轮淘汰赛',...(f===3?['八强赛','半决赛']:['半决赛']),'决赛','季军赛'];
+ const r=isGroup?0:await adminSelect('选择需要调整的比赛阶段',rounds);if(r<0)return;
+ const third=!isGroup&&r===rounds.length-1;
+ const st=isGroup?0:third?-1:r;
+ const count=isGroup?s.groups.length:third?1:(s.bracket.players.length/Math.pow(2,st+1));
+ const ix=await adminSelect('选择比赛场次',Array.from({length:count},(_,i)=>'第 '+(i+1)+' 场'));if(ix<0)return;
+ const contestants=isGroup?s.groups[ix]:third?[bracketLoser(semiStage(),0),bracketLoser(semiStage(),1)]:pair(st,ix);
+ if(!contestants[0]||!contestants[1]){alert('该场对阵尚未产生');return}
+ const method=await adminSelect(`${contestants[0]} VS ${contestants[1]}\n选择调整方式`,['判定左方弃权（右方晋级）','判定右方弃权（左方晋级）','手动指定左方获胜','手动指定右方获胜','交换双方位置（清空比分）','更换选手／交换其他场次选手（仅小组赛或淘汰赛首轮）','撤销最近一次调整']);if(method<0)return;
+ if(method===6){adminUndo();return}
+ if(method===5&&!(isGroup||st===0)){alert('后续淘汰赛的选手由前一轮胜者自动决定，请先修改上游比赛结果，再重新晋级。');return}
+ let side=0, replacement=null, old=null, from=null;
+ if(method===5){side=await adminSelect('选择要替换的一方',contestants);if(side<0)return;old=contestants[side];const options=s.names.filter(x=>x!==old);const picked=await adminSelect('选择替换选手（已有选手将自动交换位置，避免重复参赛）',options);if(picked<0)return;replacement=options[picked];
+ if(isGroup){for(let i=0;i<s.groups.length;i++)for(let j=0;j<2;j++)if(s.groups[i][j]===replacement)from=[i,j]}
+ else{const arr=s.bracket.players;const idx=arr.indexOf(replacement);if(idx>=0)from=[idx]}
+ }
+ if((await adjustUI('确定执行调整？相关后续比分可能被清空。操作前将自动备份。',['确认调整']))===null)return;
+ adminSnapshot();
+ if(method===5){if(isGroup){s.groups[ix][side]=replacement;if(from){s.groups[from[0]][from[1]]=old;delete s.groupScores[from[0]]}delete s.groupScores[ix];clearLater()}
+ else{const at=ix*2+side;s.bracket.players[at]=replacement;if(from)s.bracket.players[from[0]]=old;s.bracketScores={};s.thirdScore=null}}
+ else if(method===4){if(isGroup){s.groups[ix].reverse();delete s.groupScores[ix];clearLater()}
+ else if(third){s.thirdScore=null;alert('季军赛由半决赛败者自动决定；请调整半决赛比分来交换参赛位置。')}
+ else if(st===0){const at=ix*2;[s.bracket.players[at],s.bracket.players[at+1]]=[s.bracket.players[at+1],s.bracket.players[at]];s.bracketScores={};s.thirdScore=null}
+ else{alert('后续轮次对阵由前一轮自动产生，请调整前一轮。')}
+ }
+ else{const need=isGroup?2:(third||st===f?3:2);const leftWins=method===1||method===2;const score=leftWins?[need,0]:[0,need];if(isGroup){s.groupScores[ix]=score;clearLater()}
+ else if(third)s.thirdScore=score;
+ else{s.bracketScores[st+'_'+ix]=score;clearDescendants(st,ix)}
+ }
+ persist();render();alert('调整已保存。')
+}
+const groupAdmin=document.createElement('button');groupAdmin.className='admin-adjust';groupAdmin.type='button';groupAdmin.textContent='✏️ 调整小组赛 / 弃权';groupAdmin.onclick=()=>adminAdjust('group').catch(e=>alert('调整失败：'+e.message));/* replaced by inline match editors */
+const koAdmin=document.createElement('button');koAdmin.className='admin-adjust';koAdmin.type='button';koAdmin.textContent='✏️ 调整淘汰赛 / 弃权';koAdmin.onclick=()=>adminAdjust('ko').catch(e=>alert('调整失败：'+e.message));/* replaced by inline match editors */
+
+
+
+// V89: undo handler runs inside 1V1 state scope, not a separate script.
+document.querySelector('.tabs .nav-undo').addEventListener('click',event=>{
+ const button=event.currentTarget;
+ const raw=localStorage.getItem(ADMIN_HISTORY);
+ if(!raw){button.textContent='暂无可撤销记录';return}
+ if(button.dataset.confirmUndo!=='yes'){
+   button.dataset.confirmUndo='yes';button.textContent='⚠ 再点确认撤销';return;
+ }
+ try{
+   const previous=JSON.parse(raw);
+   if(!previous||!Array.isArray(previous.names))throw new Error('备份数据格式不正确');
+   s=previous;persist();localStorage.removeItem(ADMIN_HISTORY);
+   button.dataset.confirmUndo='';button.textContent='↶ 撤销修改';render();
+ }catch(error){console.error(error);button.textContent='撤销失败：'+error.message}
+});
+
 render();
-})();</script></body></html>
+})();</script><script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), KEY='nsh_v54_team3_independent';
+const escapeHtml=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fresh=()=>({teams:[],groups:[],groupBye:null,fastByes:[],fastMode:false,groupScores:{},qualRounds:[],bracket:null,koScores:{},prizes:{冠军:'288时装',亚军:'128时装',季军:'68时装',八强奖:'月卡一张',参与奖:'柠檬茶'}});
+let state=fresh();try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&Array.isArray(v.teams))state={...fresh(),...v}}catch(e){}
+let tab='roster', mode='one';
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('本地存储失败：'+e.message)}}
+function randomize(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function pair(a){const b=randomize(a),out=[];for(let i=0;i<b.length;i+=2)out.push([b[i],b[i+1]]);return out}
+function teamName(id){return state.teams.find(t=>t.id===id)?.name||id||'待定'}
+function memberText(id){const t=state.teams.find(t=>t.id===id);return t?`奶妈：${escapeHtml(t.heal)}　输出：${escapeHtml(t.dps1)}、${escapeHtml(t.dps2)}`:''}
+function isDone(v,max){return Array.isArray(v)&&v.length===2&&v.every(x=>Number.isInteger(x)&&x>=0&&x<=max)&&Math.max(...v)===max&&Math.min(...v)<max}
+function winner(m,score,max){return isDone(score,max)?m[score[0]>score[1]?0:1]:null}
+function scoreCard(m,key,max,label){
+ const sc=stateScore(key)||[0,0];
+ const group=key.startsWith('g')||key.startsWith('q');
+ const names=m.map(id=>escapeHtml(teamName(id)));
+ const buttons=[0,1].map(j=>`<button type="button" class="team-score" data-scorekey="${escapeHtml(key)}" data-side="${j}" title="点击加1；Enter、Backspace、Delete 清零">${sc[j]||0}</button>`);
+ const duel=`<div class="team-duel-row"><span class="team-duel-name">${names[0]}</span><div class="team-duel-scores">${buttons[0]}<span class="team-duel-colon">:</span>${buttons[1]}</div><span class="team-duel-name right">${names[1]}</span></div>`;
+ return group?`<div class="team-group-item"><h3 class="team-group-label">${escapeHtml(label)}</h3><div class="team-match match team-duel">${duel}</div></div>`:`<div class="team-match match team-ko-card">${duel}</div>`;
+}
+function stateScore(key){if(key.startsWith('g'))return state.groupScores[key.slice(1)];if(key.startsWith('q')){const [r,i]=key.slice(1).split('_').map(Number);return state.qualRounds[r]?.scores?.[i]}return state.koScores[key]}
+function setScore(key,side,n){const max=key.startsWith('g')||key.startsWith('q')?1:key==='final'||key==='third'?3:2;const score=[...(stateScore(key)||[0,0])];score[side]=Math.max(0,Math.min(max,n));if(score[0]===max&&score[1]===max)score[1-side]=max-1;
+if(key.startsWith('g')){state.groupScores[key.slice(1)]=score;state.qualRounds=[];state.bracket=null;state.koScores={}}
+else if(key.startsWith('q')){const [r,i]=key.slice(1).split('_').map(Number);state.qualRounds[r].scores[i]=score;state.qualRounds=state.qualRounds.slice(0,r+1);state.bracket=null;state.koScores={}}
+else{state.koScores[key]=score;const stage=key.startsWith('r8')?0:key.startsWith('semi')?1:2;if(stage===0){Object.keys(state.koScores).filter(k=>!k.startsWith('r8')).forEach(k=>delete state.koScores[k])}if(stage===1){delete state.koScores.final;delete state.koScores.third}}
+save();render()}
+function firstWinners(){if((!state.groups.length&&!state.fastMode)||!state.groups.every((m,i)=>isDone(state.groupScores[i],1)))return null;return [...(state.groupBye?[state.groupBye]:[]),...state.groups.map((m,i)=>winner(m,state.groupScores[i],1))]}
+// Minimal-match BO1 qualification for all team counts: eliminate only the excess; if more than half must be eliminated, repeat with the survivors.
+function qualified(){let current=firstWinners();if(!current)return null;if(state.fastMode){
+ const first=[...current];const losers=state.groups.map((m,i)=>m.find(id=>id!==winner(m,state.groupScores[i],1)));
+ current=losers;
+ const seats=8-first.length;
+ let r=0;
+ while(current.length>seats){let matches,auto=[];const round=state.qualRounds[r];if(round&&JSON.stringify([...round.pool].sort())===JSON.stringify([...current].sort())){matches=round.matches;auto=round.auto}else{
+ const shuffled=randomize(current),need=current.length-seats,gameCount=Math.min(need,Math.floor(current.length/2));matches=pair(shuffled.slice(0,gameCount*2));auto=shuffled.slice(gameCount*2);state.qualRounds=state.qualRounds.slice(0,r);state.qualRounds.push({pool:[...current],matches,auto,scores:{}});save();}
+ const q=state.qualRounds[r];if(!matches.every((m,i)=>isDone(q.scores[i],1)))return {pending:r,round:q};
+ current=[...auto,...matches.map((m,i)=>winner(m,q.scores[i],1))];r++;if(r>15)throw Error('资格赛轮次异常');}
+ return {teams:[...first,...current]};
+ }
+ const reserved=state.groupBye?[state.groupBye]:[];current=current.filter(id=>!reserved.includes(id));const seats=8-reserved.length;let r=0;
+while(current.length>seats){let matches,auto=[];const round=state.qualRounds[r];if(round&&JSON.stringify([...round.pool].sort())===JSON.stringify([...current].sort())){matches=round.matches;auto=round.auto}else{
+ const shuffled=randomize(current);const n=current.length;const need=n-seats;const gameCount=Math.min(need,Math.floor(n/2));const playCount=gameCount*2;matches=pair(shuffled.slice(0,playCount));auto=shuffled.slice(playCount);
+ state.qualRounds=state.qualRounds.slice(0,r);state.qualRounds.push({pool:[...current],matches,auto,scores:{}});save();}
+ const q=state.qualRounds[r];if(!matches.every((m,i)=>isDone(q.scores[i],1)))return {pending:r,round:q};
+ current=[...auto,...matches.map((m,i)=>winner(m,q.scores[i],1))];r++;
+ if(r>15)throw Error('资格赛轮次异常');
+}
+return {teams:[...reserved,...current]};}
+function bracketMatches(){if(!state.bracket)return null;const p=state.bracket;const r8=Array.from({length:4},(_,i)=>p.slice(i*2,i*2+2));const q=r8.map((m,i)=>winner(m,state.koScores['r8'+i],2));const semi=[[q[0],q[1]],[q[2],q[3]]];const sw=semi.map((m,i)=>m.every(Boolean)?winner(m,state.koScores['semi'+i],2):null);const losers=semi.map((m,i)=>sw[i]?m.find(x=>x!==sw[i]):null);return {r8,semi,final:sw,third:losers}}
+function quickTeamEditors(){
+ const build=(host,stage,i,m)=>{
+  if(!host||!m?.every(Boolean))return;
+  const toggle=document.createElement('button');toggle.type='button';toggle.className='quick-edit-toggle no-print';toggle.textContent='✏️ 直接修改本场';
+  const panel=document.createElement('div');panel.className='quick-edit no-print';panel.hidden=true;
+  const closeEdit=document.createElement('button');closeEdit.type='button';closeEdit.className='v93-close';closeEdit.textContent='✕ 关闭修改';closeEdit.onclick=(e)=>{e.preventDefault();e.stopPropagation();closeFloatingEditor(panel)};panel.append(closeEdit);
+  const choose=id=>{const el=document.createElement('select');state.teams.forEach(t=>el.add(new Option(t.name,t.id)));el.value=id;return el};
+  const a=choose(m[0]),b=choose(m[1]);const policy=document.createElement('select');policy.add(new Option('保留本场比分','keep'));policy.add(new Option('清空本场比分（重新比赛）','clear'));
+  const row=document.createElement('div');row.className='quick-edit-row';row.append(a,b);panel.append(row,policy);
+  const addBox=document.createElement('div');addBox.className='quick-add-person';addBox.hidden=true;
+  const fields=['队伍名称','奶妈昵称','DPS1 昵称','DPS2 昵称'].map(placeholder=>{const input=document.createElement('input');input.placeholder=placeholder;return input});
+  const addRow=document.createElement('div');addRow.className='quick-edit-row';fields.forEach(x=>addRow.append(x));addBox.append(addRow);
+  const addConfirm=document.createElement('button');addConfirm.type='button';addConfirm.textContent='＋ 确认新增队伍';
+  addConfirm.onclick=()=>{const vals=fields.map(x=>x.value.trim());if(vals.some(x=>!x)){alert('请填写队名、奶妈和两名 DPS');return}if(new Set(vals.slice(1)).size!==3){alert('三名队员不能重复');return}if(state.teams.some(t=>t.name===vals[0])){alert('队伍名称已存在');return}const used=new Set(state.teams.flatMap(t=>[t.heal,t.dps1,t.dps2]));if(vals.slice(1).some(x=>used.has(x))){alert('队员昵称已被其他队伍使用');return}if(state.teams.length>=256){alert('队伍已达到上限');return}teamSnapshot();let id='t'+Date.now();while(state.teams.some(t=>t.id===id))id+='x';state.teams.push({id,name:vals[0],heal:vals[1],dps1:vals[2],dps2:vals[3]});save();for(const sel of [a,b])sel.add(new Option(vals[0],id));fields.forEach(x=>x.value='');addBox.hidden=true;alert('已新增 '+vals[0]+' 到参赛名单。当前对阵保持不变；需要替换时请手动选择新队伍并确认修改。')};
+  addBox.append(addConfirm);const hint=document.createElement('div');hint.className='quick-edit-note';hint.textContent='新增队伍保存到参赛名单；本场对阵需另点「保存本场」才会生效。';addBox.append(hint);
+  const addToggle=document.createElement('button');addToggle.type='button';addToggle.textContent='＋ 新增参赛队伍';addToggle.onclick=()=>{addBox.hidden=!addBox.hidden;if(!addBox.hidden)fields[0].focus()};panel.append(addToggle,addBox);
+
+  const actions=document.createElement('div');actions.className='quick-edit-row';
+  const apply=forfeit=>{
+   if(a.value===b.value){alert('同一场不能出现相同队伍');return}
+   const old=stage==='group'?state.groups[i]:state.bracket.slice(i*2,i*2+2);
+   const changed=old[0]!==a.value||old[1]!==b.value;
+   const occupied=stage==='group'?state.groups.flat().filter(x=>!old.includes(x)):state.bracket.filter(x=>!old.includes(x));
+   if(changed&&(occupied.includes(a.value)||occupied.includes(b.value))){alert('队伍已在其他场次，请先调整另一场或交换队伍');return}
+   // 无需原生 confirm，避免 Safari/Netlify 预览阻断按钮。
+   teamSnapshot();
+   if(stage==='group'){
+    state.groups[i]=[a.value,b.value];
+    if(forfeit!==null)state.groupScores[i]=forfeit===0?[0,1]:[1,0];
+    else if(policy.value==='clear')delete state.groupScores[i];
+    if(changed||forfeit!==null||policy.value==='clear'){state.qualRounds=[];state.bracket=null;state.koScores={}}
+   }else{
+    state.bracket.splice(i*2,2,a.value,b.value);
+    if(forfeit!==null)state.koScores['r8'+i]=forfeit===0?[0,2]:[2,0];
+    else if(policy.value==='clear')delete state.koScores['r8'+i];
+    if(changed||forfeit!==null||policy.value==='clear'){delete state.koScores['semi'+Math.floor(i/2)];delete state.koScores.final;delete state.koScores.third}
+   }
+   closeFloatingEditor(panel);save();render();
+  };
+  const action=document.createElement('select');[['save','保存更换'],['left','左方弃权'],['right','右方弃权']].forEach(([v,t])=>action.add(new Option(t,v)));actions.append(action);
+  const confirm=document.createElement('button');confirm.type='button';confirm.className='quick-save';confirm.textContent='✓ 确认修改';confirm.onclick=(event)=>{event.preventDefault();event.stopPropagation();try{apply(action.value==='left'?0:action.value==='right'?1:null)}catch(error){console.error(error);alert('操作失败：'+error.message)}};actions.append(confirm);
+  panel.append(actions);toggle.onclick=(e)=>{e.preventDefault();e.stopPropagation();toggleFloatingEditor(panel)};host.append(toggle,panel);
+  host.classList.add("editable-match");host.addEventListener("click",ev=>{if(!document.body.classList.contains("edit-mode-on")||ev.target.closest("button,input,select,textarea,.quick-edit,[data-scorekey],.score"))return;toggleFloatingEditor(panel);});
+ };
+ document.querySelectorAll('#teamGroupContent .team-group-layout > *').forEach((el,i)=>{if(i<state.groups.length)build(el,'group',i,state.groups[i])});
+ document.querySelectorAll('#teamGroupContent .team-group-layout > *').forEach((el,i)=>{
+   if(i>=state.groups.length)return;
+   let btn=el.querySelector('.delete-group-button');
+   if(!btn){btn=document.createElement('button');btn.type='button';btn.className='delete-group-button';el.append(btn)}
+   btn.textContent='🗑 删除第'+(i+1)+'组';btn.onclick=(event)=>{event.preventDefault();event.stopPropagation();
+     if(btn.dataset.confirmDelete!=='yes'){btn.dataset.confirmDelete='yes';btn.textContent='⚠️ 再点一次确认删除第'+(i+1)+'组';return}
+     try{teamSnapshot();state.groups.splice(i,1);const next={};Object.entries(state.groupScores||{}).forEach(([key,value])=>{const n=Number(key);if(n<i)next[n]=value;else if(n>i)next[n-1]=value});state.groupScores=next;state.qualRounds=[];state.bracket=null;state.koScores={};save();render()}catch(error){console.error(error);alert('删除失败：'+error.message)}};
+ });
+ document.querySelectorAll('#teamBracketContent .ko-node[data-team-stage="r8"]').forEach(el=>{const i=Number(el.dataset.teamIndex);build(el,'ko',i,state.bracket?.slice(i*2,i*2+2))});
+}
+function renderAddGroupThree(){
+ const host=$('addGroupThree');if(!host)return;
+ host.replaceChildren();const open=document.createElement('button');open.type='button';open.className='add-group-open';open.textContent='＋ 新增小组';host.append(open);
+ const form=document.createElement('div');form.className='add-group-form';form.hidden=true;host.append(form);
+ const available=()=>state.teams.filter(t=>!state.groups.some(g=>g.includes(t.id)));
+ const a=document.createElement('select'),b=document.createElement('select');
+ for(const el of [a,b])el.setAttribute('aria-label','选择队伍');
+ function refresh(){const prev=[a.value,b.value],pool=available();[a,b].forEach((el,i)=>{el.replaceChildren(new Option('选择队伍',''));pool.forEach(t=>el.add(new Option(t.name,t.id)));if(pool.some(t=>t.id===prev[i]))el.value=prev[i]})}
+ const btn=document.createElement('button');btn.type='button';btn.textContent='✓ 添加小组';btn.onclick=()=>{const x=a.value,y=b.value;if(!x||!y||x===y){alert('请选择两支不同的未安排队伍');return}if(!available().some(t=>t.id===x)||!available().some(t=>t.id===y)){alert('队伍已在其他小组，请先调整原有对阵');return}try{localStorage.setItem('nsh_v66_3v3_history',JSON.stringify(state))}catch(e){}state.groups.push([x,y]);if(state.groupBye===x||state.groupBye===y)state.groupBye=null;state.qualRounds=[];state.bracket=null;state.koScores={};save();render()};
+ form.append(a,b);
+ const addToggle=document.createElement('button');addToggle.type='button';addToggle.textContent='＋ 新增参赛队伍';
+ const addBox=document.createElement('div');addBox.className='add-group-new-entry';addBox.hidden=true;
+ const fields=['队伍名称','奶妈昵称','DPS1 昵称','DPS2 昵称'].map(t=>{const input=document.createElement('input');input.type='text';input.placeholder=t;return input});
+ const addTeam=document.createElement('button');addTeam.type='button';addTeam.textContent='✓ 保存新队伍';
+ addTeam.onclick=()=>{const vals=fields.map(f=>f.value.trim());if(vals.some(v=>!v)){alert('请填写队名、奶妈及两名 DPS');return}if(new Set(vals.slice(1)).size!==3){alert('三名队员不能重复');return}if(state.teams.some(t=>t.name===vals[0])){alert('队名已存在');return}const used=new Set(state.teams.flatMap(t=>[t.heal,t.dps1,t.dps2]));if(vals.slice(1).some(v=>used.has(v))){alert('队员已报名其他队伍');return}if(state.teams.length>=256){alert('参赛队伍已达到上限');return}teamSnapshot();let id='t'+Date.now();while(state.teams.some(t=>t.id===id))id+='x';state.teams.push({id,name:vals[0],heal:vals[1],dps1:vals[2],dps2:vals[3]});save();refresh();fields.forEach(f=>f.value='');addBox.hidden=true;alert('已加入参赛名单：'+vals[0]+'。请选择该队伍参加新增小组。')};
+ addToggle.onclick=()=>{addBox.hidden=!addBox.hidden;if(!addBox.hidden)fields[0].focus()};
+ fields.forEach(f=>addBox.append(f));addBox.append(addTeam);const actionRow=document.createElement('div');actionRow.className='add-group-actions';actionRow.append(addToggle,btn);form.append(actionRow,addBox);
+ const hint=document.createElement('small');hint.textContent='新增队伍仅加入名单，不会自动替换已有对阵；保存后可在上方选择。';form.append(hint);
+ open.onclick=()=>{form.hidden=!form.hidden;open.textContent=form.hidden?'＋ 新增小组':'第'+(state.groups.length+1)+'组';if(!form.hidden)refresh()};
+}
+function render(){
+ $('teamCount').textContent=`当前 ${state.teams.length} 支队伍（共 ${state.teams.length*3} 名玩家）`;
+ if(document.activeElement!==$('teamInput'))$('teamInput').value=state.teams.map(t=>[t.name,t.heal,t.dps1,t.dps2].join(' | ')).join('\n');
+ $('teamRoster').hidden=tab!=='roster';$('teamGroups').hidden=tab!=='groups';$('teamBracket').hidden=tab!=='knockout';$('teamPrizes').hidden=tab!=='prizes';
+ document.querySelectorAll('[data-team-tab]').forEach(b=>b.classList.toggle('active',b.dataset.teamTab===tab));
+ let h='';if(!state.groups.length&&!state.fastMode)h='<p class="team-note">请先保存队伍并随机抽签。</p>';else{
+ h=(state.fastMode?'<p class="team-note">⚡ 小人数快速赛：'+state.teams.length+'队争8席，只需'+state.groups.length+'场BO1；抽签免赛：'+(state.fastByes||[]).map(teamName).map(escapeHtml).join('、')+'</p>':'')+'<h3>'+(state.fastMode?'八强资格赛':'第一轮 · 随机抽签')+'</h3>'+(state.groupBye?'<p class="team-note">🎟️ 首轮随机轮空：<strong>'+escapeHtml(teamName(state.groupBye))+'</strong>（自动进入八强资格筛选）</p>':'')+'<div class="group-grid team-group-layout">'+state.groups.map((m,i)=>scoreCard(m,'g'+i,1,`第${i+1}组`)).join('')+'</div>';
+ const w=firstWinners();if(!w)h+='<p class="team-note">完成全部 BO1 比分后，将自动安排八强资格赛。</p>';else{
+ const q=qualified();if(q?.pending!==undefined){const round=q.round;h+=`<h3>八强资格加赛 · 第 ${q.pending+1} 轮</h3><p class="team-note">首轮轮空队伍单独保留晋级席位：${state.groupBye?escapeHtml(teamName(state.groupBye)):'无'}</p><p class="team-note">本轮只安排 ${round.matches.length} 场必要的 BO1 加赛，${round.auto.length} 队资格赛抽签轮空（不等于首轮轮空）。${round.auto.length?'本轮免赛：'+round.auto.map(teamName).map(escapeHtml).join('、'):''}</p><div class="group-grid team-group-layout">`+round.matches.map((m,i)=>scoreCard(m,`q${q.pending}_${i}`,1,`资格赛 ${i+1}`)).join('')+'</div>'}
+ else if(q?.teams?.length===8)h+='<p class="team-note">✅ 八强资格已确定，可在下方生成八强对阵。</p>';
+ }}$('teamGroupContent').innerHTML=h;
+ const q=qualified();let ko='';if(!q||!q.teams)ko='<p class="team-note">完成小组赛后生成八强对阵。</p>';else if(!state.bracket)ko='<p class="team-note">已产生 8 支晋级队伍，点击下方按钮随机生成八强对阵。</p><button id="teamSeed">🎲 生成八强淘汰赛</button>';else{
+ const b=bracketMatches();const sections=[['八强赛 · BO3',b.r8,'r8',2],['半决赛 · BO3',b.semi,'semi',2],['🏆 决赛 · BO5',[b.final],'final',3],['🥉 季军赛 · BO5',[b.third],'third',3]];
+ const card=(m,key,max,label)=>m.every(Boolean)?scoreCard(m,key,max,label):`<div class="team-match match team-wait"><strong>${label}</strong><p>等待上一轮结果</p></div>`;
+ const column=(matches,indices,prefix,title,max)=>`<div class="ko-col"><h3>${title}</h3><div class="ko-stack">${indices.map(i=>`<div class="ko-node" data-team-stage="${prefix}" data-team-index="${i}">${card(matches[i],prefix+i,max,`第 ${i+1} 场`)}</div>`).join('')}</div></div>`;
+ const champion=winner(b.final,state.koScores.final,3),bronze=winner(b.third,state.koScores.third,3);
+ ko=`<div class="ko-scroll team-ko-scroll"><div class="ko-bracket team-ko-bracket"><svg class="ko-lines" aria-hidden="true"></svg><div class="ko-wing left">${column(b.r8,[0,1],'r8','八强赛 · 左半区',2)}${column(b.semi,[0],'semi','半决赛 · 左半区',2)}</div><div class="ko-center"><div class="ko-final-spot"><h3>🏆 决赛 · BO5</h3>${card(b.final,'final',3,'冠军争夺战')}<p class="champion">${champion?'冠军：'+escapeHtml(teamName(champion)):'冠军待定'}</p></div><div class="ko-third"><h2>🥉 季军赛 · BO5</h2>${card(b.third,'third',3,'季军争夺战')}<p class="champion">${bronze?'季军：'+escapeHtml(teamName(bronze)):'季军待定'}</p></div></div><div class="ko-wing right">${column(b.semi,[1],'semi','半决赛 · 右半区',2)}${column(b.r8,[2,3],'r8','八强赛 · 右半区',2)}</div></div></div>`;}
+ $('teamBracketContent').innerHTML=ko;
+ const teamGrid=document.querySelector('#teamGroupContent .team-group-layout');
+ if(teamGrid){
+   let addCard=document.getElementById('addGroupThree');
+   if(!addCard){addCard=document.createElement('div');addCard.id='addGroupThree';addCard.className='add-group-admin no-print'}
+   teamGrid.appendChild(addCard);
+   renderAddGroupThree();
+ }
+ quickTeamEditors();
+ if(tab==='knockout')requestAnimationFrame(drawTeamConnections);
+ $('teamPrizesFields').innerHTML=Object.entries(state.prizes).map(([k,v])=>`<label for="pr_${escapeHtml(k)}">${escapeHtml(k)}</label><input id="pr_${escapeHtml(k)}" data-prize="${escapeHtml(k)}" value="${escapeHtml(v)}">`).join('');
+ document.querySelectorAll('[data-scorekey]').forEach(b=>{b.addEventListener('click',()=>setScore(b.dataset.scorekey,Number(b.dataset.side),Number(b.textContent)+1));b.addEventListener('keydown',e=>{if(['Enter','Backspace','Delete'].includes(e.key)){e.preventDefault();setScore(b.dataset.scorekey,Number(b.dataset.side),0)}})});
+ const seed=$('teamSeed');if(seed)seed.onclick=()=>{state.bracket=randomize(q.teams);state.koScores={};save();render()};
+ document.querySelectorAll('[data-prize]').forEach(input=>input.onchange=()=>{state.prizes[input.dataset.prize]=input.value;save()});
+}
+function drawTeamConnections(){
+ const root=document.querySelector('#teamBracketContent .team-ko-bracket');
+ if(!root||!root.getClientRects().length)return;
+ const svg=root.querySelector('.ko-lines');if(!svg)return;
+ const box=root.getBoundingClientRect(),W=root.scrollWidth,H=root.scrollHeight;
+ svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+ const pos=(sel)=>{const e=root.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();return {l:r.left-box.left,r:r.right-box.left,y:(r.top+r.bottom)/2-box.top}};
+ const node=(wing,stage,i)=>pos(`.ko-wing.${wing} .ko-node[data-team-stage="${stage}"][data-team-index="${i}"] .team-match`);
+ const fin=pos('.ko-final-spot .team-match');let paths='';
+ const line=(a,b)=>{if(!a||!b)return;const forward=b.l>=a.r;const x1=forward?a.r:a.l,x2=forward?b.l:b.r,mid=(x1+x2)/2;paths+=`<path d="M${x1},${a.y} H${mid} V${b.y} H${x2}" fill="none" stroke="#d5a64e" stroke-width="3" stroke-linecap="round"/>`};
+ for(const [wing,offset] of [['left',0],['right',2]]){
+  const semi=node(wing,'semi',wing==='left'?0:1);
+  for(let i=0;i<2;i++)line(node(wing,'r8',offset+i),semi);
+  if(semi&&fin){const x1=wing==='left'?semi.r:semi.l,x2=wing==='left'?fin.l:fin.r;paths+=`<path d="M${x1},${semi.y} H${x2}" fill="none" stroke="#d5a64e" stroke-width="3"/>`}
+ }
+ svg.innerHTML=paths;
+}
+window.addEventListener('resize',()=>requestAnimationFrame(drawTeamConnections));
+function switchMode(m){mode=m;document.body.classList.toggle('mode3',m==='three');$('modeOne').classList.toggle('active',m==='one');$('modeThree').classList.toggle('active',m==='three');document.body.classList.remove('report-preview-active');if(m==='three')render();try{localStorage.setItem('nsh_v54_active_mode',m)}catch(e){}}
+$('modeOne').onclick=()=>switchMode('one');$('modeThree').onclick=()=>switchMode('three');
+document.querySelectorAll('[data-team-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.teamTab;render()});
+$('teamSave').onclick=()=>{const lines=$('teamInput').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(lines.length<8){alert('请至少填写8支队伍；8–15队使用快速资格赛。');return}if(lines.length>256){alert('最多支持 256 支队伍');return}
+const teams=[],names=new Set(),members=new Set();for(let i=0;i<lines.length;i++){const a=lines[i].split(/[|｜]/).map(x=>x.trim());if(a.length!==4||a.some(x=>!x)){alert(`第 ${i+1} 行必须填写：队名 | 奶妈 | DPS1 | DPS2`);return}if(names.has(a[0])||a.slice(1).some(x=>members.has(x))||new Set(a.slice(1)).size!==3){alert(`第 ${i+1} 行队名重复或成员重复报名`);return}names.add(a[0]);a.slice(1).forEach(x=>members.add(x));teams.push({id:'t'+i,name:a[0],heal:a[1],dps1:a[2],dps2:a[3]})}
+if(state.groups.length&&!confirm('修改队伍将清空 3V3 已有比赛进度，继续吗？'))return;
+state.teams=teams;state.groups=[];state.groupBye=null;state.fastMode=false;state.fastByes=[];state.groupScores={};state.qualRounds=[];state.bracket=null;state.koScores={};save();render();alert('已保存 '+teams.length+' 支队伍')};
+$('teamImportBtn').onclick=()=>$('teamFile').click();
+$('teamFile').onchange=async(e)=>{const file=e.target.files?.[0];if(!file)return;try{
+ const data=await file.arrayBuffer();let rows=[];
+ if(typeof XLSX!=='undefined'){
+  const book=XLSX.read(data,{type:'array'});rows=XLSX.utils.sheet_to_json(book.Sheets[book.SheetNames[0]],{header:1,defval:''});
+ }else if(/\.(csv|tsv)$/i.test(file.name)){
+  const str=new TextDecoder().decode(data);rows=str.split(/\r?\n/).map(line=>line.split(/[,\t]/));
+ }else throw new Error('Excel 读取组件未加载，请检查网络后重试');
+ const cleaned=rows.map(row=>row.slice(0,4).map(v=>String(v??'').trim())).filter(row=>row.some(Boolean));
+ if(cleaned.length&&/队伍|队名|team/i.test(cleaned[0][0]))cleaned.shift();
+ $('teamInput').value=cleaned.map(row=>row.join(' | ')).join('\n');
+ alert('已导入 '+cleaned.length+' 支队伍，请核对后点击「保存名单」。');
+ }catch(err){alert('导入失败：'+err.message)}finally{e.target.value=''}
+};
+$('teamDraw').onclick=()=>{if(state.teams.length<8){alert('请先保存至少8支队伍');return}if(state.groups.length&&!confirm('重新抽签将清空 3V3 比分，继续吗？'))return;const pool=randomize(state.teams.map(x=>x.id));state.fastMode=pool.length<16;state.fastByes=[];state.groupBye=null;if(state.fastMode){state.groupBye=pool.length%2?pool.pop():null;state.groups=pair(pool);}else{state.groupBye=pool.length%2?pool.pop():null;state.groups=pair(pool);}state.groupScores={};state.qualRounds=[];state.bracket=null;state.koScores={};tab='groups';save();render()};
+$('teamReset').onclick=()=>{if(!confirm('确定重置 3V3 比赛？将清空队伍和比分，但保留 3V3 奖励。1V1 不受影响。'))return;const prizes={...state.prizes};state=fresh();state.prizes=prizes;save();tab='roster';render()};
+function posterMarkup(){const p=state.prizes,b=bracketMatches();const champ=b?winner(b.final,state.koScores.final,3):null;const runner=champ?b.final.find(x=>x!==champ):null;const third=b?winner(b.third,state.koScores.third,3):null;
+return `<div style="box-sizing:border-box;max-width:850px;margin:0 auto;padding:65px 36px;text-align:center;background:linear-gradient(150deg,#fff5ee,#ffeef5,#eaf7ff);color:#905675;border:9px double #e6bdcc;border-radius:26px;font-family:'Microsoft YaHei',sans-serif"><div style="font-size:64px">🐮</div><h1 style="font-size:42px">牛牛利亚共和国</h1><h2 style="font-size:36px">⚔️ 3V3 · 帮会团队赛</h2><p style="font-size:22px">1 奶妈 + 2 DPS · 自由组队</p><h2>🏆 荣耀之战 · 丰厚奖励</h2><div style="font-size:23px;line-height:2.5">🥇 冠军：${escapeHtml(p.冠军)}${champ?' · '+escapeHtml(teamName(champ)):''}<br>🥈 亚军：${escapeHtml(p.亚军)}${runner?' · '+escapeHtml(teamName(runner)):''}<br>🥉 季军：${escapeHtml(p.季军)}${third?' · '+escapeHtml(teamName(third)):''}<br>🏅 八强奖：${escapeHtml(p.八强奖)}<br>🎁 参与奖：${escapeHtml(p.参与奖)}</div><hr style="border:1px solid #e9c5d2"><h2>比赛赛制</h2><p style="font-size:22px;line-height:2">小组赛 / 八强资格加赛 · BO1<br>八强赛 / 半决赛 · BO3<br>决赛 / 季军赛 · BO5</p><p>✨ 以武会友 · 团队协作 · 快乐插旗 ✨</p></div>`}
+$('teamPoster').onclick=()=>{const inputs=document.querySelectorAll('[data-prize]');inputs.forEach(el=>state.prizes[el.dataset.prize]=el.value);save();$('printReport').innerHTML=posterMarkup();document.body.classList.add('report-preview-active');window.scrollTo(0,0)};
+// Capture 3v3 export events before legacy 1v1 listeners; 1v1 code is unchanged.
+$('reportPrint').addEventListener('click',e=>{if(mode!=='three')return;e.stopImmediatePropagation();$('printReport').innerHTML=posterMarkup();window.print()},true);
+$('reportPNG').addEventListener('click',async e=>{if(mode!=='three')return;e.stopImmediatePropagation();try{const c=document.createElement('canvas');c.width=1200;c.height=1600;const x=c.getContext('2d');const bg=x.createLinearGradient(0,0,1200,1600);bg.addColorStop(0,'#fff4ed');bg.addColorStop(1,'#eaf6ff');x.fillStyle=bg;x.fillRect(0,0,1200,1600);x.strokeStyle='#d6a5ba';x.lineWidth=8;x.strokeRect(35,35,1130,1530);x.textAlign='center';const txt=(t,y,size=35,color='#945b77')=>{x.fillStyle=color;x.font=`bold ${size}px sans-serif`;x.fillText(t,600,y,1070)};txt('牛牛利亚共和国',200,66);txt('3V3 · 帮会团队赛',300,54);txt('1 奶妈 + 2 DPS · 自由组队',375,32);txt('🏆 丰 厚 奖 励',515,49);let y=630;for(const [k,v] of Object.entries(state.prizes)){txt(k+'：'+v,y,37);y+=95}txt('比 赛 赛 制',1190,47);txt('小组赛 / 八强资格加赛 · BO1',1260,33);txt('八强赛 / 半决赛 · BO3',1320,33);txt('决赛 / 季军赛 · BO5',1380,33);txt('以武会友 · 团队协作 · 快乐插旗',1500,27);const blob=await new Promise(resolve=>c.toBlob(resolve,'image/png'));if(!blob)throw Error('图片生成失败');const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='牛牛利亚共和国_3V3宣传海报.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),30000)}catch(err){alert('导出失败：'+err.message)}},true);
+// Legacy Ctrl+P listener is 1v1-specific; overwrite its report before print in 3v3 mode.
+window.addEventListener('beforeprint',()=>{if(mode==='three')$('printReport').innerHTML=posterMarkup()});
+
+// V66: 3V3 live adjustments with one-step undo.
+const TEAM_ADMIN_HISTORY='nsh_v66_3v3_history';
+function teamSnapshot(){try{localStorage.setItem(TEAM_ADMIN_HISTORY,JSON.stringify(state))}catch(e){}}
+async function teamUndo(){const old=localStorage.getItem(TEAM_ADMIN_HISTORY);if(!old){alert('暂无可撤销调整');return}if((await adjustUI('撤销最近一次3V3调整？',['确认撤销']))===null)return;state=JSON.parse(old);save();localStorage.removeItem(TEAM_ADMIN_HISTORY);render();alert('已恢复调整前状态')}
+async function teamPick(title,items){const n=await adjustUI(title,items);return n===null?-1:n}
+async function teamAdjust(which){
+ if(which==='groups'&&!state.groups.length){alert('请先抽签');return}
+ if(which==='knockout'&&!state.bracket){alert('请先生成八强');return}
+ const phases=which==='groups'?['小组赛','资格加赛']:['八强赛','半决赛','决赛','季军赛'];
+ const phase=await teamPick('选择阶段',phases);if(phase<0)return;
+ let matches=[],keyFn, max,source;
+ if(which==='groups'&&phase===0){matches=state.groups;keyFn=i=>'g'+i;max=1;source='group'}
+ else if(which==='groups'){const round=await teamPick('选择资格赛轮次',state.qualRounds.map((_,i)=>'第'+(i+1)+'轮'));if(round<0)return;matches=state.qualRounds[round].matches;keyFn=i=>'q'+round+'_'+i;max=1;source='qual';sourceRound=round}
+ else{const b=bracketMatches();matches=phase===0?b.r8:phase===1?b.semi:phase===2?[b.final]:[b.third];keyFn=i=>phase===0?'r8'+i:phase===1?'semi'+i:phase===2?'final':'third';max=phase>=2?3:2;source='ko'}
+ const i=await teamPick('选择场次',matches.map((_,j)=>'第'+(j+1)+'场'));if(i<0)return;
+ const m=matches[i];if(!m||!m[0]||!m[1]){alert('对阵尚未确定');return}
+ const action=await teamPick(teamName(m[0])+' VS '+teamName(m[1])+'\n选择调整方式',['左方弃权 / 右方获胜','右方弃权 / 左方获胜','指定左方获胜','指定右方获胜','交换双方位置并清空比分（仅首轮）','替换队伍 / 与其他场次交换（仅小组赛或八强首轮）','修改队伍成员（不影响比分）','撤销最近一次调整']);if(action<0)return;
+ if(action===7){teamUndo();return}
+ if((action===4||action===5)&&!(source==='group'||source==='ko'&&phase===0)){alert('此阶段对阵由上一轮胜负决定，请先修改上一轮。');return}
+ let side=0,replacement=null,found=null,memberIndex=null,newMember=null;
+ if(action===5){side=await teamPick('选择替换位置',m.map(teamName));if(side<0)return;const pool=state.teams.filter(t=>t.id!==m[side]);const k=await teamPick('选择队伍；已在其他场次的队伍将交换位置',pool.map(t=>t.name));if(k<0)return;replacement=pool[k].id}
+ if(action===6){side=await teamPick('选择要修改成员的队伍',m.map(teamName));if(side<0)return;memberIndex=await teamPick('选择成员角色',['奶妈','DPS1','DPS2']);if(memberIndex<0)return;newMember=await adjustUI('输入新的玩家昵称',[],'text');if(!newMember?.trim())return;newMember=newMember.trim();if(state.teams.some(t=>[t.heal,t.dps1,t.dps2].includes(newMember))){alert('该玩家已报名，不能重复');return}}
+ if((await adjustUI('确认调整？将自动备份当前数据，受影响的后续比分可能被清空。',['确认调整']))===null)return;
+ teamSnapshot();
+ if(action===6){const t=state.teams.find(t=>t.id===m[side]);t[['heal','dps1','dps2'][memberIndex]]=newMember}
+ else if(action===5){const old=m[side];if(source==='group'){state.groups[i][side]=replacement;for(let x=0;x<state.groups.length;x++)for(let y=0;y<2;y++)if((x!==i||y!==side)&&state.groups[x][y]===replacement){state.groups[x][y]=old;delete state.groupScores[x]}if(state.groupBye===replacement)state.groupBye=old;delete state.groupScores[i];state.qualRounds=[];state.bracket=null;state.koScores={}}
+ else{const at=i*2+side;const pos=state.bracket.indexOf(replacement);state.bracket[at]=replacement;if(pos>=0)state.bracket[pos]=old;state.koScores={}}}
+ else if(action===4){if(source==='group'){state.groups[i].reverse();delete state.groupScores[i];state.qualRounds=[];state.bracket=null;state.koScores={}}
+ else{const at=i*2;[state.bracket[at],state.bracket[at+1]]=[state.bracket[at+1],state.bracket[at]];state.koScores={}}}
+ else{const score=(action===1||action===2)?[max,0]:[0,max];if(source==='group'){state.groupScores[i]=score;state.qualRounds=[];state.bracket=null;state.koScores={}}
+ else if(source==='qual'){state.qualRounds[sourceRound].scores[i]=score;state.qualRounds=state.qualRounds.slice(0,sourceRound+1);state.bracket=null;state.koScores={}}
+ else{const key=keyFn(i);state.koScores[key]=score;if(phase===0)Object.keys(state.koScores).filter(k=>!k.startsWith('r8')).forEach(k=>delete state.koScores[k]);if(phase===1){delete state.koScores.final;delete state.koScores.third}}}
+ save();render();alert('调整已保存。')
+}
+let sourceRound=0;
+for(const [id,which] of [['teamGroupContent','groups'],['teamBracketContent','knockout']]){const b=document.createElement('button');b.type='button';b.className='admin-adjust';b.textContent='✏️ 调整对阵 / 弃权 / 换人';b.onclick=()=>teamAdjust(which).catch(e=>alert('调整失败：'+e.message));/* replaced by inline match editors */}
+
+
+
+// V89: undo handler runs inside 3V3 state scope.
+document.querySelector('.team-tabs .nav-undo').addEventListener('click',event=>{
+ const button=event.currentTarget;
+ const raw=localStorage.getItem(TEAM_ADMIN_HISTORY);
+ if(!raw){button.textContent='暂无可撤销记录';return}
+ if(button.dataset.confirmUndo!=='yes'){
+   button.dataset.confirmUndo='yes';button.textContent='⚠ 再点确认撤销';return;
+ }
+ try{
+   const previous=JSON.parse(raw);
+   if(!previous||!Array.isArray(previous.teams))throw new Error('备份数据格式不正确');
+   state=previous;save();localStorage.removeItem(TEAM_ADMIN_HISTORY);
+   button.dataset.confirmUndo='';button.textContent='↶ 撤销修改';render();
+ }catch(error){console.error(error);button.textContent='撤销失败：'+error.message}
+});
+
+render();if(localStorage.getItem('nsh_v54_active_mode')==='three')switchMode('three');
+})();
+</script><div id="adjustDialog" hidden role="dialog" aria-modal="true" aria-labelledby="adjustTitle"><div class="adjust-card"><h3 id="adjustTitle"></h3><div id="adjustBody"></div><div class="adjust-actions"><button id="adjustCancel" type="button">取消</button></div></div></div><script>
+window.adjustUI=function(title,options,kind='choice') {return new Promise(resolve=>{const root=document.getElementById('adjustDialog'),body=document.getElementById('adjustBody'),cancel=document.getElementById('adjustCancel');document.getElementById('adjustTitle').textContent=title;body.replaceChildren();root.hidden=false;let settled=false;function finish(v){if(settled)return;settled=true;root.hidden=true;body.replaceChildren();resolve(v)}cancel.onclick=()=>finish(null);if(kind==='text'){const input=document.createElement('input');input.placeholder='请输入新昵称';body.append(input);const ok=document.createElement('button');ok.className='adjust-choice';ok.textContent='确认输入';ok.onclick=()=>finish(input.value);body.append(ok);input.focus();input.onkeydown=e=>{if(e.key==='Enter')finish(input.value)}}else{const list=document.createElement('div');list.className='adjust-choices';options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className='adjust-choice';b.textContent=name;b.onclick=()=>finish(i);list.append(b)});body.append(list)}})};
+</script>
+<script>
+/* Single edit-mode switch per visible tournament navigation. */
+(function(){
+ let enabled=false;
+ function update(){document.body.classList.toggle('edit-mode-on',enabled);document.querySelectorAll('.edit-mode-master').forEach(b=>{b.textContent=enabled?'✓ 完成对阵修改':'✏️ 开启对阵修改';b.setAttribute('aria-pressed',String(enabled));});if(!enabled)document.querySelectorAll('.quick-edit').forEach(p=>p.hidden=true);}
+ document.addEventListener('click',e=>{const b=e.target.closest('.edit-mode-master');if(!b)return;enabled=!enabled;update();});
+ /* Switching from group stage to knockout exits editing automatically. */
+ document.addEventListener('click',e=>{if(e.target.closest('[data-tab], [data-team-tab]')){if(enabled){enabled=false;update();}}},true);
+ update();
+})();
+</script>
+<script>document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.quick-edit').forEach(p=>p.hidden=true)});</script></body></html>
